@@ -383,10 +383,8 @@ function updateMateriels()
       counter.call("setCount", counter.call("getCount") + delta)
       local materiel = v.name..": "..factionsNameFiller[k].."materiel "..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
       printMessage(materiel, v.color)
-      --report = report.."\n"..v.name..": "..factionsNameFiller[k]..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
     end
   end
-  --printMessage(report)
 end
 
 function countMateriels()
