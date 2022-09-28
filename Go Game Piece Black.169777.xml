@@ -1,0 +1,11 @@
+<Defaults>
+  <Button fontSize = "100"></Button>
+</Defaults>
+
+<Button onClick="customSetup" width="600" height="250" position="0 -150 -100">Custom setup</Button>
+<Button onClick="introSetup" width="600" height="250" position="0 150 -100">Introductory setup</Button>
+<VerticalLayout id="players" position="600 150 -100" spacing="30" height="500" width="500" active="false" showAnimation="FadeIn">
+   <Button onClick="twoPlayers">2 players</Button>
+   <Button onClick="threePlayers">3 players</Button>
+   <Button onClick="fourPlayers">4 players</Button>
+</VerticalLayout>

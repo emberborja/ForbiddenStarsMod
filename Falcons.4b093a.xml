@@ -1,0 +1,7 @@
+<Defaults>
+  <Text fontSize="100" color="#F7D722"></Text>
+</Defaults>
+
+<Panel offsetXY="0 -175">
+  <Text id="amount">0</Text>
+</Panel>

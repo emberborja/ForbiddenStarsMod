@@ -1,0 +1,34 @@
+<Defaults>
+  <Text fontSize = "13"></Text>
+</Defaults>
+
+<Panel class = "battlePanel" width="130" height="100" id="battlePanel">
+  <Button onClick="Global/addDiceClicked" width="50" height="25" offsetXY="30 70" id="diceButton">+Die</Button>
+  <Button onClick="Global/sortClicked" width="50" height="25" offsetXY="-30 70" id="sortButton">Sort</Button>
+  <Button onClick="Global/endBattleClicked" width="50" height="35" offsetXY="30 -70">End battle</Button>
+  <Button onClick="Global/endRoundClicked" width="50" height="35" offsetXY="-30 -70" id="endRoundButton">End round</Button>
+  <Button onClick="Global/addBolterClicked" width="20" height="20" offsetXY="77 -12" id="bolterButton">+</Button>
+  <Button onClick="Global/addShieldClicked" width="20" height="20" offsetXY="77 13" id="shieldButton">+</Button>
+  <TableLayout width = "130" height = "100" color = "#FFFFFF">
+    <Row dontUseTableRowBackground="true" color="#0089EA">
+      <Cell><Text></Text></Cell>
+      <Cell><Text>Count</Text></Cell>
+      <Cell><Text>Delta</Text></Cell>
+    </Row>
+    <Row>
+      <Cell><Text>Bolters</Text></Cell>
+      <Cell><Text id="bolterCount" text="0"></Text></Cell>
+      <Cell><Text id="dealtDamage" text="0"></Text></Cell>
+    </Row>
+    <Row>
+      <Cell><Text>Shields</Text></Cell>
+      <Cell><Text id="shieldCount" text="0"></Text></Cell>
+      <Cell><Text id="takenDamage" text="0"></Text></Cell>
+    </Row>
+    <Row>
+      <Cell><Text>Morale</Text></Cell>
+      <Cell><Text id="moraleCount" text="0"></Text></Cell>
+      <Cell><Text id="moraleDelta" text="0"></Text></Cell>
+    </Row>
+  </TableLayout>
+</Panel>

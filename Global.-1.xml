@@ -1,0 +1,11 @@
+<!-- Xml UI. See documentation: https://api.tabletopsimulator.com/ui/introUI/ -->
+<Defaults>
+  <Button fontSize = "20"></Button>
+  <ToggleButton fontSize = "20"></ToggleButton>
+</Defaults>
+
+<VerticalLayout id="buttons" padding="0 0 0 20" rectAlignment="UpperRight" offsetXY="-250 0" height="135" width="176">
+   <Button onClick="fightClicked">Scan for battle</Button>
+   <Button onClick="collectMaterielClicked" tooltip="Collect materiel and shuffle event decks">Materiel / Events</Button>
+   <ToggleButton onValueChanged="toggleBordersClicked" id="toggleBorder">Sector occupation</ToggleButton>
+</VerticalLayout>
