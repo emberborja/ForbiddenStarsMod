@@ -1,3 +1,40 @@
+-- faction data -> deckZoneGUID this is the faction combat deck
+--[[
+function dealBattleCards(faction)
+  local deck, factionData
+
+  factionData = factionsData[faction]
+  deck = getFactionDeck(factionData)
+  if deck ~= nil then
+    deck.shuffle()
+    deck.deal(5, factionData.color)
+  end
+end
+
+function getFactionDeck(factionData)
+  local objs
+
+  objs = getObjectFromGUID(factionData.deckZoneGUID).getObjects()
+  for i,v in ipairs(objs) do
+    if v.tag == "Deck" then
+      return v
+    end
+  end
+end
+--]]
+-- cardsData -> [card name] : [ icons: [''], faction: '']
+-- ie ["Impure zeal"] = {icons={"b", "s"}, faction="ch"},
+--[[
+function takeCardHome(card)
+  local cardData = cardsData[card.getName()]
+  local factionData = factionsData[cardData.faction]
+  local zone = getObjectFromGUID(factionData.deckZoneGUID)
+
+  if putCardInDeck(card, zone) == false then
+    moveCardToDeck(card, zone)
+  end
+end
+--]]
 
 function upgradeCards(deck, playerColor)
     if (not state.combatLock[playerColor]) then
