@@ -574,10 +574,8 @@ end
 
 function updateTileBorders()
     local objs = boardZone.getObjects()
-    local foundTile = false
     for num,tile in ipairs(objs) do
         if string.find(tile.getName(), "Tile") then
-            foundTile = true
             toggleBorder(tile)
         end
     end
@@ -1159,3 +1157,7 @@ function updateContainerAmount(container)
       container.UI.setValue("amount", container.getQuantity())
     end
 end
+
+-- Combat cards upgrade feature start
+
+-- combat cards upgrade feature end
