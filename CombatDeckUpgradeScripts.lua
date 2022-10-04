@@ -67,7 +67,6 @@ cardsData = {
 
 
 -- faction data -> deckZoneGUID this is the faction combat deck
---[[
 function dealBattleCards(faction)
   local deck, factionData
 
@@ -89,10 +88,9 @@ function getFactionDeck(factionData)
     end
   end
 end
---]]
 -- cardsData -> [card name] : [ icons: [''], faction: '']
 -- ie ["Impure zeal"] = {icons={"b", "s"}, faction="ch"},
---[[
+
 function takeCardHome(card)
   local cardData = cardsData[card.getName()]
   local factionData = factionsData[cardData.faction]
@@ -102,7 +100,7 @@ function takeCardHome(card)
     moveCardToDeck(card, zone)
   end
 end
---]]
+
 function discardBattleCards()
   for k,v in pairs(Player.getPlayers()) do
     if v.getHandCount() > 0 then
@@ -154,26 +152,44 @@ function getFactionDataByColor(color)
   return nil
 end
 
+-- The other scripted mod, the tournament one, uses the below code
+-- it uses a state = {} variable to capture overal game state
+
+state = {}
+
+-- look like in their code the things that affect a combat lock are:
+-- combat itself
+-- card upgrading
+
+-- dont think this logic is necessary for us
+
 function upgradeCards(deck, playerColor)
+  -- ignore
     if (not state.combatLock[playerColor]) then
       state.combatLock[playerColor] = true
+      -- get combat deck
       local combatDeck = getObjectFromGUID(state.combatDecks[playerColor])
       if (combatDeck == nil) then
         combatDeck = findCombatDeckForColor(playerColor)
         state.combatLock[playerColor] = false
         return
       end
+      -- good error handleing
       if (#combatDeck.getObjects() < 10) then
         log("Invalid combat deck, please wait")
         state.combatLock[playerColor] = false
         return
       end
+      -- interesting ... 
       if (closeTo(combatDeck.getRotation().z, 180, 1)) then
         combatDeck.flip()
       end
+
       if (combatDeck ~= nil) then
+        -- inspect this piece of state
         state.plannedUpgrades[playerColor] = deck.getGUID()
         local cards = combatDeck.getObjects()
+        -- why?
         local cardNamesToGuids = {}
         for k, card in pairs(cards) do
           if (not cardNamesToGuids[card.nickname]) then
@@ -183,6 +199,7 @@ function upgradeCards(deck, playerColor)
         end
   
         local counter = 0
+        
         state.floatingCards[playerColor] = cardNamesToGuids
         state.combatDeckPositions[playerColor] = vector_convertor(combatDeck.getPosition())
         for cardName, guids in pairs(cardNamesToGuids) do
