@@ -82,7 +82,7 @@ factionsData = {
 }
 
 factionsNameFiller = {
-    ["ch"] = "             ",
+    ["ch"] = "               ",
     ["ed"] = "                ",
     ["sm"] = "",
     ["oz"] = "                 "
@@ -369,22 +369,14 @@ function updateMateriels()
 
   report = "Materiels were added:"
   for k,v in pairs(factionsData) do
-    
-    local isSeatedPlayer = false
-    for _, player in ipairs(Player.getPlayers()) do
-      if(player.color == v.color) then isSeatedPlayer = true end
-    end
-
-    if(isSeatedPlayer) then
-      counter = getObjectFromGUID(v.counterGUID)
-      plus    = materiels[k] or 0
-      delta   = math.min(plus, 14 - counter.call("getCount"))
-      old     = counter.call("getCount")
-      counter.call("setCount", counter.call("getCount") + delta)
-      local materiel = v.name..": "..factionsNameFiller[k].."materiel "..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
-      printMessage(materiel, v.color)
-    end
+    counter = getObjectFromGUID(v.counterGUID)
+    plus    = materiels[k] or 0
+    delta   = math.min(plus, 14 - counter.call("getCount"))
+    old     = counter.call("getCount")
+    counter.call("setCount", counter.call("getCount") + delta)
+    report  = report.."\n"..v.name..": "..factionsNameFiller[k]..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
   end
+  printMessage(report)
 end
 
 function countMateriels()
@@ -755,9 +747,8 @@ function printError(text)
   broadcastToAll(text, {1, 0, 0})
 end
 
-function printMessage(text, customColor)
-  local messageColor = customColor or {0, 1, 0.2}
-  broadcastToAll(text, messageColor)
+function printMessage(text)
+  broadcastToAll(text, {0, 1, 0.2})
 end
 
 function isFightTilesClean()
