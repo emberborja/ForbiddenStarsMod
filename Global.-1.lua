@@ -174,7 +174,7 @@ function onload()
     topFightTile.interactable = false
     botFightTile.interactable = false
     unitsPositions = {}
-
+    require("Test")
     updateAllConteinerAmounts()
     setupBattlePanelsUI()
     drawAllGarbageZoneBorders()
