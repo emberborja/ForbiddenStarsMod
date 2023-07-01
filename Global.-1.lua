@@ -75,10 +75,10 @@ tilesData = {
 }
 
 factionsData = {
-  ["ch"] = {deckZoneGUID = "545788", diceBagGUID = "35addc", color = "Red",    counterGUID="f8446e", name="Chaos"},
-  ["ed"] = {deckZoneGUID = "fe9f55", diceBagGUID = "408fe6", color = "Yellow", counterGUID="9197a2", name="Eldar"},
-  ["sm"] = {deckZoneGUID = "bdf156", diceBagGUID = "893c6c", color = "Blue",   counterGUID="a87a1e", name="Space Marines"},
-  ["oz"] = {deckZoneGUID = "aad880", diceBagGUID = "5e40b3", color = "Green",  counterGUID="587dc5", name="Orks"}
+  ["ch"] = {deckZoneGUID = "545788", diceBagGUID = "35addc", color = "Red",    counterGUID="f8446e", orderZone="d48a52", name="Chaos"},
+  ["ed"] = {deckZoneGUID = "fe9f55", diceBagGUID = "408fe6", color = "Yellow", counterGUID="9197a2", orderZone="a82193", name="Eldar"},
+  ["sm"] = {deckZoneGUID = "bdf156", diceBagGUID = "893c6c", color = "Blue",   counterGUID="a87a1e", orderZone="5c5abb", name="Space Marines"},
+  ["oz"] = {deckZoneGUID = "aad880", diceBagGUID = "5e40b3", color = "Green",  counterGUID="587dc5", orderZone="3f1125", name="Orks"}
 }
 
 factionsNameFiller = {
