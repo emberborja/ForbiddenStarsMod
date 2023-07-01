@@ -4,24 +4,10 @@
   -in order to reference them programmatically or represent values
 ]]--
 
--- TODO battle data do here?
--- TODO: put "boardzone"
--- TODO: botFightZoneGUID = "9f0b03"
--- TODO: topFightZoneGUID = "839de2"
--- topFightTile = getObjectFromGUID("3d4d0d")
--- botFightTile = getObjectFromGUID("d96e1d")
--- topFightTile.registerCollisions(false)
--- botFightTile.registerCollisions(false)
--- topFightTile.interactable = false
--- botFightTile.interactable = false
--- unitsPositions = {}
-
 -- updateAllConteinerAmounts this is setup and can go here too
 -- setupBattlePanelsUI is setup and can go here
 -- drawAllGarbageZoneBorders
--- getObjectFromGUID(diceWallIDs[1]).setPosition({-40.6, 6, 0})
--- getObjectFromGUID(diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
--- getObjectFromGUID(diceWallIDs[3]).setPosition({-24, 6, 0})
+
 -- lowerDiceWalls TODO: see if there is a better way to do bounding than this
 
 -- This piece of state is where we store dice objects that have been randomized
@@ -31,7 +17,7 @@ rollingDices = {}
 --[[ Units Data Table
   This table represents the plastic units and their stats from the FS faction boards
   @type  Table - Associative, Multidimensional Array
-  @key   String
+  @Key   String
     Unit Name - the value stored in the object name; accessed by obj.getName(); (INGAMEREF)
   @Value Table - Associative Array
     Unit Data
@@ -186,63 +172,62 @@ garbageZoneIDs = {"a9ec4f", "561867", "68756b", "4b67bc"}
 -- card name, iconds, faction code
 -- TODO: probably better way to do this, at least numbers instead of repeated codes
 cardsData = {
-    ["Foul worship"] = {icons={"s"}, faction="ch"},
-    ["Khorne's rage"] = {icons={"b"}, faction="ch"},
-    ["Dark faith"] = {icons={"m"}, faction="ch"},
-    ["Impure zeal"] = {icons={"b", "s"}, faction="ch"},
-    ["Lure of Chaos"] = {icons={"m"}, faction="ch"},
-    ["Mark of Khorne"] = {icons={"b", "b"}, faction="ch"},
-    ["Mark of Nurgle"] = {icons={"s", "s"}, faction="ch"},
-    ["Mark of Slaanesh"] = {icons={"b", "s"}, faction="ch"},
-    ["Mark of Tzeentch"] = {icons={"m", "m"}, faction="ch"},
-    ["Chaos victorious"] = {icons={"b", "s", "m"}, faction="ch"},
-    ["Death and despair"] = {icons={"b", "b", "m"}, faction="ch"},
-    ["Chaos united"] = {icons={"b", "s", "m"}, faction="ch"},
-    ["Daemonic resilience"] = {icons={"s", "s", "m"}, faction="ch"},
-    ["Inhuman strength"] = {icons={"b", "b", "m"}, faction="ch"},
-    ["Biker Nobz"] = {icons={"b", "b", "s"}, faction="oz"},
-    ["Mega Nobz"] = {icons={"b", "s", "s"}, faction="oz"},
-    ["Sea of green"] = {icons={"b", "s"}, faction="oz"},
-    ["Waaagh!!!!"] = {icons={"m", "m", "m"}, faction="oz"},
-    ["Rokkit wagon"] = {icons={"b", "b", "b"}, faction="oz"},
-    ["Party wagon"] = {icons={"b", "s", "s"}, faction="oz"},
-    ["Weirdboyz"] = {icons={"b", "s", "m"}, faction="oz"},
-    ["Smasher Gargant"] = {icons={"b", "b", "s", "s", "s"}, faction="oz"},
-    ["Snapper Gargant"] = {icons={"b", "b", "b", "b", "s"}, faction="oz"},
-    ["Shoota Boyz"] = {icons={"b", "b"}, faction="oz"},
-    ["'Ard Boyz"] = {icons={"s", "s"}, faction="oz"},
-    ["Slugga Boyz"] = {icons={"b", "s"}, faction="oz"},
-    ["Gretchin"] = {faction="oz"},
-    ["Mek Boyz"] = {icons={"m"}, faction="oz"},
-    ["Reconnaissance"] = {icons={"s"}, faction="sm"},
-    ["Fury of the Ultramar"] = {icons={"b"}, faction="sm"},
-    ["Blessed Power Armour"] = {icons={"s"}, faction="sm"},
-    ["Ambush"] = {icons={"b"}, faction="sm"},
-    ["Faith in the Emperor"] = {icons={"m"}, faction="sm"},
-    ["Veteran Scouts"] = {icons={"b", "s", "m"}, faction="sm"},
-    ["Drop Pod assault"] = {icons={"b", "s"}, faction="sm"},
-    ["Glory and death"] = {icons={"b", "m"}, faction="sm"},
-    ["Hold the line"] = {icons={"s", "m"}, faction="sm"},
-    ["Emperor's glory"] = {icons={"s", "s", "m", "m"}, faction="sm"},
-    ["Emperor's might"] = {icons={"b", "b", "b"}, faction="sm"},
-    ["Show no fear"] = {icons={"s", "s", "m"}, faction="sm"},
-    ["Armoured advance"] = {icons={"b", "b", "s"}, faction="sm"},
-    ["Break the line"] = {icons={"b", "s", "s"}, faction="sm"},
-    ["Howling Banshees"] = {icons={"b"}, faction="ed"},
-    ["Striking Scorpions"] = {icons={"s"}, faction="ed"},
-    ["Hit and run"] = {icons={"b"}, faction="ed"},
-    ["Command of the Autarch"] = {faction="ed"},
-    ["Ranger support"] = {icons={"s", "m"}, faction="ed"},
-    ["Fire Dragon's vengeance"] = {icons={"b", "b"}, faction="ed"},
-    ["Swooping Hawks"] = {icons={"s", "s"}, faction="ed"},
-    ["Wraithguard advance"] = {icons={"b", "m"}, faction="ed"},
-    ["Wraithguard support"] = {icons={"s", "m"}, faction="ed"},
-    ["Fire Prism"] = {icons={"b", "b", "s"}, faction="ed"},
-    ["Wave Serpent"] = {icons={"b", "s", "s"}, faction="ed"},
-    ["Spiritseer's guidance"] = {icons={"b", "s", "m"}, faction="ed"},
-    ["Holofield emitter"] = {icons={"b", "s", "s", "m"}, faction="ed"},
-    ["Psychic lance"] = {icons={"b", "b", "s"}, faction="ed"}
-  }
+  ["Foul worship"] = {icons={"s"}, faction="ch"},
+  ["Khorne's rage"] = {icons={"b"}, faction="ch"},
+  ["Dark faith"] = {icons={"m"}, faction="ch"},
+  ["Impure zeal"] = {icons={"b", "s"}, faction="ch"},
+  ["Lure of Chaos"] = {icons={"m"}, faction="ch"},
+  ["Mark of Khorne"] = {icons={"b", "b"}, faction="ch"},
+  ["Mark of Nurgle"] = {icons={"s", "s"}, faction="ch"},
+  ["Mark of Slaanesh"] = {icons={"b", "s"}, faction="ch"},
+  ["Mark of Tzeentch"] = {icons={"m", "m"}, faction="ch"},
+  ["Chaos victorious"] = {icons={"b", "s", "m"}, faction="ch"},
+  ["Death and despair"] = {icons={"b", "b", "m"}, faction="ch"},
+  ["Chaos united"] = {icons={"b", "s", "m"}, faction="ch"},
+  ["Daemonic resilience"] = {icons={"s", "s", "m"}, faction="ch"},
+  ["Inhuman strength"] = {icons={"b", "b", "m"}, faction="ch"},
+  ["Biker Nobz"] = {icons={"b", "b", "s"}, faction="oz"},
+  ["Mega Nobz"] = {icons={"b", "s", "s"}, faction="oz"},
+  ["Sea of green"] = {icons={"b", "s"}, faction="oz"},
+  ["Waaagh!!!!"] = {icons={"m", "m", "m"}, faction="oz"},
+  ["Rokkit wagon"] = {icons={"b", "b", "b"}, faction="oz"},
+  ["Party wagon"] = {icons={"b", "s", "s"}, faction="oz"},
+  ["Weirdboyz"] = {icons={"b", "s", "m"}, faction="oz"},
+  ["Smasher Gargant"] = {icons={"b", "b", "s", "s", "s"}, faction="oz"},
+  ["Snapper Gargant"] = {icons={"b", "b", "b", "b", "s"}, faction="oz"},
+  ["Shoota Boyz"] = {icons={"b", "b"}, faction="oz"},
+  ["'Ard Boyz"] = {icons={"s", "s"}, faction="oz"},
+  ["Slugga Boyz"] = {icons={"b", "s"}, faction="oz"},
+  ["Gretchin"] = {faction="oz"},
+  ["Mek Boyz"] = {icons={"m"}, faction="oz"},
+  ["Reconnaissance"] = {icons={"s"}, faction="sm"},
+  ["Fury of the Ultramar"] = {icons={"b"}, faction="sm"},
+  ["Blessed Power Armour"] = {icons={"s"}, faction="sm"},
+  ["Ambush"] = {icons={"b"}, faction="sm"},
+  ["Faith in the Emperor"] = {icons={"m"}, faction="sm"},
+  ["Veteran Scouts"] = {icons={"b", "s", "m"}, faction="sm"},
+  ["Drop Pod assault"] = {icons={"b", "s"}, faction="sm"},
+  ["Glory and death"] = {icons={"b", "m"}, faction="sm"},
+  ["Hold the line"] = {icons={"s", "m"}, faction="sm"},
+  ["Emperor's glory"] = {icons={"s", "s", "m", "m"}, faction="sm"},
+  ["Emperor's might"] = {icons={"b", "b", "b"}, faction="sm"},
+  ["Show no fear"] = {icons={"s", "s", "m"}, faction="sm"},
+  ["Armoured advance"] = {icons={"b", "b", "s"}, faction="sm"},
+  ["Break the line"] = {icons={"b", "s", "s"}, faction="sm"},
+  ["Howling Banshees"] = {icons={"b"}, faction="ed"},
+  ["Striking Scorpions"] = {icons={"s"}, faction="ed"},
+  ["Hit and run"] = {icons={"b"}, faction="ed"},
+  ["Command of the Autarch"] = {faction="ed"},
+  ["Ranger support"] = {icons={"s", "m"}, faction="ed"},
+  ["Fire Dragon's vengeance"] = {icons={"b", "b"}, faction="ed"},
+  ["Swooping Hawks"] = {icons={"s", "s"}, faction="ed"},
+  ["Wraithguard advance"] = {icons={"b", "m"}, faction="ed"},
+  ["Wraithguard support"] = {icons={"s", "m"}, faction="ed"},
+  ["Fire Prism"] = {icons={"b", "b", "s"}, faction="ed"},
+  ["Wave Serpent"] = {icons={"b", "s", "s"}, faction="ed"},
+  ["Spiritseer's guidance"] = {icons={"b", "s", "m"}, faction="ed"},
+  ["Holofield emitter"] = {icons={"b", "s", "s", "m"}, faction="ed"},
+  ["Psychic lance"] = {icons={"b", "b", "s"}, faction="ed"}
+}
 
--- I assume this is for the borders when rolling dice
-diceWallIDs = {"11fae1", "ccd19c", "1f4efb"}
+

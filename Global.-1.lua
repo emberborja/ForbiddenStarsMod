@@ -1,101 +1,36 @@
 -- Lua code. See documentation: http://berserk-games.com/knowledgebase/scripting/
 -- This require call pulls in the file that has all of the globla game constants
+require("_helpers")
 require("_game_constants")
+require("_combat_board")
+require("_tts_events")
 
 --[[
   The OnLoad function. This is called after everything in the game save finishes loading.
   Most of your script code goes here.
 --]]
 function onload()
-    battleData = nil
     boardZone = getObjectFromGUID("7e9dca")
-    botFightZoneGUID = "9f0b03"
-    topFightZoneGUID = "839de2"
-    topFightTile = getObjectFromGUID("3d4d0d")
-    botFightTile = getObjectFromGUID("d96e1d")
-    topFightTile.registerCollisions(false)
-    botFightTile.registerCollisions(false)
-    topFightTile.interactable = false
-    botFightTile.interactable = false
-    unitsPositions = {}
-
+    setWallIdPositions()
+    setFightTiles()
     updateAllConteinerAmounts()
     setupBattlePanelsUI()
     drawAllGarbageZoneBorders()
-    getObjectFromGUID(diceWallIDs[1]).setPosition({-40.6, 6, 0})
-    getObjectFromGUID(diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
-    getObjectFromGUID(diceWallIDs[3]).setPosition({-24, 6, 0})
+
     lowerDiceWalls()
 end
 
-function onObjectPeek(object, player_color)
-    if string.find(object.getName(), "order token") then
-        print(player_color .. " peeked: " .. object.getName())
-    end
-end
-
-function checkEligibleBattles()
-  local battles = getAllBattles()
-
-  if isFightTilesClean() == false then
-    return false, "There is something in the battle zone. Clean battle zone first!"
-  end
-  if #battles == 0 then
-    return false, "I don't see any active battles on the board."
-  end
-  if #battles > 1 then
-    return false, "I have found battles on tiles: "..concatTileNames(battles)..". There can only be one active battle!"
-  end
-  if #battles[1].armies > 2 then
-    return false, "I have found a battle on "..battles[1].tileName..", but there are more than 2 factions there!"
-  end
-
-  return true
-end
-
-function concatTileNames(battles)
-  local result = ""
-
-  for i, v in ipairs(battles) do
-    result = result..v.tileName..", "
-  end
-
-  return string.sub(result, 1, string.len(result) - 2)
-end
-
-function getAllBattles(isCountBuildings)
-  local objs = boardZone.getObjects()
-  local result, army = {}, {}
-
-  for num,tile in ipairs(objs) do
-      if string.find(tile.getName(), "Tile") then
-        for i = 1, 4 do
-          army = getSectorArmy(i, tile, isCountBuildings)
-          if #army > 1 then
-            table.insert(result, {tileName=tile.getName(), armies=army})
-          end
-        end
-      end
-  end
-
-  return result
-end
-
-function scanForBattles()
-  local objs = boardZone.getObjects()
-  local fighters
-
-  for i,v in ipairs(objs) do
-      if string.find(v.getName(), "Tile") then
-        data = findEligibleBattle(v)
-        if data ~= nil then
-          print("Found a battle on "..v.getName())
-          startBattle(data)
-          return
-        end
-      end
+-- runs when "Scan for battle" button is clicked
+function fightClicked()
+  local status, err = checkEligibleBattles()
+  if status then
+    scanForBattles()
+  else
+    printError(err)
   end
 end
+
+
 
 function compareFighters(a, b)
   local order = {ch=1, ed=2, oz=3, sm=4}
@@ -105,7 +40,7 @@ end
 function startBattle(data)
   battleData = data
   raiseDiceWalls()
-  setupFighter(data.fighters[1], botFightTile)
+  setupFighter(data.fighters[1], bottomFightTile)
   setupFighter(data.fighters[2], topFightTile)
 end
 
@@ -189,23 +124,6 @@ function spawnUnitDices(units, tile)
   end
 end
 
-function raiseDiceWalls()
-    adjustDiceWalls(20)
-    Wait.time(lowerDiceWalls,5)
-end
-
-function lowerDiceWalls()
-    adjustDiceWalls(-20)
-end
-
-function adjustDiceWalls(heightOffset)
-    for i,v in ipairs(diceWallIDs) do
-        wall = getObjectFromGUID(v)
-        pos = wall.getPosition()
-        pos[2] = pos[2] + heightOffset
-        wall.setPosition(pos)
-    end
-end
 
 function updateMateriels()
   local materiels = countMateriels()
@@ -243,24 +161,7 @@ function countMateriels()
   return result
 end
 
-function findEligibleBattle(tile)
-  local army
-  local fightersData
-  for i = 1, 4 do
-    army = getSectorArmy(i, tile)
-    if #army == 2 then
-      return createBattleData(army, tile, i)
-    end
-  end
 
-  return nil
-end
-
-function getSectorArmy(sector, tile, isCountBuildings)
-  local army
-  army = sortObjectsByFactions(getSectorObjects(tile, sector), isCountBuildings)
-  return convertArmyToArray(army)
-end
 
 function createBattleData(fighters, tile, sector)
   local result = {}
@@ -326,6 +227,7 @@ function getSectorObjects(tile, sector)
   local data, objs = {}, {}
   position.x = position.x + signX[sector] * tile.getBounds().size.x / 4
   position.z = position.z + signZ[sector] * tile.getBounds().size.z / 4
+  -- @see https://api.tabletopsimulator.com/physics/#cast
   data = Physics.cast({origin=position, type=3, size={5, 5, 5},direction = {0,1,0},max_distance = 0})
 
   for i,v in ipairs(data) do
@@ -487,8 +389,8 @@ end
 
 function addDiceClicked(player, value, id)
   local factionData = getFactionDataByColor(player.color)
-  local tile = id == "botDiceButton" and botFightTile or topFightTile
-  local zoneGUID = id == "botDiceButton" and botFightZoneGUID or topFightZoneGUID
+  local tile = id == "botDiceButton" and bottomFightTile or topFightTile
+  local zoneGUID = id == "botDiceButton" and bottomFightZoneGUID or topFightZoneGUID
 
   factionData = factionData or factionsData["ch"]
 
@@ -500,12 +402,12 @@ function addDiceClicked(player, value, id)
 end
 
 function addBolterClicked(player, value, id)
-  local tile = id == "botBolterButton" and botFightTile or topFightTile
+  local tile = id == "botBolterButton" and bottomFightTile or topFightTile
   addTokenToTile("bolter", tile)
 end
 
 function addShieldClicked(player, value, id)
-  local tile = id == "botShieldButton" and botFightTile or topFightTile
+  local tile = id == "botShieldButton" and bottomFightTile or topFightTile
   addTokenToTile("shield", tile)
 end
 
@@ -559,7 +461,7 @@ function onDiceAdded(dice)
 end
 
 function endRoundClicked()
-  removeCombatTokens(getObjectFromGUID(botFightZoneGUID))
+  removeCombatTokens(getObjectFromGUID(bottomFightZoneGUID))
   removeCombatTokens(getObjectFromGUID(topFightZoneGUID))
 end
 
@@ -578,29 +480,11 @@ function sortClicked()
   sortObjects()
 end
 
-function fightClicked()
-  local status, err = checkEligibleBattles()
-  if status then
-    scanForBattles()
-  else
-    printError(err)
-  end
-end
 
-function printError(text)
-  broadcastToAll(text, {1, 0, 0})
-end
 
-function printMessage(text)
-  broadcastToAll(text, {0, 1, 0.2})
-end
-
-function isFightTilesClean()
-  return #getObjectFromGUID(botFightZoneGUID).getObjects() == 1 and #getObjectFromGUID(topFightZoneGUID).getObjects() == 1
-end
 
 function endBattleClicked()
-  cleanFightZone(getObjectFromGUID(botFightZoneGUID))
+  cleanFightZone(getObjectFromGUID(bottomFightZoneGUID))
   cleanFightZone(getObjectFromGUID(topFightZoneGUID))
   discardBattleCards()
   unitsPositions = {}
@@ -678,23 +562,23 @@ function putCardInDeck(card, zone)
 end
 
 function setupBattlePanelsUI()
-  local data = botFightTile.UI.getXmlTable()
+  local data = bottomFightTile.UI.getXmlTable()
   topFightTile.UI.setXmlTable(data)
   Wait.time(setupBattlePanelsUIDelay, 0.2)
 end
 
 function setupBattlePanelsUIDelay()
-  botFightTile.UI.setAttribute("battlePanel", "offsetXY", "250 0")
+  bottomFightTile.UI.setAttribute("battlePanel", "offsetXY", "250 0")
   topFightTile.UI.setAttribute("battlePanel", "offsetXY", "-250 0")
-  botFightTile.UI.setAttribute("diceButton", "id", "botDiceButton")
+  bottomFightTile.UI.setAttribute("diceButton", "id", "botDiceButton")
   topFightTile.UI.setAttribute("diceButton", "id", "topDiceButton")
   topFightTile.UI.setAttribute("bolterButton", "offsetXY", "-77 -12")
   topFightTile.UI.setAttribute("shieldButton", "offsetXY", "-77 13")
-  botFightTile.UI.setAttribute("bolterButton", "offsetXY", "77 -12")
-  botFightTile.UI.setAttribute("shieldButton", "offsetXY", "77 13")
-  botFightTile.UI.setAttribute("shieldButton", "id", "botShieldButton")
+  bottomFightTile.UI.setAttribute("bolterButton", "offsetXY", "77 -12")
+  bottomFightTile.UI.setAttribute("shieldButton", "offsetXY", "77 13")
+  bottomFightTile.UI.setAttribute("shieldButton", "id", "botShieldButton")
   topFightTile.UI.setAttribute("shieldButton", "id", "topShieldButton")
-  botFightTile.UI.setAttribute("bolterButton", "id", "botBolterButton")
+  bottomFightTile.UI.setAttribute("bolterButton", "id", "botBolterButton")
   topFightTile.UI.setAttribute("bolterButton", "id", "topBolterButton")
 end
 
@@ -706,7 +590,7 @@ function onObjectCollisionEnter(registered_object, info)
   local obj = info.collision_object
 
   if obj.getName() == "Reinforcement token" then
-    renameReinforcementToken(obj, registered_object == botFightTile and 1 or 2)
+    renameReinforcementToken(obj, registered_object == bottomFightTile and 1 or 2)
     obj.setVar("isReinforcement", true)
     obj.setRotation({0, registered_object.getRotation().y, 0})
   end
@@ -739,7 +623,7 @@ function update ()
 end
 
 function sortObjects()
-  sortObjectsOnTile(botFightZoneGUID, botFightTile)
+  sortObjectsOnTile(bottomFightZoneGUID, bottomFightTile)
   sortObjectsOnTile(topFightZoneGUID, topFightTile)
 end
 
@@ -882,7 +766,7 @@ function unitReturnClicked(player, value, id)
 end
 
 function onObjectLeaveScriptingZone(zone, obj)
-  if (zone.guid == botFightZoneGUID or zone.guid == topFightZoneGUID) then
+  if (zone.guid == bottomFightZoneGUID or zone.guid == topFightZoneGUID) then
     calculate()
 
     if unitsData[obj.getName()] then
@@ -892,10 +776,10 @@ function onObjectLeaveScriptingZone(zone, obj)
 end
 
 function calculate()
-    local botStats = getStatsForObjects(getObjectFromGUID(botFightZoneGUID).getObjects())
+    local botStats = getStatsForObjects(getObjectFromGUID(bottomFightZoneGUID).getObjects())
     local topStats = getStatsForObjects(getObjectFromGUID(topFightZoneGUID).getObjects())
 
-    setFightTileData(botFightTile, botStats, topStats)
+    setFightTileData(bottomFightTile, botStats, topStats)
     setFightTileData(topFightTile, topStats, botStats)
 end
 
