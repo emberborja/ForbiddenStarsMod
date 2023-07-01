@@ -1,11 +1,11 @@
---[[ Lua code. See documentation: http://berserk-games.com/knowledgebase/scripting/ --]]
+-- Lua code. See documentation: http://berserk-games.com/knowledgebase/scripting/
+-- This require call pulls in the file that has all of the globla game constants
+require("_game_constants")
 
---[[ The OnLoad function. This is called after everything in the game save finishes loading.
-Most of your script code goes here. --]]
-
-require("_game_state")
-
--- test out if require will work outside or inside the onload, if necessary have a state constructor that is called here
+--[[
+  The OnLoad function. This is called after everything in the game save finishes loading.
+  Most of your script code goes here.
+--]]
 function onload()
     battleData = nil
     boardZone = getObjectFromGUID("7e9dca")
