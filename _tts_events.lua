@@ -9,3 +9,10 @@ function onObjectPeek(object, player_color)
     end
 end
 
+function onObjectEnterContainer(container, object)
+    updateContainerAmount(container)
+end
+
+function onObjectLeaveContainer(container, object)
+    updateContainerAmount(container)
+end

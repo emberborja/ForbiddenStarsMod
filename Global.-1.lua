@@ -16,7 +16,6 @@ function onload()
     updateAllConteinerAmounts()
     setupBattlePanelsUI()
     drawAllGarbageZoneBorders()
-
     lowerDiceWalls()
 end
 
@@ -29,8 +28,6 @@ function fightClicked()
     printError(err)
   end
 end
-
-
 
 function compareFighters(a, b)
   local order = {ch=1, ed=2, oz=3, sm=4}
@@ -859,22 +856,9 @@ function getDiceValue(dice)
   return sides[tonumber(dice.getRotationValue())]
 end
 
-function onObjectEnterContainer(container, object)
-    updateContainerAmount(container)
-end
-
-function onObjectLeaveContainer(container, object)
-    updateContainerAmount(container)
-end
-
 function updateAllConteinerAmounts()
     for k,v in pairs(unitsData) do
         updateContainerAmount(getObjectFromGUID(v.bagGUID))
     end
 end
 
-function updateContainerAmount(container)
-    if container.UI.getValue("amount") != nil then
-      container.UI.setValue("amount", container.getQuantity())
-    end
-end
