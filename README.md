@@ -12,4 +12,7 @@ You should see a menu of options of the left side of the modal that pops up. Cla
 
 ## Instructions for contributing to the mod
 There is an in-game script editor in TTS under the "Modding" menu option which opens a dropdown with further options. Click on "Scriping" to open the script editor in game. 
-I prefer to use an external text editor called Visual Studio Code. This is a YouTube vidoe with instrucitons on how to use it to mod in TTS => https://youtu.be/z9rxVf3XvLk
+I prefer to use an external text editor called Visual Studio Code. This is a YouTube video with instructions on how to use it to mod in TTS => https://youtu.be/z9rxVf3XvLk
+
+Update: there is currently an issue with the TTS Lua extensions but if you follow the instructions here you can resolve it.
+https://github.com/rolandostar/tabletopsimulator-lua-vscode/issues/48#issuecomment-2405736522
