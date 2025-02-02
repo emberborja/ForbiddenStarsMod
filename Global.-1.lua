@@ -4,6 +4,8 @@
 Most of your script code goes here. --]]
 
 local STORE = require("scripts/variables")
+local UTILS = require('scripts/utils')
+local BATTLE_SCRIPTS = require('scripts/battles')
 
 function onload()
     battleData = nil
@@ -27,169 +29,21 @@ function onload()
     lowerDiceWalls()
 end
 
+-- https://api.tabletopsimulator.com/events/#onobjectpeek
 function onObjectPeek(object, player_color)
     if string.find(object.getName(), "order token") then
         print(player_color .. " peeked: " .. object.getName())
     end
 end
 
-function checkEligibleBattles()
-  local battles = getAllBattles()
-
-  if isFightTilesClean() == false then
-    return false, "There is something in the battle zone. Clean battle zone first!"
+-- Scan for battle button function
+function fightClicked()
+  local status, err = BATTLE_SCRIPTS.checkEligibleBattles(boardZone, botFightZoneGUID, topFightZoneGUID)
+  if status then
+    BATTLE_SCRIPTS.scanForBattles(boardZone, botFightTile, topFightTile)
+  else
+    printError(err)
   end
-  if #battles == 0 then
-    return false, "I don't see any active battles on the board."
-  end
-  if #battles > 1 then
-    return false, "I have found battles on tiles: "..concatTileNames(battles)..". There can only be one active battle!"
-  end
-  if #battles[1].armies > 2 then
-    return false, "I have found a battle on "..battles[1].tileName..", but there are more than 2 factions there!"
-  end
-
-  return true
-end
-
-function concatTileNames(battles)
-  local result = ""
-
-  for i, v in ipairs(battles) do
-    result = result..v.tileName..", "
-  end
-
-  return string.sub(result, 1, string.len(result) - 2)
-end
-
-function getAllBattles(isCountBuildings)
-  local objs = boardZone.getObjects()
-  local result, army = {}, {}
-
-  for num,tile in ipairs(objs) do
-      if string.find(tile.getName(), "Tile") then
-        for i = 1, 4 do
-          army = getSectorArmy(i, tile, isCountBuildings)
-          if #army > 1 then
-            table.insert(result, {tileName=tile.getName(), armies=army})
-          end
-        end
-      end
-  end
-
-  return result
-end
-
-function scanForBattles()
-  local objs = boardZone.getObjects()
-  local fighters
-
-  for i,v in ipairs(objs) do
-      if string.find(v.getName(), "Tile") then
-        data = findEligibleBattle(v)
-        if data ~= nil then
-          print("Found a battle on "..v.getName())
-          startBattle(data)
-          return
-        end
-      end
-  end
-end
-
-function compareFighters(a, b)
-  local order = {ch=1, ed=2, oz=3, sm=4}
-  return order[a.faction] < order[b.faction]
-end
-
-function startBattle(data)
-  battleData = data
-  --raiseDiceWalls()
-  setupFighter(data.fighters[1], botFightTile)
-  setupFighter(data.fighters[2], topFightTile)
-end
-
-function setupFighter(fighter, tile)
-  spawnUnitDices(fighter.units, tile)
-  dealBattleCards(fighter.faction)
-  lookAtBattle(fighter.faction, tile)
-  moveUnitsToBattle(fighter, tile)
-end
-
-function moveUnitsToBattle(fighter, tile)
-  local count = 0
-  saveUnitsPositions(fighter.units)
-  for i,v in ipairs(fighter.units) do
-    v.setRotation({0, tile.getRotation().y, v.getRotation().z})
-    v.setPositionSmooth(getUnitPosition(tile, count))
-    count = count + 1
-  end
-end
-
-function saveUnitsPositions(units)
-  for i,v in ipairs(units) do
-    unitsPositions[v.getGUID()] = v.getPosition()
-  end
-end
-
-function getUnitPosition(tile, count)
-  local diceWidth, diceHeight = 2, 2
-  local sign = math.cos(tile.getRotation().y * math.pi / 180)
-  position = tile.getPosition()
-  position.y = 3
-  position.x = position.x - tile.getBounds().size.x / 2 + diceWidth / 2 + count * diceWidth
-  position.z = position.z + sign * tile.getBounds().size.z / 2 - sign * diceHeight / 2 - sign * 3 * diceHeight
-  position.z = position.z - sign * 4
-  return position
-end
-
-function lookAtBattle(faction, tile)
-  local factionData = STORE.factionsData[faction]
-  Player[factionData.color].lookAt({
-    position = tile.getPosition(),
-    pitch    = 70,
-    yaw      = tile.getRotation().y,
-    distance = 50,
-  })
-end
-
-function dealBattleCards(faction)
-  local deck, factionData
-
-  factionData = STORE.factionsData[faction]
-  deck = getFactionDeck(factionData)
-  if deck ~= nil then
-    deck.shuffle()
-    deck.deal(5, factionData.color)
-  end
-end
-
-function getFactionDeck(factionData)
-  local objs
-
-  objs = getObjectFromGUID(factionData.deckZoneGUID).getObjects()
-  for i,v in ipairs(objs) do
-    if v.tag == "Deck" then
-      return v
-    end
-  end
-end
-
-function spawnUnitDices(units, tile)
-    local diceCount = 0
-    local sign, unflipped, unitData, faction, factionData
-    for i,v in ipairs(units) do
-        sign      = math.cos(v.getRotation().z * math.pi / 180)
-        unflipped = sign > 0
-        unitData  = STORE.unitsData[v.getName()]
-        faction   = unitData.faction
-        if unflipped then
-            diceCount = diceCount + unitData.dices
-        end
-    end
-    diceCount = math.min(diceCount, 8)
-    for i=1,diceCount do
-        addDiceToTile(tile, STORE.factionsData[faction].diceBagGUID)
-    end
 end
 
 function raiseDiceWalls()
@@ -241,9 +95,9 @@ function countMateriels()
   for i,v in ipairs(objs) do
     if string.find(v.getName(), "Tile") then
       for sector = 1, 4 do
-        army = getSectorArmy(sector, v, true)
+        army = UTILS.getSectorArmy(sector, v, true)
         if #army > 0 then
-          materiel = getTileData(v)[normalizeSectorNumber(sector, v)].materiel or 0
+          materiel = UTILS.getTileData(v)[UTILS.normalizeSectorNumber(sector, v)].materiel or 0
           result[army[1].faction] = result[army[1].faction] or 0
           result[army[1].faction] = result[army[1].faction] + materiel
         end
@@ -251,97 +105,6 @@ function countMateriels()
     end
   end
   return result
-end
-
-function findEligibleBattle(tile)
-  local army
-  local fightersData
-  for i = 1, 4 do
-    army = getSectorArmy(i, tile)
-    if #army == 2 then
-      return createBattleData(army, tile, i)
-    end
-  end
-
-  return nil
-end
-
-function getSectorArmy(sector, tile, isCountBuildings)
-  local army
-  army = sortObjectsByFactions(getSectorObjects(tile, sector), isCountBuildings)
-  return convertArmyToArray(army)
-end
-
-function createBattleData(fighters, tile, sector)
-  local result = {}
-  local sectorNormalized = normalizeSectorNumber(sector, tile)
-  table.sort(fighters, compareFighters)
-  result.fighters = fighters
-  result.isSpace = getTileData(tile)[sectorNormalized].isSpace or false
-  return result
-end
-
-function getTileData(tile)
-  local num = tile.getName()
-  local letter
-  num = string.sub(num, string.len("Tile ") + 1)
-  letter = tile.is_face_down and "B" or "A"
-  return STORE.tilesData[num..letter]
-end
-
-function normalizeSectorNumber(sector, tile)
-  local offset = round(tile.getRotation().y / 90)
-  sector = sector - offset
-  if sector < 1 then sector = 4 + sector end
-  if sector > 4 then sector = math.fmod(sector, 4) end
-  return sector
-end
-
-function round(x)
-  return x>=0 and math.floor(x+0.5) or math.ceil(x-0.5)
-end
-
-function sortObjectsByFactions(objs, isCountBuildings)
-  local army = {}
-  local faction, unitData, buildingData
-
-  for i,v in ipairs(objs) do
-    faction = STORE.unitsData[v.getName()] and STORE.unitsData[v.getName()].faction
-    faction = faction or (isCountBuildings and STORE.buildingsData[v.getName()])
-    if faction then
-      army[faction] = army[faction] or {}
-      table.insert(army[faction], v)
-    end
-  end
-
-  return army
-end
-
-function convertArmyToArray(army)
-  local result = {}
-  for k,v in pairs(army) do
-    table.insert(result, {
-      faction = k,
-      units = v
-    })
-  end
-
-  return result
-end
-
-function getSectorObjects(tile, sector)
-  local position = tile.getPosition()
-  local signX = {-1, 1, 1, -1}
-  local signZ = {1, 1, -1, -1}
-  local data, objs = {}, {}
-  position.x = position.x + signX[sector] * tile.getBounds().size.x / 4
-  position.z = position.z + signZ[sector] * tile.getBounds().size.z / 4
-  data = Physics.cast({origin=position, type=3, size={5, 5, 5},direction = {0,1,0},max_distance = 0})
-
-  for i,v in ipairs(data) do
-    table.insert(objs, v.hit_object)
-  end
-  return objs
 end
 
 function collectMaterielClicked()
@@ -358,10 +121,10 @@ function collectMaterielClicked()
 end
 
 function checkCollectMateriels()
-  local battles = getAllBattles(true)
+  local battles = UTILS.getAllBattles(boardZone, true)
 
   if #battles > 0 then
-    return false, "I can't count materiels! There are active battles on "..concatTileNames(battles)
+    return false, "I can't count materiels! There are active battles on "..UTILS.concatTileNames(battles)
   end
 
   return true
@@ -437,7 +200,7 @@ function toggleBorder(tile)
         local index = 3
         local army
         for i = 1, 4 do
-            army = getSectorArmy(i, tile, true)
+            army = UTILS.getSectorArmy(i, tile, true)
             if #army == 1 then
                 lines = addSectorOccupationLines(adjustSector(i,tile), army[1].faction, lines, index, tile.is_face_down)
                 index = index + 4
@@ -503,7 +266,7 @@ function addDiceClicked(player, value, id)
   factionData = factionData or STORE.factionsData["ch"]
 
   if getDiceCount(getObjectFromGUID(zoneGUID)) < 8 then
-    addDiceToTile(tile, factionData.diceBagGUID)
+    UTILS.addDiceToTile(tile, factionData.diceBagGUID)
   else
     print("You can't have more than 8 dice!")
   end
@@ -551,23 +314,6 @@ function getFactionDataByColor(color)
   return nil
 end
 
-function addDiceToTile(tile, bagGUID)
-  local position = tile.getPosition()
-  local bounds = tile.getBounds().size
-
-  position.y = 3
-  position.x = math.random(position.x - bounds.x / 3, position.x + bounds.x / 3)
-  position.z = math.random(position.z - 2, position.z + 2)
-  getObjectFromGUID(bagGUID).takeObject({
-    position = position,
-    callback_function = onDiceAdded
-  })
-end
-
-function onDiceAdded(dice)
-  dice.randomize("someColor")
-end
-
 function endRoundClicked()
   removeCombatTokens(getObjectFromGUID(botFightZoneGUID))
   removeCombatTokens(getObjectFromGUID(topFightZoneGUID))
@@ -588,15 +334,6 @@ function sortClicked()
   sortObjects()
 end
 
-function fightClicked()
-  local status, err = checkEligibleBattles()
-  if status then
-    scanForBattles()
-  else
-    printError(err)
-  end
-end
-
 function printError(text)
   broadcastToAll(text, {1, 0, 0})
 end
@@ -604,10 +341,6 @@ end
 function printMessage(text, customColor)
   local messageColor = customColor or {0, 1, 0.2}
   broadcastToAll(text, messageColor)
-end
-
-function isFightTilesClean()
-  return #getObjectFromGUID(botFightZoneGUID).getObjects() == 1 and #getObjectFromGUID(topFightZoneGUID).getObjects() == 1
 end
 
 function endBattleClicked()
@@ -916,9 +649,11 @@ function onObjectLeaveScriptingZone(zone, obj)
 end
 
 function calculate()
-    local botStats = getStatsForObjects(getObjectFromGUID(botFightZoneGUID).getObjects())
+    local bottomFightZone = getObjectFromGUID(botFightZoneGUID)
+    local bottomFightZoneObjects = bottomFightZone and bottomFightZone.getObjects()
+    if(not bottomFightZoneObjects) then return end
+    local botStats = getStatsForObjects(bottomFightZoneObjects)
     local topStats = getStatsForObjects(getObjectFromGUID(topFightZoneGUID).getObjects())
-
     setFightTileData(botFightTile, botStats, topStats)
     setFightTileData(topFightTile, topStats, botStats)
 end
