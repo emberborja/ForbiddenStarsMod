@@ -503,13 +503,6 @@ function onObjectCollisionEnter(registered_object, info)
   calculate()
 end
 
-function printTable(tab)
-  for key,value in pairs(tab) do
-    print("key: " .. key.." value: ")
-    print(value)
-  end
-end
-
 --[[ The Update function. This is called once per frame. --]]
 function update ()
     if #STORE.rollingDices == 0 then

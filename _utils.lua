@@ -108,4 +108,11 @@ UTILS.round = function(x)
     return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
+function printTable(tab)
+    for key, value in pairs(tab) do
+        print("key: " .. key .. " value: ")
+        print(value)
+    end
+end
+
 return UTILS
