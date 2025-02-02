@@ -3,164 +3,7 @@
 --[[ The OnLoad function. This is called after everything in the game save finishes loading.
 Most of your script code goes here. --]]
 
-rollingDices = {}
-
-unitsData = {
-  ["Onslaught Attack Ship"]   = {faction="oz", dices=1, morale=2, bagGUID = "7ece2b", reinf = "space", hp = 3},
-  ["Ork Boyz"]                = {faction="oz", dices=2, morale=1, bagGUID = "6c4efd", reinf = "planet", hp = 2},
-  ["Nob"]                     = {faction="oz", dices=2, morale=2, bagGUID = "b8e6b9", hp = 4},
-  ["Kill Kroozer"]            = {faction="oz", dices=3, morale=4, bagGUID = "5ab3e3", hp = 6},
-  ["Battlewagons"]            = {faction="oz", dices=3, morale=2, bagGUID = "32f862", hp = 5},
-  ["Gargant"]                 = {faction="oz", dices=3, morale=3, bagGUID = "cab63c", hp = 6},
-  ["Orks Bastion"]            = {faction="oz", dices=2, morale=2, bagGUID = "bbcfb4", hp = 3},
-  ["Cultist"]                 = {faction="ch", dices=1, morale=2, bagGUID = "aa302c", reinf = "planet", hp = 2},
-  ["Chaos Space Marine"]      = {faction="ch", dices=3, morale=2, bagGUID = "e3f272", hp = 3},
-  ["Iconoclast Destroyer"]    = {faction="ch", dices=2, morale=2, bagGUID = "14836a", reinf = "space", hp = 2},
-  ["Helbrute"]                = {faction="ch", dices=3, morale=3, bagGUID = "e73481", hp = 4},
-  ["Repulsive Grand Cruiser"] = {faction="ch", dices=4, morale=4, bagGUID = "36cbd8", hp = 5},
-  ["Chaos Reaver Titan"]      = {faction="ch", dices=4, morale=3, bagGUID = "632bba", hp = 5},
-  ["Chaos Bastion"]           = {faction="ch", dices=2, morale=2, bagGUID = "580d53", hp = 3},
-  ["Hellebore Frigate"]       = {faction="ed", dices=3, morale=1, bagGUID = "3b40cb", reinf = "space", hp = 2},
-  ["Aspect Warrior"]          = {faction="ed", dices=2, morale=2, bagGUID = "26e79f", reinf="planet", hp = 1},
-  ["Wraithguard"]             = {faction="ed", dices=2, morale=2, bagGUID = "581425", hp = 4},
-  ["Void Stalker"]            = {faction="ed", dices=4, morale=4, bagGUID = "7ab72a", hp = 5},
-  ["Falcon"]                  = {faction="ed", dices=3, morale=3, bagGUID = "4b093a", hp = 4},
-  ["Warlock Battle Titan"]    = {faction="ed", dices=4, morale=3, bagGUID = "f16fe6", hp = 5},
-  ["Eldar Bastion"]           = {faction="ed", dices=2, morale=2, bagGUID = "ab8b20", hp = 3},
-  ["Space Marine Bastion"]    = {faction="sm", dices=2, morale=2, bagGUID = "bf9d28", hp = 3},
-  ["Scout"]                   = {faction="sm", dices=1, morale=2, bagGUID = "90596a", reinf = "planet", hp = 2},
-  ["Strike Cruiser"]          = {faction="sm", dices=2, morale=2, bagGUID = "145d82", reinf = "space", hp = 2},
-  ["Space Marine"]            = {faction="sm", dices=2, morale=3, bagGUID = "bbfa5a", hp = 3},
-  ["Land Raider"]             = {faction="sm", dices=3, morale=3, bagGUID = "ad6b7f", hp = 4},
-  ["Battle Barge"]            = {faction="sm", dices=4, morale=4, bagGUID = "06cc47", hp = 5},
-  ["Warlord Titan"]           = {faction="sm", dices=3, morale=4, bagGUID = "3a3e84", hp = 5}
-}
-
-buildingsData = {
-  ["Chaos Factory"]         = "ch",
-  ["Chaos City"]            = "ch",
-  ["Orks Factory"]          = "oz",
-  ["Orks City"]             = "oz",
-  ["Space Marines Factory"] = "sm",
-  ["Space Marines City"]    = "sm",
-  ["Eldar Factory"]         = "ed",
-  ["Eldar City"]            = "ed"
-}
-
-tilesData = {
-  ["12A"] = {{isSpace=true}, {materiel=1}, {materiel=1}, {materiel=1}},
-  ["12B"] = {{isSpace=true}, {materiel=2}, {}, {materiel=1}},
-  ["9A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=2}},
-  ["9B"] = {{materiel=1}, {isSpace=true}, {materiel=2}, {isSpace=true}},
-  ["10A"] = {{isSpace=true}, {materiel=1}, {}, {materiel=2}},
-  ["10B"] = {{materiel=1}, {isSpace=true}, {materiel=2}, {}},
-  ["11A"] = {{isSpace=true}, {materiel=2}, {materiel=1}, {}},
-  ["11B"] = {{materiel=1}, {isSpace=true}, {materiel=1}, {materiel=1}},
-  ["3A"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=2}},
-  ["3B"] = {{isSpace=true}, {}, {isSpace=true}, {materiel=2}},
-  ["5A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=2}},
-  ["5B"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=1}},
-  ["7A"] = {{isSpace=true}, {isSpace=true}, {materiel=2}, {}},
-  ["7B"] = {{}, {isSpace=true}, {materiel=2}, {isSpace=true}},
-  ["1A"] = {{materiel=2}, {isSpace=true}, {materiel=1}, {isSpace=true}},
-  ["1B"] = {{materiel=2}, {isSpace=true}, {}, {isSpace=true}},
-  ["8A"] = {{isSpace=true}, {isSpace=true}, {materiel=3}, {}},
-  ["8B"] = {{}, {isSpace=true}, {materiel=3}, {isSpace=true}},
-  ["4A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=1}},
-  ["4B"] = {{materiel=1}, {isSpace=true}, {materiel=1}, {isSpace=true}},
-  ["2A"] = {{isSpace=true}, {isSpace=true}, {}, {materiel=3}},
-  ["2B"] = {{isSpace=true}, {isSpace=true}, {}, {materiel=2}},
-  ["6A"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=1}},
-  ["6B"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=1}}
-}
-
-factionsData = {
-  ["ch"] = {deckZoneGUID = "545788", diceBagGUID = "35addc", color = "Red",    counterGUID="f8446e", name="Chaos"},
-  ["ed"] = {deckZoneGUID = "fe9f55", diceBagGUID = "408fe6", color = "Yellow", counterGUID="9197a2", name="Eldar"},
-  ["sm"] = {deckZoneGUID = "bdf156", diceBagGUID = "893c6c", color = "Blue",   counterGUID="a87a1e", name="Space Marines"},
-  ["oz"] = {deckZoneGUID = "aad880", diceBagGUID = "5e40b3", color = "Green",  counterGUID="587dc5", name="Orks"}
-}
-
-factionsNameFiller = {
-    ["ch"] = "               ",
-    ["ed"] = "                ",
-    ["sm"] = "",
-    ["oz"] = "                 "
-}
-
-factionColors = {
-    ["ch"] = {0.83, 0.07, 0.11},
-    ["ed"] = {0.93, 0.93, 0.00},
-    ["sm"] = {0.40, 0.40, 1.00},
-    ["oz"] = {0.18, 0.67, 0.14}
-}
-
-borderLineY = 0.08
-showSectorBorders = false
-lineColor = {0.75,0.52,0.23}
-
-garbageZoneIDs = {"a9ec4f", "561867", "68756b", "4b67bc"}
-
-cardsData = {
-  ["Foul worship"] = {icons={"s"}, faction="ch"},
-  ["Khorne's rage"] = {icons={"b"}, faction="ch"},
-  ["Dark faith"] = {icons={"m"}, faction="ch"},
-  ["Impure zeal"] = {icons={"b", "s"}, faction="ch"},
-  ["Lure of Chaos"] = {icons={"m"}, faction="ch"},
-  ["Mark of Khorne"] = {icons={"b", "b"}, faction="ch"},
-  ["Mark of Nurgle"] = {icons={"s", "s"}, faction="ch"},
-  ["Mark of Slaanesh"] = {icons={"b", "s"}, faction="ch"},
-  ["Mark of Tzeentch"] = {icons={"m", "m"}, faction="ch"},
-  ["Chaos victorious"] = {icons={"b", "s", "m"}, faction="ch"},
-  ["Death and despair"] = {icons={"b", "b", "m"}, faction="ch"},
-  ["Chaos united"] = {icons={"b", "s", "m"}, faction="ch"},
-  ["Daemonic resilience"] = {icons={"s", "s", "m"}, faction="ch"},
-  ["Inhuman strength"] = {icons={"b", "b", "m"}, faction="ch"},
-  ["Biker Nobz"] = {icons={"b", "b", "s"}, faction="oz"},
-  ["Mega Nobz"] = {icons={"b", "s", "s"}, faction="oz"},
-  ["Sea of green"] = {icons={"b", "s"}, faction="oz"},
-  ["Waaagh!!!!"] = {icons={"m", "m", "m"}, faction="oz"},
-  ["Rokkit wagon"] = {icons={"b", "b", "b"}, faction="oz"},
-  ["Party wagon"] = {icons={"b", "s", "s"}, faction="oz"},
-  ["Weirdboyz"] = {icons={"b", "s", "m"}, faction="oz"},
-  ["Smasher Gargant"] = {icons={"b", "b", "s", "s", "s"}, faction="oz"},
-  ["Snapper Gargant"] = {icons={"b", "b", "b", "b", "s"}, faction="oz"},
-  ["Shoota Boyz"] = {icons={"b", "b"}, faction="oz"},
-  ["'Ard Boyz"] = {icons={"s", "s"}, faction="oz"},
-  ["Slugga Boyz"] = {icons={"b", "s"}, faction="oz"},
-  ["Gretchin"] = {faction="oz"},
-  ["Mek Boyz"] = {icons={"m"}, faction="oz"},
-  ["Reconnaissance"] = {icons={"s"}, faction="sm"},
-  ["Fury of the Ultramar"] = {icons={"b"}, faction="sm"},
-  ["Blessed Power Armour"] = {icons={"s"}, faction="sm"},
-  ["Ambush"] = {icons={"b"}, faction="sm"},
-  ["Faith in the Emperor"] = {icons={"m"}, faction="sm"},
-  ["Veteran Scouts"] = {icons={"b", "s", "m"}, faction="sm"},
-  ["Drop Pod assault"] = {icons={"b", "s"}, faction="sm"},
-  ["Glory and death"] = {icons={"b", "m"}, faction="sm"},
-  ["Hold the line"] = {icons={"s", "m"}, faction="sm"},
-  ["Emperor's glory"] = {icons={"s", "s", "m", "m"}, faction="sm"},
-  ["Emperor's might"] = {icons={"b", "b", "b"}, faction="sm"},
-  ["Show no fear"] = {icons={"s", "s", "m"}, faction="sm"},
-  ["Armoured advance"] = {icons={"b", "b", "s"}, faction="sm"},
-  ["Break the line"] = {icons={"b", "s", "s"}, faction="sm"},
-  ["Howling Banshees"] = {icons={"b"}, faction="ed"},
-  ["Striking Scorpions"] = {icons={"s"}, faction="ed"},
-  ["Hit and run"] = {icons={"b"}, faction="ed"},
-  ["Command of the Autarch"] = {faction="ed"},
-  ["Ranger support"] = {icons={"s", "m"}, faction="ed"},
-  ["Fire Dragon's vengeance"] = {icons={"b", "b"}, faction="ed"},
-  ["Swooping Hawks"] = {icons={"s", "s"}, faction="ed"},
-  ["Wraithguard advance"] = {icons={"b", "m"}, faction="ed"},
-  ["Wraithguard support"] = {icons={"s", "m"}, faction="ed"},
-  ["Fire Prism"] = {icons={"b", "b", "s"}, faction="ed"},
-  ["Wave Serpent"] = {icons={"b", "s", "s"}, faction="ed"},
-  ["Spiritseer's guidance"] = {icons={"b", "s", "m"}, faction="ed"},
-  ["Holofield emitter"] = {icons={"b", "s", "s", "m"}, faction="ed"},
-  ["Psychic lance"] = {icons={"b", "b", "s"}, faction="ed"}
-}
-
-diceWallIDs = {"11fae1", "ccd19c", "1f4efb"}
+local STORE = require("scripts/variables")
 
 function onload()
     battleData = nil
@@ -175,12 +18,12 @@ function onload()
     botFightTile.interactable = false
     unitsPositions = {}
 
-    updateAllConteinerAmounts()
+    updateAllContainerAmounts()
     setupBattlePanelsUI()
     drawAllGarbageZoneBorders()
-    getObjectFromGUID(diceWallIDs[1]).setPosition({-40.6, 6, 0})
-    getObjectFromGUID(diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
-    getObjectFromGUID(diceWallIDs[3]).setPosition({-24, 6, 0})
+    getObjectFromGUID(STORE.diceWallIDs[1]).setPosition({-40.6, 6, 0})
+    getObjectFromGUID(STORE.diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
+    getObjectFromGUID(STORE.diceWallIDs[3]).setPosition({-24, 6, 0})
     lowerDiceWalls()
 end
 
@@ -260,7 +103,7 @@ end
 
 function startBattle(data)
   battleData = data
-  raiseDiceWalls()
+  --raiseDiceWalls()
   setupFighter(data.fighters[1], botFightTile)
   setupFighter(data.fighters[2], topFightTile)
 end
@@ -300,7 +143,7 @@ function getUnitPosition(tile, count)
 end
 
 function lookAtBattle(faction, tile)
-  local factionData = factionsData[faction]
+  local factionData = STORE.factionsData[faction]
   Player[factionData.color].lookAt({
     position = tile.getPosition(),
     pitch    = 70,
@@ -312,7 +155,7 @@ end
 function dealBattleCards(faction)
   local deck, factionData
 
-  factionData = factionsData[faction]
+  factionData = STORE.factionsData[faction]
   deck = getFactionDeck(factionData)
   if deck ~= nil then
     deck.shuffle()
@@ -332,22 +175,26 @@ function getFactionDeck(factionData)
 end
 
 function spawnUnitDices(units, tile)
-  local diceCount = 0
-  local unitData, faction, factionData
-  for i,v in ipairs(units) do
-    unitData = unitsData[v.getName()]
-    faction = unitData.faction
-    diceCount = diceCount + unitData.dices
-  end
-  diceCount = math.min(diceCount, 8)
-  for i=1,diceCount do
-    addDiceToTile(tile, factionsData[faction].diceBagGUID)
-  end
+    local diceCount = 0
+    local sign, unflipped, unitData, faction, factionData
+    for i,v in ipairs(units) do
+        sign      = math.cos(v.getRotation().z * math.pi / 180)
+        unflipped = sign > 0
+        unitData  = STORE.unitsData[v.getName()]
+        faction   = unitData.faction
+        if unflipped then
+            diceCount = diceCount + unitData.dices
+        end
+    end
+    diceCount = math.min(diceCount, 8)
+    for i=1,diceCount do
+        addDiceToTile(tile, STORE.factionsData[faction].diceBagGUID)
+    end
 end
 
 function raiseDiceWalls()
     adjustDiceWalls(20)
-    Wait.time(lowerDiceWalls,5)
+    --Wait.time(lowerDiceWalls,5)
 end
 
 function lowerDiceWalls()
@@ -355,7 +202,7 @@ function lowerDiceWalls()
 end
 
 function adjustDiceWalls(heightOffset)
-    for i,v in ipairs(diceWallIDs) do
+    for i,v in ipairs(STORE.diceWallIDs) do
         wall = getObjectFromGUID(v)
         pos = wall.getPosition()
         pos[2] = pos[2] + heightOffset
@@ -364,19 +211,26 @@ function adjustDiceWalls(heightOffset)
 end
 
 function updateMateriels()
-  local materiels = countMateriels()
-  local counter, old, plus, delta, report
+    local materiels = countMateriels()
+    local counter, old, plus, delta, report
 
-  report = "Materiels were added:"
-  for k,v in pairs(factionsData) do
-    counter = getObjectFromGUID(v.counterGUID)
-    plus    = materiels[k] or 0
-    delta   = math.min(plus, 14 - counter.call("getCount"))
-    old     = counter.call("getCount")
-    counter.call("setCount", counter.call("getCount") + delta)
-    report  = report.."\n"..v.name..": "..factionsNameFiller[k]..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
-  end
-  printMessage(report)
+    report = "Materiels were added:"
+    for k,v in pairs(STORE.factionsData) do
+      local isSeatedPlayer = false
+      for _, player in ipairs(Player.getPlayers()) do
+          if(player.color == v.color) then isSeatedPlayer = true end
+      end
+
+      if(isSeatedPlayer) then
+        counter = getObjectFromGUID(v.counterGUID)
+        plus    = materiels[k] or 0
+        delta   = math.min(plus, 14 - counter.call("getCount"))
+        old     = counter.call("getCount")
+        counter.call("setCount", counter.call("getCount") + delta)
+        local materiel = v.name..": "..STORE.factionsNameFiller[k].."materiel "..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
+        printMessage(materiel, v.color)
+      end
+    end
 end
 
 function countMateriels()
@@ -432,7 +286,7 @@ function getTileData(tile)
   local letter
   num = string.sub(num, string.len("Tile ") + 1)
   letter = tile.is_face_down and "B" or "A"
-  return tilesData[num..letter]
+  return STORE.tilesData[num..letter]
 end
 
 function normalizeSectorNumber(sector, tile)
@@ -452,8 +306,8 @@ function sortObjectsByFactions(objs, isCountBuildings)
   local faction, unitData, buildingData
 
   for i,v in ipairs(objs) do
-    faction = unitsData[v.getName()] and unitsData[v.getName()].faction
-    faction = faction or (isCountBuildings and buildingsData[v.getName()])
+    faction = STORE.unitsData[v.getName()] and STORE.unitsData[v.getName()].faction
+    faction = faction or (isCountBuildings and STORE.buildingsData[v.getName()])
     if faction then
       army[faction] = army[faction] or {}
       table.insert(army[faction], v)
@@ -514,14 +368,14 @@ function checkCollectMateriels()
 end
 
 function onObjectDrop(player, object)
-    if showSectorBorders and (unitsData[object.getName()] or buildingsData[object.getName()]) then
+    if STORE.showSectorBorders and (STORE.unitsData[object.getName()] or STORE.buildingsData[object.getName()]) then
         updateTileBorders()
     end
     checkGarbageZones()
 end
 
 function checkGarbageZones()
-    for _, id in ipairs(garbageZoneIDs) do
+    for _, id in ipairs(STORE.garbageZoneIDs) do
         checkGarbageZone(id)
     end
 end
@@ -547,7 +401,7 @@ function checkGarbageZone(id)
 end
 
 function drawAllGarbageZoneBorders()
-    for _, id in ipairs(garbageZoneIDs) do
+    for _, id in ipairs(STORE.garbageZoneIDs) do
         drawGarbageZoneBorders(id)
     end
 end
@@ -555,12 +409,12 @@ end
 function drawGarbageZoneBorders(id)
     zone = getObjectFromGUID(id)
     zone.setVectorLines({
-        createLine({{0.5, -0.5, 0.5}, {0.5, -0.5, -0.5}, {-0.5, -0.5, -0.5}, {-0.5, -0.5, 0.5}, {0.5, -0.5, 0.5}}, lineColor)
+        createLine({{0.5, -0.5, 0.5}, {0.5, -0.5, -0.5}, {-0.5, -0.5, -0.5}, {-0.5, -0.5, 0.5}, {0.5, -0.5, 0.5}}, STORE.lineColor)
     })
 end
 
 function toggleBordersClicked(player, value, id)
-    showSectorBorders = value == "True"
+    STORE.showSectorBorders = value == "True"
     updateTileBorders()
 end
 
@@ -577,7 +431,7 @@ end
 
 function toggleBorder(tile)
     local lines = {}
-    if showSectorBorders then
+    if STORE.showSectorBorders then
         lines[1] = createTileBorderMiddleLine(true,  tile.is_face_down)
         lines[2] = createTileBorderMiddleLine(false, tile.is_face_down)
         local index = 3
@@ -605,10 +459,10 @@ function adjustSector(sector, tile)
 end
 
 function addSectorOccupationLines(sector, faction, lines, index, tileFlipped)
-    local c = factionColors[faction]
-    local xz, g, l, y = 2.6, 0.1, 0.2, borderLineY
+    local c = STORE.factionColors[faction]
+    local xz, g, l, y = 2.6, 0.1, 0.2, STORE.borderLineY
     local xOffA, yOffA, xOffB, yOffB, offset = 0, 0, 0, 0, xz + g
-    if tileFlipped then y = -borderLineY end
+    if tileFlipped then y = -STORE.borderLineY end
     if sector == 1 then
         xOffA = offset
     elseif sector == 3 then
@@ -626,10 +480,10 @@ end
 
 function createTileBorderMiddleLine(vertical, tileFlipped)
     local x, z = 0, 0
-    local y = borderLineY
+    local y = STORE.borderLineY
     if vertical then x = 2.8 else z = 2.8 end
-    if tileFlipped then y = -borderLineY end
-    return createLine({{x,y,z}, {-x,y,-z}}, lineColor)
+    if tileFlipped then y = -STORE.borderLineY end
+    return createLine({{x,y,z}, {-x,y,-z}}, STORE.lineColor)
 end
 
 function createLine(pointTable, color)
@@ -646,7 +500,7 @@ function addDiceClicked(player, value, id)
   local tile = id == "botDiceButton" and botFightTile or topFightTile
   local zoneGUID = id == "botDiceButton" and botFightZoneGUID or topFightZoneGUID
 
-  factionData = factionData or factionsData["ch"]
+  factionData = factionData or STORE.factionsData["ch"]
 
   if getDiceCount(getObjectFromGUID(zoneGUID)) < 8 then
     addDiceToTile(tile, factionData.diceBagGUID)
@@ -688,7 +542,7 @@ function getDiceCount(zone)
 end
 
 function getFactionDataByColor(color)
-  for k,v in pairs(factionsData) do
+  for k,v in pairs(STORE.factionsData) do
     if v.color == color then
       return v
     end
@@ -747,8 +601,9 @@ function printError(text)
   broadcastToAll(text, {1, 0, 0})
 end
 
-function printMessage(text)
-  broadcastToAll(text, {0, 1, 0.2})
+function printMessage(text, customColor)
+  local messageColor = customColor or {0, 1, 0.2}
+  broadcastToAll(text, messageColor)
 end
 
 function isFightTilesClean()
@@ -775,7 +630,7 @@ end
 function discardPlayerCards(player)
   local cards = player.getHandObjects()
   for i,v in ipairs(cards) do
-    if cardsData[v.getName()] ~= nil then
+    if STORE.cardsData[v.getName()] ~= nil then
       takeCardHome(v)
     end
   end
@@ -800,8 +655,8 @@ function cleanFightZone(zone)
 end
 
 function takeCardHome(card)
-  local cardData = cardsData[card.getName()]
-  local factionData = factionsData[cardData.faction]
+  local cardData = STORE.cardsData[card.getName()]
+  local factionData = STORE.factionsData[cardData.faction]
   local zone = getObjectFromGUID(factionData.deckZoneGUID)
 
   if putCardInDeck(card, zone) == false then
@@ -866,7 +721,7 @@ function onObjectCollisionEnter(registered_object, info)
     obj.setVar("isReinforcement", true)
     obj.setRotation({0, registered_object.getRotation().y, 0})
   end
-  if unitsData[obj.getName()] then
+  if STORE.unitsData[obj.getName()] then
     obj.UI.setXmlTable(createUnitUI(obj))
   end
 
@@ -882,16 +737,29 @@ end
 
 --[[ The Update function. This is called once per frame. --]]
 function update ()
-    if #rollingDices == 0 then return end
+    if #STORE.rollingDices == 0 then
+        if STORE.wallsUp then
+            lowerDiceWalls()
+            STORE.wallsUp = false
+        end
+        return
+    end
 
-    for i, v in ipairs(rollingDices) do
+    if not STORE.wallsUp then
+        raiseDiceWalls()
+        STORE.wallsUp = true
+    end
+
+    for i, v in ipairs(STORE.rollingDices) do
         if v == nil then break end
         if v.resting == false then return end
     end
 
-    rollingDices = {}
+    STORE.rollingDices = {}
     calculate()
     sortObjects()
+    lowerDiceWalls()
+    STORE.wallsUp = false
 end
 
 function sortObjects()
@@ -960,12 +828,12 @@ end
 function onObjectRandomize(obj, color)
     if obj.tag == "Dice" then
       if haveRollingDice(obj) then return end
-      table.insert(rollingDices, obj)
+      table.insert(STORE.rollingDices, obj)
     end
 end
 
 function haveRollingDice(dice)
-  for i,v in ipairs(rollingDices) do
+  for i,v in ipairs(STORE.rollingDices) do
     if v == dice then return true end
   end
 
@@ -980,7 +848,7 @@ function renameReinforcementToken(token, fighterIndex)
 end
 
 function getReinforcementUnitName(faction, reinf)
-  for k,v in pairs(unitsData) do
+  for k,v in pairs(STORE.unitsData) do
     if v.faction == faction and v.reinf == reinf then
       return k
     end
@@ -988,7 +856,7 @@ function getReinforcementUnitName(faction, reinf)
 end
 
 function createUnitUI(obj)
-  local hp = unitsData[obj.getName()].hp
+  local hp = STORE.unitsData[obj.getName()].hp
   return {
     createUnitButton(obj, 0,"HP: "..hp, nil, 1, false),
     createUnitButton(obj, 1, "Kill", "Global/unitDeleteClicked", 2, true),
@@ -1020,7 +888,7 @@ end
 function unitDeleteClicked(player, value, id)
   local unit = getObjectFromGUID(string.sub(id, 1, 6))
   if unit == nil then return end
-  local data = unitsData[unit.getName()]
+  local data = STORE.unitsData[unit.getName()]
   if unit.tag == "Figurine" then
     getObjectFromGUID(data.bagGUID).putObject(unit)
   else
@@ -1041,7 +909,7 @@ function onObjectLeaveScriptingZone(zone, obj)
   if (zone.guid == botFightZoneGUID or zone.guid == topFightZoneGUID) then
     calculate()
 
-    if unitsData[obj.getName()] then
+    if STORE.unitsData[obj.getName()] then
       obj.UI.setXmlTable({{}})
     end
   end
@@ -1075,7 +943,7 @@ function getStatsForObjects(objs)
       stats[getCombatTokenValue(v)] = stats[getCombatTokenValue(v)] + 1
     end
 
-    unitData = unitsData[v.getName()]
+    unitData = STORE.unitsData[v.getName()]
     if unitData ~= nil and v.is_face_down == false then
       stats["morale"] = stats["morale"] + unitData.morale
     end
@@ -1113,7 +981,7 @@ end
 
 function getCardIcons(card, type)
   local result = 0
-  local cardIcons = cardsData[card.getName()] and cardsData[card.getName()].icons or nil
+  local cardIcons = STORE.cardsData[card.getName()] and STORE.cardsData[card.getName()].icons or nil
 
   if cardIcons == nil then return 0 end
 
@@ -1139,14 +1007,15 @@ function onObjectLeaveContainer(container, object)
     updateContainerAmount(container)
 end
 
-function updateAllConteinerAmounts()
-    for k,v in pairs(unitsData) do
+function updateAllContainerAmounts()
+    for k,v in pairs(STORE.unitsData) do
         updateContainerAmount(getObjectFromGUID(v.bagGUID))
     end
 end
 
 function updateContainerAmount(container)
-    if container.UI.getValue("amount") != nil then
+    local containerAmount = container.UI.getValue("amount")
+    if containerAmount then
       container.UI.setValue("amount", container.getQuantity())
     end
 end
