@@ -9,9 +9,9 @@ end
 
 --Loads the saved data then creates the buttons
 function onload(saved_data)
-    generateButtonParamiters()
+    generateButtonParameters()
     --Checks if there is a saved data. If there is, it gets the saved value for 'count'
-    if saved_data != '' then
+    if not saved_data == '' then
         local loaded_data = JSON.decode(saved_data)
         count = loaded_data.saved_count
     else
@@ -103,7 +103,8 @@ end
 
 function customSet()
     local description = self.getDescription()
-    if description != '' and type(tonumber(description)) == 'number' then
+    local descriptionNEmpty = description == ''
+    if not descriptionNEmpty and type(tonumber(description)) == 'number' then
         self.setDescription('')
         count = tonumber(description)
         updateDisplay()
@@ -123,9 +124,9 @@ function updateDisplay()
     updateName()
 end
 
---This is activated when onload runs. This sets all paramiters for our buttons.
+--This is activated when onload runs. This sets all parameters for our buttons.
 --I do not have to put this all into a function, but I prefer to do it this way.
-function generateButtonParamiters()
+function generateButtonParameters()
     b_display = {
         index = 0, click_function = 'customSet', function_owner = self, label = '',
         position = {0,0.1,0}, width = 600, height = 600, font_size = 500
