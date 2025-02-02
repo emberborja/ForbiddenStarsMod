@@ -11,7 +11,7 @@ end
 function onload(saved_data)
     generateButtonParamiters()
     --Checks if there is a saved data. If there is, it gets the saved value for 'count'
-    if saved_data != '' then
+    if saved_data ~= '' then
         local loaded_data = JSON.decode(saved_data)
         count = loaded_data.saved_count
     else
@@ -103,7 +103,7 @@ end
 
 function customSet()
     local description = self.getDescription()
-    if description != '' and type(tonumber(description)) == 'number' then
+    if description ~= '' and type(tonumber(description)) == 'number' then
         self.setDescription('')
         count = tonumber(description)
         updateDisplay()
