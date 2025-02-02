@@ -1,4 +1,4 @@
-local STORE = require("variables")
+local STORE = require("_variables")
 
 local UTILS = {}
 
@@ -28,7 +28,7 @@ UTILS.getTileData = function(tile)
 end
 
 UTILS.normalizeSectorNumber = function(sector, tile)
-    local offset = round(tile.getRotation().y / 90)
+    local offset = UTILS.round(tile.getRotation().y / 90)
     sector = sector - offset
     if sector < 1 then
         sector = 4 + sector
@@ -104,7 +104,6 @@ function getSectorObjects(tile, sector)
     return objs
 end
 
--- not used
 UTILS.round = function(x)
     return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end

@@ -1,12 +1,12 @@
-local STORE = require("scripts/variables")
-local UTILS = require('scripts/utils')
+local STORE = require("_variables")
+local UTILS = require('_utils')
 
 local BATTLE_SCRIPTS = {}
 
-BATTLE_SCRIPTS.checkEligibleBattles = function(boardZone)
+BATTLE_SCRIPTS.checkEligibleBattles = function(boardZone, botFightZoneGUID, topFightZoneGUID)
     local battles = BATTLE_SCRIPTS.getAllBattles(boardZone)
 
-    if isFightTilesClean() == false then
+    if isFightTilesClean(botFightZoneGUID, topFightZoneGUID) == false then
         return false, "There is something in the battle zone. Clean battle zone first!"
     end
     if #battles == 0 then
@@ -24,7 +24,7 @@ BATTLE_SCRIPTS.checkEligibleBattles = function(boardZone)
     return true
 end
 
-BATTLE_SCRIPTS.scanForBattles = function(boardZone)
+BATTLE_SCRIPTS.scanForBattles = function(boardZone, botFightTile, topFightTile)
     local objs = boardZone.getObjects()
     local fighters
 
@@ -33,7 +33,7 @@ BATTLE_SCRIPTS.scanForBattles = function(boardZone)
             data = findEligibleBattle(v)
             if data ~= nil then
                 print("Found a battle on " .. v.getName())
-                startBattle(data)
+                startBattle(data, botFightTile, topFightTile)
                 return
             end
         end
@@ -61,8 +61,7 @@ BATTLE_SCRIPTS.getAllBattles = function(boardZone, isCountBuildings)
     return result
 end
 
--- botFightZoneGUID and topFightZoneGUID are global variables set on load
-function isFightTilesClean()
+function isFightTilesClean(botFightZoneGUID, topFightZoneGUID)
     local bottomFightZoneObjects = getObjectFromGUID(botFightZoneGUID).getObjects()
     local topFightZoneObjects = getObjectFromGUID(topFightZoneGUID).getObjects()
     return #bottomFightZoneObjects == 1 and #topFightZoneObjects == 1
@@ -100,9 +99,8 @@ function compareFighters(a, b)
     return order[a.faction] < order[b.faction]
 end
 
--- botFightTile and topFightTile are global variables set on load
 -- battleData is also a global variable
-function startBattle(data)
+function startBattle(data, botFightTile, topFightTile)
     battleData = data
     -- raiseDiceWalls()
     setupFighter(data.fighters[1], botFightTile)

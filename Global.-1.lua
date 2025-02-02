@@ -2,10 +2,9 @@
 
 --[[ The OnLoad function. This is called after everything in the game save finishes loading.
 Most of your script code goes here. --]]
-
-local STORE = require("scripts/variables")
-local UTILS = require('scripts/utils')
-local BATTLE_SCRIPTS = require('scripts/battles')
+local STORE = require("_variables")
+local UTILS = require('_utils')
+local BATTLE_SCRIPTS = require('_battles')
 
 function onload()
     battleData = nil
