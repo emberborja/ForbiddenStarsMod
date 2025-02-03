@@ -99,30 +99,32 @@ function initStrategizeOrderReturnButtons()
 end
 
 function createOrderTokenUI(tokenId, obj, faction)
-  local index = 1
   local scale = 1 / obj.getScale().x
-  local offset = 70
-  local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+  local offset = 10
   return {
     tag = "Button",
-    value = eventDeckGUID,
     attributes = {
       interactable = true,
       height = 60,
-      width = 300,
+      width = 250,
       scale = scale.." "..scale.." "..scale,
-      position = "0 "..((-150 - offset * index) * scale).." 0",
+      position = "0 "..((-150 - offset) * scale).." 0",
       rotation = obj.getRotation().z.." 0 "..obj.getRotation().z,
       text = "Add to event deck",
       fontSize = 28,
       onClick = "Global/addOrderTokenToEventDeck",
-      id = tokenId .. ":" .. index
+      id = tokenId .. ":" .. faction
     }
   }
 end
 
 function addOrderTokenToEventDeck(player, value, id)
-  print(value)
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+    local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
+    eventDeck.y = eventDeck.y + 2
+    getObjectFromGUID(tokenId).setPositionSmooth(eventDeck, false, true)
+  end
 end
 
 function raiseDiceWalls()
