@@ -245,209 +245,41 @@ local STORE = {
     },
 
     buildingsData = {
-        ["Chaos Factory"] = "ch",
-        ["Chaos City"] = "ch",
-        ["Orks Factory"] = "oz",
-        ["Orks City"] = "oz",
+        ["Chaos Factory"]         = "ch",
+        ["Chaos City"]            = "ch",
+        ["Orks Factory"]          = "oz",
+        ["Orks City"]             = "oz",
         ["Space Marines Factory"] = "sm",
-        ["Space Marines City"] = "sm",
-        ["Eldar Factory"] = "ed",
-        ["Eldar City"] = "ed"
+        ["Space Marines City"]    = "sm",
+        ["Eldar Factory"]         = "ed",
+        ["Eldar City"]            = "ed"
     },
 
     tilesData = {
-        ["12A"] = {{
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 1
-        }, {
-            materiel = 1
-        }},
-        ["12B"] = {{
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {}, {
-            materiel = 1
-        }},
-        ["9A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 2
-        }},
-        ["9B"] = {{
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {
-            isSpace = true
-        }},
-        ["10A"] = {{
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {}, {
-            materiel = 2
-        }},
-        ["10B"] = {{
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {}},
-        ["11A"] = {{
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {
-            materiel = 1
-        }, {}},
-        ["11B"] = {{
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 1
-        }},
-        ["3A"] = {{
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }},
-        ["3B"] = {{
-            isSpace = true
-        }, {}, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }},
-        ["5A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 2
-        }},
-        ["5B"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 1
-        }},
-        ["7A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {}},
-        ["7B"] = {{}, {
-            isSpace = true
-        }, {
-            materiel = 2
-        }, {
-            isSpace = true
-        }},
-        ["1A"] = {{
-            materiel = 2
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            isSpace = true
-        }},
-        ["1B"] = {{
-            materiel = 2
-        }, {
-            isSpace = true
-        }, {}, {
-            isSpace = true
-        }},
-        ["8A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 3
-        }, {}},
-        ["8B"] = {{}, {
-            isSpace = true
-        }, {
-            materiel = 3
-        }, {
-            isSpace = true
-        }},
-        ["4A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            materiel = 1
-        }},
-        ["4B"] = {{
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            isSpace = true
-        }},
-        ["2A"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {}, {
-            materiel = 3
-        }},
-        ["2B"] = {{
-            isSpace = true
-        }, {
-            isSpace = true
-        }, {}, {
-            materiel = 2
-        }},
-        ["6A"] = {{
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }},
-        ["6B"] = {{
-            isSpace = true
-        }, {
-            materiel = 1
-        }, {
-            isSpace = true
-        }, {
-            materiel = 1
-        }}
+        ["12A"] = {{isSpace=true}, {materiel=1}, {materiel=1}, {materiel=1}},
+        ["12B"] = {{isSpace=true}, {materiel=2}, {}, {materiel=1}},
+        ["9A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=2}},
+        ["9B"] = {{materiel=1}, {isSpace=true}, {materiel=2}, {isSpace=true}},
+        ["10A"] = {{isSpace=true}, {materiel=1}, {}, {materiel=2}},
+        ["10B"] = {{materiel=1}, {isSpace=true}, {materiel=2}, {}},
+        ["11A"] = {{isSpace=true}, {materiel=2}, {materiel=1}, {}},
+        ["11B"] = {{materiel=1}, {isSpace=true}, {materiel=1}, {materiel=1}},
+        ["3A"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=2}},
+        ["3B"] = {{isSpace=true}, {}, {isSpace=true}, {materiel=2}},
+        ["5A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=2}},
+        ["5B"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=1}},
+        ["7A"] = {{isSpace=true}, {isSpace=true}, {materiel=2}, {}},
+        ["7B"] = {{}, {isSpace=true}, {materiel=2}, {isSpace=true}},
+        ["1A"] = {{materiel=2}, {isSpace=true}, {materiel=1}, {isSpace=true}},
+        ["1B"] = {{materiel=2}, {isSpace=true}, {}, {isSpace=true}},
+        ["8A"] = {{isSpace=true}, {isSpace=true}, {materiel=3}, {}},
+        ["8B"] = {{}, {isSpace=true}, {materiel=3}, {isSpace=true}},
+        ["4A"] = {{isSpace=true}, {isSpace=true}, {materiel=1}, {materiel=1}},
+        ["4B"] = {{materiel=1}, {isSpace=true}, {materiel=1}, {isSpace=true}},
+        ["2A"] = {{isSpace=true}, {isSpace=true}, {}, {materiel=3}},
+        ["2B"] = {{isSpace=true}, {isSpace=true}, {}, {materiel=2}},
+        ["6A"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=1}},
+        ["6B"] = {{isSpace=true}, {materiel=1}, {isSpace=true}, {materiel=1}}
     },
 
     factionsData = {
