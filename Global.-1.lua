@@ -171,6 +171,7 @@ function createOrderTokenUI(tokenId, obj, faction)
     tag = "Button",
     attributes = {
       interactable = true,
+      active = false,
       height = 60,
       width = 250,
       scale = scale.." "..scale.." "..scale,
