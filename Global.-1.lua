@@ -85,7 +85,7 @@ function onPlayerAction(player, action, targets)
       local rotation = target.getRotation()
       local id = target.getGUID()
       local faction = getFactionOfObjectiveToken(id)
-
+      if not faction then return end
       if target.is_face_down then
         target.UI.hide(id..":"..faction)
       else
@@ -104,6 +104,7 @@ function getFactionOfObjectiveToken(id)
     end
   end
 end
+
 -- Scan for battle button function
 function fightClicked()
   local status, err = BATTLE_SCRIPTS.checkEligibleBattles(boardZone, botFightZoneGUID, topFightZoneGUID)
@@ -118,6 +119,7 @@ function initStrategizeOrderReturnButtons()
   for faction, tokenTypes in pairs(orderTokens) do
     for _, id in ipairs(tokenTypes.strategize) do
       local obj = getObjectFromGUID(id)
+      orderTokenStartingCoordinates[id] = obj.getPosition()
       obj.UI.setXmlTable({createOrderTokenUI(id, obj, faction)})
     end
   end
@@ -144,11 +146,36 @@ function createOrderTokenUI(tokenId, obj, faction)
 end
 
 function placeOrderTokenOnEventDeck(player, value, id)
+  local orderToken
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    orderToken = getObjectFromGUID(tokenId)
     local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
     local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
     eventDeck.y = eventDeck.y + 2
-    getObjectFromGUID(tokenId).setPositionSmooth(eventDeck, false, true)
+    orderToken.setPositionSmooth(eventDeck, false, true)
+  end
+  orderToken.UI.setAttributes(id, {
+    onClick = "Global/placeStrategizeOrderTokenBackToStart",
+    text = "Return to start"
+  })
+end
+
+function placeStrategizeOrderTokenBackToStart(player, value, id)
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    local startPos = orderTokenStartingCoordinates[tokenId]
+    local strategizeToken = getObjectFromGUID(tokenId)
+    strategizeToken.setPositionSmooth(startPos, false, true)
+    strategizeToken.UI.setAttributes(id, {
+      onClick = "Global/placeOrderTokenOnEventDeck",
+      text = "Add to event deck"
+    })
+  end
+end
+
+function placeOrderTokenBackToStart(player, value, id)
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    local startPos = orderTokenStartingCoordinates[tokenId]
+    getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
   end
 end
 

@@ -24,6 +24,9 @@ orderTokens = {
         advance = {"525259", "a68c5d"}
     }
 }
+
+orderTokenStartingCoordinates = {}
+
 local STORE = {
     rollingDices = {},
 
