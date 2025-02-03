@@ -155,7 +155,10 @@ function initStrategizeOrderReturnButtons()
   for faction, tokenTypes in pairs(orderTokens) do
     for _, id in ipairs(tokenTypes.strategize) do
       local obj = getObjectFromGUID(id)
-      orderTokenStartingCoordinates[id] = obj.getPosition()
+      orderTokenStartingCoordinates[id] = {
+        position = obj.getPosition(),
+        rotation = obj.getRotation()
+      }
       obj.UI.setXmlTable({createOrderTokenUI(id, obj, faction)})
     end
   end
@@ -189,6 +192,8 @@ function placeOrderTokenOnEventDeck(player, value, id)
     local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
     eventDeck.y = eventDeck.y + 2
     orderToken.setPositionSmooth(eventDeck, false, true)
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    orderToken.setRotationSmooth(startRot, false, true)
   end
   orderToken.UI.setAttributes(id, {
     onClick = "Global/placeStrategizeOrderTokenBackToStart",
@@ -198,9 +203,11 @@ end
 
 function placeStrategizeOrderTokenBackToStart(player, value, id)
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-    local startPos = orderTokenStartingCoordinates[tokenId]
+    local startPos = orderTokenStartingCoordinates[tokenId].position
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
     local strategizeToken = getObjectFromGUID(tokenId)
     strategizeToken.setPositionSmooth(startPos, false, true)
+    strategizeToken.setRotationSmooth(startRot, false, true)
     strategizeToken.UI.setAttributes(id, {
       onClick = "Global/placeOrderTokenOnEventDeck",
       text = "Add to event deck"
@@ -210,8 +217,10 @@ end
 
 function placeOrderTokenBackToStart(player, value, id)
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-    local startPos = orderTokenStartingCoordinates[tokenId]
+    local startPos = orderTokenStartingCoordinates[tokenId].position
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
     getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
+    getObjectFromGUID(tokenId).setRotationSmooth(startPos, false, true)
   end
 end
 
