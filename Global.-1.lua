@@ -95,6 +95,42 @@ function onPlayerAction(player, action, targets)
   end
 end
 
+function onObjectLeaveZone(zone, object)
+  local isOrderZone = false
+  local zoneFaction = ''
+  for faction, zoneId in pairs(orderZones) do
+    if zoneId == zone.guid then 
+      isOrderZone = true
+      zoneFaction = faction
+    end
+  end
+  if isOrderZone then
+    for _, token in ipairs(orderTokens[zoneFaction].strategize) do
+      if object.guid == token and object.is_face_down then
+        object.UI.show(token..":"..zoneFaction)
+      end
+    end
+  end
+end
+
+function onObjectEnterZone(zone, object)
+  local isOrderZone = false
+  local zoneFaction = ''
+  for faction, zoneId in pairs(orderZones) do
+    if zoneId == zone.guid then 
+      isOrderZone = true
+      zoneFaction = faction
+    end
+  end
+  if isOrderZone then
+    for _, token in ipairs(orderTokens[zoneFaction].strategize) do
+      if object.guid == token then
+        object.UI.hide(token..":"..zoneFaction)
+      end
+    end
+  end
+end
+
 function getFactionOfObjectiveToken(id)
   for faction, tokens in pairs(orderTokens) do
     for type, ids in pairs(tokens) do

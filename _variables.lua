@@ -27,6 +27,13 @@ orderTokens = {
 
 orderTokenStartingCoordinates = {}
 
+orderZones = {
+    ["ch"] = "a82193",
+    ["ed"] = "d48a52",
+    ["sm"] = "5c5abb",
+    ["oz"] = "3f1125"
+}
+
 local STORE = {
     rollingDices = {},
 
