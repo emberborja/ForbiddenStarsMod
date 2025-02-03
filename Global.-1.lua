@@ -26,6 +26,7 @@ function onload()
     getObjectFromGUID(STORE.diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
     getObjectFromGUID(STORE.diceWallIDs[3]).setPosition({-24, 6, 0})
     lowerDiceWalls()
+    initStrategizeOrderReturnButtons()
 end
 
 -- https://api.tabletopsimulator.com/events/#onobjectpeek
@@ -86,6 +87,42 @@ function fightClicked()
   else
     printError(err)
   end
+end
+
+function initStrategizeOrderReturnButtons()
+  for faction, tokenTypes in pairs(orderTokens) do
+    for _, id in ipairs(tokenTypes.strategize) do
+      local obj = getObjectFromGUID(id)
+      obj.UI.setXmlTable({createOrderTokenUI(id, obj, faction)})
+    end
+  end
+end
+
+function createOrderTokenUI(tokenId, obj, faction)
+  local index = 1
+  local scale = 1 / obj.getScale().x
+  local offset = 70
+  local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+  return {
+    tag = "Button",
+    value = eventDeckGUID,
+    attributes = {
+      interactable = true,
+      height = 60,
+      width = 300,
+      scale = scale.." "..scale.." "..scale,
+      position = "0 "..((-150 - offset * index) * scale).." 0",
+      rotation = obj.getRotation().z.." 0 "..obj.getRotation().z,
+      text = "Add to event deck",
+      fontSize = 28,
+      onClick = "Global/addOrderTokenToEventDeck",
+      id = tokenId .. ":" .. index
+    }
+  }
+end
+
+function addOrderTokenToEventDeck(player, value, id)
+  print(value)
 end
 
 function raiseDiceWalls()

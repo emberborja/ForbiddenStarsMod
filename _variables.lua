@@ -1,15 +1,27 @@
 orderTokens = {
     ["sm"] = {
-        strategize = {"d2e8ea", "d36c19"},
         deploy = {"f70c5d", "cd262d"},
+        strategize = {"d2e8ea", "d36c19"},
         dominate = {"e3142f", "88b2c7"},
         advance = {"e51f7b", "080a73"}
     },
     ["oz"] = {
-        strategize = {"d2e8ea", "d36c19"},
-        deploy = {"f70c5d", "cd262d"},
-        dominate = {"e3142f", "88b2c7"},
-        advance = {"e51f7b", "080a73"}
+        deploy = {"6faf2d", "b23647"},
+        strategize = {"3bf6c2", "8c2b92"},
+        dominate = {"d48b28", "05f879"},
+        advance = {"f20013", "ff822a"}
+    },
+    ["ch"] = {
+        deploy = {"7fc185", "2d02ab"},
+        strategize = {"b5b9ec", "787faf"},
+        dominate = {"5244ce", "2607fc"},
+        advance = {"911f30", "656f0c"}
+    },
+    ["ed"] = {
+        deploy = {"8ec1f0", "99d309"},
+        strategize = {"9d41d1", "b05da8"},
+        dominate = {"ea7418", "91d7c0"},
+        advance = {"525259", "a68c5d"}
     }
 }
 local STORE = {
@@ -430,14 +442,18 @@ local STORE = {
 
     factionsData = {
         ["ch"] = {
+            orderTokens = orderTokens["ch"],
             deckZoneGUID = "545788",
+            eventDeckGUID = "f869ee",
             diceBagGUID = "35addc",
             color = "Red",
             counterGUID = "f8446e",
             name = "Chaos"
         },
         ["ed"] = {
+            orderTokens = orderTokens["ed"],
             deckZoneGUID = "fe9f55",
+            eventDeckGUID = "9fdf39",
             diceBagGUID = "408fe6",
             color = "Yellow",
             counterGUID = "9197a2",
@@ -446,6 +462,7 @@ local STORE = {
         ["sm"] = {
             orderTokens = orderTokens["sm"],
             deckZoneGUID = "bdf156",
+            eventDeckGUID = "84398b",
             diceBagGUID = "893c6c",
             color = "Blue",
             counterGUID = "a87a1e",
@@ -454,6 +471,7 @@ local STORE = {
         ["oz"] = {
             orderTokens = orderTokens["oz"],
             deckZoneGUID = "aad880",
+            eventDeckGUID = "beb03e",
             diceBagGUID = "5e40b3",
             color = "Green",
             counterGUID = "587dc5",
