@@ -79,6 +79,31 @@ function addWaitToUnhideObject(object, player_color)
   )
 end
 
+function onPlayerAction(player, action, targets)
+  if action == Player.Action.FlipOver then
+    for _, target in ipairs(targets) do
+      local rotation = target.getRotation()
+      local id = target.getGUID()
+      local faction = getFactionOfObjectiveToken(id)
+
+      if target.is_face_down then
+        target.UI.hide(id..":"..faction)
+      else
+        target.UI.show(id..":"..faction)
+      end
+    end
+  end
+end
+
+function getFactionOfObjectiveToken(id)
+  for faction, tokens in pairs(orderTokens) do
+    for type, ids in pairs(tokens) do
+      for _, tokenId in ipairs(ids) do
+        if tokenId == id then return faction end
+      end
+    end
+  end
+end
 -- Scan for battle button function
 function fightClicked()
   local status, err = BATTLE_SCRIPTS.checkEligibleBattles(boardZone, botFightZoneGUID, topFightZoneGUID)
@@ -112,13 +137,13 @@ function createOrderTokenUI(tokenId, obj, faction)
       rotation = obj.getRotation().z.." 0 "..obj.getRotation().z,
       text = "Add to event deck",
       fontSize = 28,
-      onClick = "Global/addOrderTokenToEventDeck",
+      onClick = "Global/placeOrderTokenOnEventDeck",
       id = tokenId .. ":" .. faction
     }
   }
 end
 
-function addOrderTokenToEventDeck(player, value, id)
+function placeOrderTokenOnEventDeck(player, value, id)
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
     local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
     local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
