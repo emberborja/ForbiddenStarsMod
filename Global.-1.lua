@@ -30,9 +30,36 @@ end
 
 -- https://api.tabletopsimulator.com/events/#onobjectpeek
 function onObjectPeek(object, player_color)
-    if string.find(object.getName(), "order token") then
-        print(player_color .. " peeked: " .. object.getName())
+  testAndHideOrderTokenOnPeek(object, player_color)
+end
+
+local unhideColorMap = {}
+function testAndHideOrderTokenOnPeek(object, player_color)
+  local objectName = object.getName()
+  local msg = player_color .. " peeked: " .. objectName
+  if unhideColorMap[player_color] then Wait.stop(unhideColorMap[player_color]) end
+  if string.find(objectName, "order token") and not object.is_face_down then
+    local msgColor = {1, 0, 0}
+    local shouldHide = false
+    for faction, data in pairs(factionsData) do
+      local color = data['color']
+      if color == player_color then msgColor = factionColors[faction] end
+      if string.find(objectName, data["name"]) and color ~= player_color then 
+        shouldHide = true
+      end
     end
+    if shouldHide then
+      object.setHiddenFrom({player_color})
+      broadcastToAll(msg, msgColor)
+      unhideColorMap[player_color] = Wait.frames(
+        function()
+          object.setHiddenFrom({})
+          unhideColorMap[player_color] = nil
+        end,
+        300
+      )  
+    end
+  end
 end
 
 -- Scan for battle button function
