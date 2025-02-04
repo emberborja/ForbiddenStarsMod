@@ -51,15 +51,29 @@ function testAndHideOrderTokenOnPeek(object, player_color)
     if shouldHide then
       object.setHiddenFrom({player_color})
       broadcastToAll(msg, msgColor)
-      unhideColorMap[player_color] = Wait.frames(
-        function()
-          object.setHiddenFrom({})
-          unhideColorMap[player_color] = nil
-        end,
-        300
-      )  
+      addWaitToUnhideObject(object, player_color)
     end
   end
+end
+
+function addWaitToUnhideObject(object, player_color)
+  unhideColorMap[player_color] = Wait.frames(
+    function()
+      for _, player in ipairs(Player.getPlayers()) do
+        if player.color == player_color then
+          local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
+          if hoverGuid == object.guid then
+            print(player_color..' still hovering')
+            addWaitToUnhideObject(object, player_color)
+            return
+          end
+        end
+      end
+      object.setHiddenFrom({})
+      unhideColorMap[player_color] = nil
+    end,
+    300
+  )
 end
 
 -- Scan for battle button function
