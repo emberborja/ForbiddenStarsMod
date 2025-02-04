@@ -37,7 +37,8 @@ local unhideColorMap = {}
 function testAndHideOrderTokenOnPeek(object, player_color)
   local objectName = object.getName()
   local msg = player_color .. " peeked: " .. objectName
-  if unhideColorMap[player_color] then Wait.stop(unhideColorMap[player_color]) end
+  local waitId = player_color..object.guid
+  if unhideColorMap[waitId] then Wait.stop(unhideColorMap[waitId]) end
   if string.find(objectName, "order token") and not object.is_face_down then
     local msgColor = {1, 0, 0}
     local shouldHide = false
@@ -57,7 +58,8 @@ function testAndHideOrderTokenOnPeek(object, player_color)
 end
 
 function addWaitToUnhideObject(object, player_color)
-  unhideColorMap[player_color] = Wait.frames(
+  local waitId = player_color..object.guid
+  unhideColorMap[waitId] = Wait.frames(
     function()
       for _, player in ipairs(Player.getPlayers()) do
         if player.color == player_color then
@@ -70,7 +72,7 @@ function addWaitToUnhideObject(object, player_color)
         end
       end
       object.setHiddenFrom({})
-      unhideColorMap[player_color] = nil
+      unhideColorMap[waitId] = nil
     end,
     300
   )
