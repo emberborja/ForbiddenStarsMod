@@ -1,7 +1,7 @@
 # ForbiddenStarsMod
-Lua mod for Table Top Simulator
+Lua mod for Tabletop Simulator
 
-This mod is found in the Steam Workshop, for the game Table Top Simulator. This mod recreates the game Forbidden Stars by downloading assets from the game and is scripted using Lua!
+This mod is found in the Steam Workshop, for the game Tabletop Simulator. This mod recreates the game Forbidden Stars by downloading assets from the game and is scripted using Lua!
 You can find and subscribe to the mod here => https://steamcommunity.com/sharedfiles/filedetails/?id=2759334366
 
 Once you have subscribed to the mod, the Steam client should download the content automatically. You can play the mod by using the in-game menue in TTS.
