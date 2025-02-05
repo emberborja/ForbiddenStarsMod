@@ -332,9 +332,9 @@ end
 function adjustSector(sector, tile)
     local sectorFlip   = {2,1,4,3}
     local rotationFlip = {0,3,2,1}
-    local roationIndex = math.floor((tile.getRotation().y/90)+0.5) -- 0=0, 90=1, 180=2, 270=3
-    roationIndex = rotationFlip[roationIndex+1]
-    local adjusted = sector + roationIndex
+    local rotationIndex = math.floor((tile.getRotation().y/90)+0.5) -- 0=0, 90=1, 180=2, 270=3
+    rotationIndex = rotationFlip[rotationIndex+1]
+    local adjusted = sector + rotationIndex
     if adjusted > 4      then adjusted = adjusted - 4         end
     if tile.is_face_down then adjusted = sectorFlip[adjusted] end
     return adjusted
@@ -686,15 +686,15 @@ function haveRollingDice(dice)
 end
 
 function renameReinforcementToken(token, fighterIndex)
-  local reinf
+  local reinforcement
   if battleData == nil then return nil end
-  reinf = battleData.isSpace and "space" or "planet"
-  token.setName(getReinforcementUnitName(battleData.fighters[fighterIndex].faction, reinf))
+  reinforcement = battleData.isSpace and "space" or "planet"
+  token.setName(getReinforcementUnitName(battleData.fighters[fighterIndex].faction, reinforcement))
 end
 
-function getReinforcementUnitName(faction, reinf)
+function getReinforcementUnitName(faction, reinforcement)
   for k,v in pairs(STORE.unitsData) do
-    if v.faction == faction and v.reinf == reinf then
+    if v.faction == faction and v.reinf == reinforcement then
       return k
     end
   end
