@@ -79,68 +79,6 @@ function addWaitToUnhideObject(object, player_color)
   )
 end
 
-function onPlayerAction(player, action, targets)
-  if action == Player.Action.FlipOver then
-    for _, target in ipairs(targets) do
-      local rotation = target.getRotation()
-      local id = target.getGUID()
-      local faction = getFactionOfObjectiveToken(id)
-      if not faction then return end
-      if target.is_face_down then
-        target.UI.hide(id..":"..faction)
-      else
-        target.UI.show(id..":"..faction)
-      end
-    end
-  end
-end
-
-function onObjectLeaveZone(zone, object)
-  local isOrderZone = false
-  local zoneFaction = ''
-  for faction, zoneId in pairs(orderZones) do
-    if zoneId == zone.guid then 
-      isOrderZone = true
-      zoneFaction = faction
-    end
-  end
-  if isOrderZone then
-    for _, token in ipairs(orderTokens[zoneFaction].strategize) do
-      if object.guid == token and object.is_face_down then
-        object.UI.show(token..":"..zoneFaction)
-      end
-    end
-  end
-end
-
-function onObjectEnterZone(zone, object)
-  local isOrderZone = false
-  local zoneFaction = ''
-  for faction, zoneId in pairs(orderZones) do
-    if zoneId == zone.guid then 
-      isOrderZone = true
-      zoneFaction = faction
-    end
-  end
-  if isOrderZone then
-    for _, token in ipairs(orderTokens[zoneFaction].strategize) do
-      if object.guid == token then
-        object.UI.hide(token..":"..zoneFaction)
-      end
-    end
-  end
-end
-
-function getFactionOfObjectiveToken(id)
-  for faction, tokens in pairs(orderTokens) do
-    for type, ids in pairs(tokens) do
-      for _, tokenId in ipairs(ids) do
-        if tokenId == id then return faction end
-      end
-    end
-  end
-end
-
 -- Scan for battle button function
 function fightClicked()
   local status, err = BATTLE_SCRIPTS.checkEligibleBattles(boardZone, botFightZoneGUID, topFightZoneGUID)
@@ -180,6 +118,8 @@ function createOrderTokenUI(tokenId, obj, faction)
       text = "Add to event deck",
       fontSize = 28,
       onClick = "Global/placeOrderTokenOnEventDeck",
+      onMouseEnter = "show",
+      onMouseExit = "hide",
       id = tokenId .. ":" .. faction
     }
   }

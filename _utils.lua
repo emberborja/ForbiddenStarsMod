@@ -115,6 +115,18 @@ function printTable(tab)
     end
 end
 
+function getFactionOfObjectiveToken(id)
+    for faction, tokens in pairs(orderTokens) do
+        for type, ids in pairs(tokens) do
+            for _, tokenId in ipairs(ids) do
+                if tokenId == id then
+                    return faction
+                end
+            end
+        end
+    end
+end
+
 return UTILS
 
 -- alternative way to get object rotation, but can't attach to an object >:-|
