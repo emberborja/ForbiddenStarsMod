@@ -26,6 +26,7 @@ function onload()
     getObjectFromGUID(STORE.diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
     getObjectFromGUID(STORE.diceWallIDs[3]).setPosition({-24, 6, 0})
     lowerDiceWalls()
+    initStrategizeOrderReturnButtons()
 end
 
 -- https://api.tabletopsimulator.com/events/#onobjectpeek
@@ -85,6 +86,82 @@ function fightClicked()
     BATTLE_SCRIPTS.scanForBattles(boardZone, botFightTile, topFightTile)
   else
     printError(err)
+  end
+end
+
+function initStrategizeOrderReturnButtons()
+  for faction, tokenTypes in pairs(orderTokens) do
+    for _, id in ipairs(tokenTypes.strategize) do
+      local obj = getObjectFromGUID(id)
+      orderTokenStartingCoordinates[id] = {
+        position = obj.getPosition(),
+        rotation = obj.getRotation()
+      }
+      obj.UI.setXmlTable({createOrderTokenUI(id, obj, faction)})
+    end
+  end
+end
+
+function createOrderTokenUI(tokenId, obj, faction)
+  local scale = 1 / obj.getScale().x
+  local offset = 10
+  return {
+    tag = "Button",
+    attributes = {
+      interactable = true,
+      active = false,
+      height = 60,
+      width = 250,
+      scale = scale.." "..scale.." "..scale,
+      position = "0 "..((150 + offset) * scale).." 0",
+      rotation = obj.getRotation().z.." 0 0",
+      text = "Add to event deck",
+      fontSize = 28,
+      onClick = "Global/placeOrderTokenOnEventDeck",
+      onMouseEnter = "show",
+      onMouseExit = "hide",
+      id = tokenId .. ":" .. faction
+    }
+  }
+end
+
+function placeOrderTokenOnEventDeck(player, value, id)
+  local orderToken
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    orderToken = getObjectFromGUID(tokenId)
+    local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+    local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
+    eventDeck.y = eventDeck.y + 2
+    orderToken.setPositionSmooth(eventDeck, false, true)
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    orderToken.setRotationSmooth(startRot, false, true)
+  end
+  orderToken.UI.setAttributes(id, {
+    onClick = "Global/placeStrategizeOrderTokenBackToStart",
+    text = "Return to start"
+  })
+end
+
+function placeStrategizeOrderTokenBackToStart(player, value, id)
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    local startPos = orderTokenStartingCoordinates[tokenId].position
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    local strategizeToken = getObjectFromGUID(tokenId)
+    strategizeToken.setPositionSmooth(startPos, false, true)
+    strategizeToken.setRotationSmooth(startRot, false, true)
+    strategizeToken.UI.setAttributes(id, {
+      onClick = "Global/placeOrderTokenOnEventDeck",
+      text = "Add to event deck"
+    })
+  end
+end
+
+function placeOrderTokenBackToStart(player, value, id)
+  for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+    local startPos = orderTokenStartingCoordinates[tokenId].position
+    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
+    getObjectFromGUID(tokenId).setRotationSmooth(startPos, false, true)
   end
 end
 
@@ -255,9 +332,9 @@ end
 function adjustSector(sector, tile)
     local sectorFlip   = {2,1,4,3}
     local rotationFlip = {0,3,2,1}
-    local roationIndex = math.floor((tile.getRotation().y/90)+0.5) -- 0=0, 90=1, 180=2, 270=3
-    roationIndex = rotationFlip[roationIndex+1]
-    local adjusted = sector + roationIndex
+    local rotationIndex = math.floor((tile.getRotation().y/90)+0.5) -- 0=0, 90=1, 180=2, 270=3
+    rotationIndex = rotationFlip[rotationIndex+1]
+    local adjusted = sector + rotationIndex
     if adjusted > 4      then adjusted = adjusted - 4         end
     if tile.is_face_down then adjusted = sectorFlip[adjusted] end
     return adjusted
@@ -503,13 +580,6 @@ function onObjectCollisionEnter(registered_object, info)
   calculate()
 end
 
-function printTable(tab)
-  for key,value in pairs(tab) do
-    print("key: " .. key.." value: ")
-    print(value)
-  end
-end
-
 --[[ The Update function. This is called once per frame. --]]
 function update ()
     if #STORE.rollingDices == 0 then
@@ -616,15 +686,15 @@ function haveRollingDice(dice)
 end
 
 function renameReinforcementToken(token, fighterIndex)
-  local reinf
+  local reinforcement
   if battleData == nil then return nil end
-  reinf = battleData.isSpace and "space" or "planet"
-  token.setName(getReinforcementUnitName(battleData.fighters[fighterIndex].faction, reinf))
+  reinforcement = battleData.isSpace and "space" or "planet"
+  token.setName(getReinforcementUnitName(battleData.fighters[fighterIndex].faction, reinforcement))
 end
 
-function getReinforcementUnitName(faction, reinf)
+function getReinforcementUnitName(faction, reinforcement)
   for k,v in pairs(STORE.unitsData) do
-    if v.faction == faction and v.reinf == reinf then
+    if v.faction == faction and v.reinf == reinforcement then
       return k
     end
   end

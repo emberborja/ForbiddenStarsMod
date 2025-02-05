@@ -108,4 +108,35 @@ UTILS.round = function(x)
     return x >= 0 and math.floor(x + 0.5) or math.ceil(x - 0.5)
 end
 
+function printTable(tab)
+    for key, value in pairs(tab) do
+        print("key: " .. key .. " value: ")
+        print(value)
+    end
+end
+
+function getFactionOfObjectiveToken(id)
+    for faction, tokens in pairs(orderTokens) do
+        for type, ids in pairs(tokens) do
+            for _, tokenId in ipairs(ids) do
+                if tokenId == id then
+                    return faction
+                end
+            end
+        end
+    end
+end
+
 return UTILS
+
+-- alternative way to get object rotation, but can't attach to an object >:-|
+--[[ 
+function onObjectRotate(object, spin, flip, player_color, old_spin, old_flip)
+  if spin ~= old_spin then
+      print(player_color .. " spun " .. tostring(object) .. " from " .. old_spin .. " degrees to " .. spin .. " degrees")
+  end
+-- flip 180 means right side up
+  if flip ~= old_flip then
+      print(player_color .. " flipped " .. tostring(object) .. " from " .. old_flip .. " degrees to " .. flip .. " degrees")
+  end
+end ]]
