@@ -30,9 +30,52 @@ end
 
 -- https://api.tabletopsimulator.com/events/#onobjectpeek
 function onObjectPeek(object, player_color)
-    if string.find(object.getName(), "order token") then
-        print(player_color .. " peeked: " .. object.getName())
+  testAndHideOrderTokenOnPeek(object, player_color)
+end
+
+local unhideColorMap = {}
+function testAndHideOrderTokenOnPeek(object, player_color)
+  local objectName = object.getName()
+  local msg = player_color .. " peeked: " .. objectName
+  local waitId = player_color..object.guid
+  if unhideColorMap[waitId] then Wait.stop(unhideColorMap[waitId]) end
+  if string.find(objectName, "order token") and not object.is_face_down then
+    local msgColor = {1, 0, 0}
+    local shouldHide = false
+    for faction, data in pairs(factionsData) do
+      local color = data['color']
+      if color == player_color then msgColor = factionColors[faction] end
+      if string.find(objectName, data["name"]) and color ~= player_color then 
+        shouldHide = true
+      end
     end
+    if shouldHide then
+      object.setHiddenFrom({player_color})
+      broadcastToAll(msg, msgColor)
+      addWaitToUnhideObject(object, player_color)
+    end
+  end
+end
+
+function addWaitToUnhideObject(object, player_color)
+  local waitId = player_color..object.guid
+  unhideColorMap[waitId] = Wait.frames(
+    function()
+      for _, player in ipairs(Player.getPlayers()) do
+        if player.color == player_color then
+          local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
+          if hoverGuid == object.guid then
+            print(player_color..' still hovering')
+            addWaitToUnhideObject(object, player_color)
+            return
+          end
+        end
+      end
+      object.setHiddenFrom({})
+      unhideColorMap[waitId] = nil
+    end,
+    300
+  )
 end
 
 -- Scan for battle button function
