@@ -1,8 +1,14 @@
+local orderZones = {
+    ["ch"] = "a82193",
+    ["ed"] = "d48a52",
+    ["sm"] = "5c5abb",
+    ["oz"] = "3f1125"
+}
 local faction = 'sm'
 local waitMap = {}
 function onHover(player_color)
     if not self.is_face_down then return end
-    for _, zone in ipairs(object.getZones()) do
+    for _, zone in ipairs(self.getZones()) do
        if zone.guid == orderZones[faction] then return end
     end
     local buttonId = self.guid..":"..faction

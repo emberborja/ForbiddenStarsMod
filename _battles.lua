@@ -1,12 +1,13 @@
 local STORE = require("_variables")
 local UTILS = require('_utils')
+local COMBAT = require("_combat")
 
 local BATTLE_SCRIPTS = {}
 
 BATTLE_SCRIPTS.checkEligibleBattles = function(boardZone, botFightZoneGUID, topFightZoneGUID)
     local battles = BATTLE_SCRIPTS.getAllBattles(boardZone)
 
-    if isFightTilesClean(botFightZoneGUID, topFightZoneGUID) == false then
+    if BATTLE_SCRIPTS.isFightTilesClean(botFightZoneGUID, topFightZoneGUID) == false then
         return false, "There is something in the battle zone. Clean battle zone first!"
     end
     if #battles == 0 then
@@ -26,14 +27,13 @@ end
 
 BATTLE_SCRIPTS.scanForBattles = function(boardZone, botFightTile, topFightTile)
     local objs = boardZone.getObjects()
-    local fighters
 
-    for i, v in ipairs(objs) do
+    for _, v in ipairs(objs) do
         if string.find(v.getName(), "Tile") then
-            data = findEligibleBattle(v)
+            local data = BATTLE_SCRIPTS.findEligibleBattle(v)
             if data ~= nil then
                 print("Found a battle on " .. v.getName())
-                startBattle(data, botFightTile, topFightTile)
+                BATTLE_SCRIPTS.startBattle(data, botFightTile, topFightTile)
                 return
             end
         end
@@ -44,7 +44,7 @@ BATTLE_SCRIPTS.getAllBattles = function(boardZone, isCountBuildings)
     local objs = boardZone.getObjects()
     local result, army = {}, {}
 
-    for num, tile in ipairs(objs) do
+    for _, tile in ipairs(objs) do
         if string.find(tile.getName(), "Tile") then
             for i = 1, 4 do
                 army = UTILS.getSectorArmy(i, tile, isCountBuildings)
@@ -61,35 +61,34 @@ BATTLE_SCRIPTS.getAllBattles = function(boardZone, isCountBuildings)
     return result
 end
 
-function isFightTilesClean(botFightZoneGUID, topFightZoneGUID)
+function BATTLE_SCRIPTS.isFightTilesClean(botFightZoneGUID, topFightZoneGUID)
     local bottomFightZoneObjects = getObjectFromGUID(botFightZoneGUID).getObjects()
     local topFightZoneObjects = getObjectFromGUID(topFightZoneGUID).getObjects()
     return #bottomFightZoneObjects == 1 and #topFightZoneObjects == 1
 end
 
-function findEligibleBattle(tile)
+function BATTLE_SCRIPTS.findEligibleBattle(tile)
     local army
-    local fightersData
     for i = 1, 4 do
         army = UTILS.getSectorArmy(i, tile)
         if #army == 2 then
-            return createBattleData(army, tile, i)
+            return BATTLE_SCRIPTS.createBattleData(army, tile, i)
         end
     end
 
     return nil
 end
 
-function createBattleData(fighters, tile, sector)
+function BATTLE_SCRIPTS.createBattleData(fighters, tile, sector)
     local result = {}
     local sectorNormalized = UTILS.normalizeSectorNumber(sector, tile)
-    table.sort(fighters, compareFighters)
+    table.sort(fighters, BATTLE_SCRIPTS.compareFighters)
     result.fighters = fighters
     result.isSpace = UTILS.getTileData(tile)[sectorNormalized].isSpace or false
     return result
 end
 
-function compareFighters(a, b)
+function BATTLE_SCRIPTS.compareFighters(a, b)
     local order = {
         ch = 1,
         ed = 2,
@@ -99,25 +98,24 @@ function compareFighters(a, b)
     return order[a.faction] < order[b.faction]
 end
 
--- battleData is also a global variable
-function startBattle(data, botFightTile, topFightTile)
-    battleData = data
+function BATTLE_SCRIPTS.startBattle(data, botFightTile, topFightTile)
+    COMBAT.battleData = data
     -- raiseDiceWalls()
-    setupFighter(data.fighters[1], botFightTile)
-    setupFighter(data.fighters[2], topFightTile)
+    BATTLE_SCRIPTS.setupFighter(data.fighters[1], botFightTile)
+    BATTLE_SCRIPTS.setupFighter(data.fighters[2], topFightTile)
 end
 
-function setupFighter(fighter, tile)
-    spawnUnitDices(fighter.units, tile)
-    dealBattleCards(fighter.faction)
-    lookAtBattle(fighter.faction, tile)
-    moveUnitsToBattle(fighter, tile)
+function BATTLE_SCRIPTS.setupFighter(fighter, tile)
+    BATTLE_SCRIPTS.spawnUnitDices(fighter.units, tile)
+    BATTLE_SCRIPTS.dealBattleCards(fighter.faction)
+    BATTLE_SCRIPTS.lookAtBattle(fighter.faction, tile)
+    BATTLE_SCRIPTS.moveUnitsToBattle(fighter, tile)
 end
 
-function spawnUnitDices(units, tile)
+function BATTLE_SCRIPTS.spawnUnitDices(units, tile)
     local diceCount = 0
     local sign, unflipped, unitData, faction, factionData
-    for i, v in ipairs(units) do
+    for _, v in ipairs(units) do
         sign = math.cos(v.getRotation().z * math.pi / 180)
         unflipped = sign > 0
         unitData = STORE.unitsData[v.getName()]
@@ -132,29 +130,29 @@ function spawnUnitDices(units, tile)
     end
 end
 
-function dealBattleCards(faction)
+function BATTLE_SCRIPTS.dealBattleCards(faction)
     local deck, factionData
 
     factionData = STORE.factionsData[faction]
-    deck = getFactionDeck(factionData)
+    deck = BATTLE_SCRIPTS.getFactionDeck(factionData)
     if deck ~= nil then
         deck.shuffle()
         deck.deal(5, factionData.color)
     end
 end
 
-function getFactionDeck(factionData)
+function BATTLE_SCRIPTS.getFactionDeck(factionData)
     local objs
 
     objs = getObjectFromGUID(factionData.deckZoneGUID).getObjects()
-    for i, v in ipairs(objs) do
+    for _, v in ipairs(objs) do
         if v.tag == "Deck" then
             return v
         end
     end
 end
 
-function lookAtBattle(faction, tile)
+function BATTLE_SCRIPTS.lookAtBattle(faction, tile)
     local factionData = STORE.factionsData[faction]
     Player[factionData.color].lookAt({
         position = tile.getPosition(),
@@ -164,27 +162,27 @@ function lookAtBattle(faction, tile)
     })
 end
 
-function moveUnitsToBattle(fighter, tile)
+function BATTLE_SCRIPTS.moveUnitsToBattle(fighter, tile)
     local count = 0
-    saveUnitsPositions(fighter.units)
-    for i, v in ipairs(fighter.units) do
+    BATTLE_SCRIPTS.saveUnitsPositions(fighter.units)
+    for _, v in ipairs(fighter.units) do
         v.setRotation({0, tile.getRotation().y, v.getRotation().z})
-        v.setPositionSmooth(getUnitPosition(tile, count))
+        v.setPositionSmooth(BATTLE_SCRIPTS.getUnitPosition(tile, count))
         count = count + 1
     end
 end
 
 -- unitsPositions is a table created on load, global variable
-function saveUnitsPositions(units)
-    for i, v in ipairs(units) do
-        unitsPositions[v.getGUID()] = v.getPosition()
+function BATTLE_SCRIPTS.saveUnitsPositions(units)
+    for _, v in ipairs(units) do
+        COMBAT.unitsPositions[v.getGUID()] = v.getPosition()
     end
 end
 
-function getUnitPosition(tile, count)
+function BATTLE_SCRIPTS.getUnitPosition(tile, count)
     local diceWidth, diceHeight = 2, 2
     local sign = math.cos(tile.getRotation().y * math.pi / 180)
-    position = tile.getPosition()
+    local position = tile.getPosition()
     position.y = 3
     position.x = position.x - tile.getBounds().size.x / 2 + diceWidth / 2 + count * diceWidth
     position.z = position.z + sign * tile.getBounds().size.z / 2 - sign * diceHeight / 2 - sign * 3 * diceHeight
