@@ -8,16 +8,8 @@ local BATTLE_SCRIPTS = require('_battles')
 local COMBAT = require("_combat")
 
 function onload()
-    boardZone = getObjectFromGUID("7e9dca")
-    botFightZoneGUID = "9f0b03"
-    topFightZoneGUID = "839de2"
-    topFightTile = getObjectFromGUID("3d4d0d")
-    botFightTile = getObjectFromGUID("d96e1d")
-    topFightTile.registerCollisions(false)
-    botFightTile.registerCollisions(false)
-    topFightTile.interactable = false
-    botFightTile.interactable = false
-
+    STORE.init()
+    COMBAT.init()
     updateAllContainerAmounts()
     setupBattlePanelsUI()
     drawAllGarbageZoneBorders()
@@ -80,19 +72,19 @@ end
 
 -- Scan for battle button function
 function fightClicked()
-  local status, err = BATTLE_SCRIPTS.checkEligibleBattles(boardZone, botFightZoneGUID, topFightZoneGUID)
+  local status, err = BATTLE_SCRIPTS.checkEligibleBattles(STORE.boardZone, COMBAT.botFightZoneGUID, COMBAT.topFightZoneGUID)
   if status then
-    BATTLE_SCRIPTS.scanForBattles(boardZone, botFightTile, topFightTile)
+    BATTLE_SCRIPTS.scanForBattles(STORE.boardZone, COMBAT.botFightTile, COMBAT.topFightTile)
   else
     printError(err)
   end
 end
 
 function initStrategizeOrderReturnButtons()
-  for faction, tokenTypes in pairs(orderTokens) do
+  for faction, tokenTypes in pairs(STORE.orderTokens) do
     for _, id in ipairs(tokenTypes.strategize) do
       local obj = getObjectFromGUID(id)
-      orderTokenStartingCoordinates[id] = {
+      STORE.orderTokenStartingCoordinates[id] = {
         position = obj.getPosition(),
         rotation = obj.getRotation()
       }
@@ -132,7 +124,7 @@ function placeOrderTokenOnEventDeck(player, value, id)
     local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
     eventDeck.y = eventDeck.y + 2
     orderToken.setPositionSmooth(eventDeck, false, true)
-    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
     orderToken.setRotationSmooth(startRot, false, true)
   end
   orderToken.UI.setAttributes(id, {
@@ -143,8 +135,8 @@ end
 
 function placeStrategizeOrderTokenBackToStart(player, value, id)
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-    local startPos = orderTokenStartingCoordinates[tokenId].position
-    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    local startPos = STORE.orderTokenStartingCoordinates[tokenId].position
+    local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
     local strategizeToken = getObjectFromGUID(tokenId)
     strategizeToken.setPositionSmooth(startPos, false, true)
     strategizeToken.setRotationSmooth(startRot, false, true)
@@ -157,10 +149,10 @@ end
 
 function placeOrderTokenBackToStart(player, value, id)
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-    local startPos = orderTokenStartingCoordinates[tokenId].position
-    local startRot = orderTokenStartingCoordinates[tokenId].rotation
+    local startPos = STORE.orderTokenStartingCoordinates[tokenId].position
+    local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
     getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
-    getObjectFromGUID(tokenId).setRotationSmooth(startPos, false, true)
+    getObjectFromGUID(tokenId).setRotationSmooth(startRot, false, true)
   end
 end
 
@@ -187,26 +179,26 @@ function updateMateriels()
     local counter, old, plus, delta, report
 
     report = "Materiels were added:"
-    for k,v in pairs(STORE.factionsData) do
+    for faction, data in pairs(STORE.factionsData) do
       local isSeatedPlayer = false
       for _, player in ipairs(Player.getPlayers()) do
-          if(player.color == v.color) then isSeatedPlayer = true end
+          if(player.color == data.color) then isSeatedPlayer = true end
       end
 
       if(isSeatedPlayer) then
-        counter = getObjectFromGUID(v.counterGUID)
-        plus    = materiels[k] or 0
+        counter = getObjectFromGUID(data.counterGUID)
+        plus    = materiels[faction] or 0
         delta   = math.min(plus, 14 - counter.call("getCount"))
         old     = counter.call("getCount")
         counter.call("setCount", counter.call("getCount") + delta)
-        local materiel = v.name..": "..STORE.factionsNameFiller[k].."materiel "..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
-        printMessage(materiel, v.color)
+        local materiel = data.name..": "..STORE.factionsNameFiller[faction].."materiel "..old.." + "..delta.." ("..plus..") = "..counter.call("getCount")
+        printMessage(materiel, data.color)
       end
     end
 end
 
 function countMateriels()
-  local objs = boardZone.getObjects()
+  local objs = STORE.boardZone.getObjects()
   local materiel
   local result = {}
 
@@ -239,7 +231,7 @@ function collectMaterielClicked()
 end
 
 function checkCollectMateriels()
-  local battles = UTILS.getAllBattles(boardZone, true)
+  local battles = BATTLE_SCRIPTS.getAllBattles(STORE.boardZone, true)
 
   if #battles > 0 then
     return false, "I can't count materiels! There are active battles on "..UTILS.concatTileNames(battles)
@@ -300,7 +292,7 @@ function toggleBordersClicked(player, value, id)
 end
 
 function updateTileBorders()
-    local objs = boardZone.getObjects()
+    local objs = STORE.boardZone.getObjects()
     local foundTile = false
     for num,tile in ipairs(objs) do
         if string.find(tile.getName(), "Tile") then
@@ -378,8 +370,8 @@ end
 
 function addDiceClicked(player, value, id)
   local factionData = getFactionDataByColor(player.color)
-  local tile = id == "botDiceButton" and botFightTile or topFightTile
-  local zoneGUID = id == "botDiceButton" and botFightZoneGUID or topFightZoneGUID
+  local tile = id == "botDiceButton" and COMBAT.botFightTile or COMBAT.topFightTile
+  local zoneGUID = id == "botDiceButton" and COMBAT.botFightZoneGUID or COMBAT.topFightZoneGUID
 
   factionData = factionData or STORE.factionsData["ch"]
 
@@ -391,12 +383,12 @@ function addDiceClicked(player, value, id)
 end
 
 function addBolterClicked(player, value, id)
-  local tile = id == "botBolterButton" and botFightTile or topFightTile
+  local tile = id == "botBolterButton" and COMBAT.botFightTile or COMBAT.topFightTile
   addTokenToTile("bolter", tile)
 end
 
 function addShieldClicked(player, value, id)
-  local tile = id == "botShieldButton" and botFightTile or topFightTile
+  local tile = id == "botShieldButton" and COMBAT.botFightTile or COMBAT.topFightTile
   addTokenToTile("shield", tile)
 end
 
@@ -433,8 +425,8 @@ function getFactionDataByColor(color)
 end
 
 function endRoundClicked()
-  removeCombatTokens(getObjectFromGUID(botFightZoneGUID))
-  removeCombatTokens(getObjectFromGUID(topFightZoneGUID))
+  removeCombatTokens(getObjectFromGUID(COMBAT.botFightZoneGUID))
+  removeCombatTokens(getObjectFromGUID(COMBAT.topFightZoneGUID))
 end
 
 function removeCombatTokens(zone)
@@ -462,8 +454,8 @@ function printMessage(text, customColor)
 end
 
 function endBattleClicked()
-  cleanFightZone(getObjectFromGUID(botFightZoneGUID))
-  cleanFightZone(getObjectFromGUID(topFightZoneGUID))
+  cleanFightZone(getObjectFromGUID(COMBAT.botFightZoneGUID))
+  cleanFightZone(getObjectFromGUID(COMBAT.topFightZoneGUID))
   discardBattleCards()
   COMBAT.unitsPositions = {}
   COMBAT.battleData = nil
@@ -540,24 +532,24 @@ function putCardInDeck(card, zone)
 end
 
 function setupBattlePanelsUI()
-  local data = botFightTile.UI.getXmlTable()
-  topFightTile.UI.setXmlTable(data)
+  local data = COMBAT.botFightTile.UI.getXmlTable()
+  COMBAT.topFightTile.UI.setXmlTable(data)
   Wait.time(setupBattlePanelsUIDelay, 0.2)
 end
 
 function setupBattlePanelsUIDelay()
-  botFightTile.UI.setAttribute("battlePanel", "offsetXY", "250 0")
-  topFightTile.UI.setAttribute("battlePanel", "offsetXY", "-250 0")
-  botFightTile.UI.setAttribute("diceButton", "id", "botDiceButton")
-  topFightTile.UI.setAttribute("diceButton", "id", "topDiceButton")
-  topFightTile.UI.setAttribute("bolterButton", "offsetXY", "-77 -12")
-  topFightTile.UI.setAttribute("shieldButton", "offsetXY", "-77 13")
-  botFightTile.UI.setAttribute("bolterButton", "offsetXY", "77 -12")
-  botFightTile.UI.setAttribute("shieldButton", "offsetXY", "77 13")
-  botFightTile.UI.setAttribute("shieldButton", "id", "botShieldButton")
-  topFightTile.UI.setAttribute("shieldButton", "id", "topShieldButton")
-  botFightTile.UI.setAttribute("bolterButton", "id", "botBolterButton")
-  topFightTile.UI.setAttribute("bolterButton", "id", "topBolterButton")
+  COMBAT.botFightTile.UI.setAttribute("battlePanel", "offsetXY", "250 0")
+  COMBAT.topFightTile.UI.setAttribute("battlePanel", "offsetXY", "-250 0")
+  COMBAT.botFightTile.UI.setAttribute("diceButton", "id", "botDiceButton")
+  COMBAT.topFightTile.UI.setAttribute("diceButton", "id", "topDiceButton")
+  COMBAT.topFightTile.UI.setAttribute("bolterButton", "offsetXY", "-77 -12")
+  COMBAT.topFightTile.UI.setAttribute("shieldButton", "offsetXY", "-77 13")
+  COMBAT.botFightTile.UI.setAttribute("bolterButton", "offsetXY", "77 -12")
+  COMBAT.botFightTile.UI.setAttribute("shieldButton", "offsetXY", "77 13")
+  COMBAT.botFightTile.UI.setAttribute("shieldButton", "id", "botShieldButton")
+  COMBAT.topFightTile.UI.setAttribute("shieldButton", "id", "topShieldButton")
+  COMBAT.botFightTile.UI.setAttribute("bolterButton", "id", "botBolterButton")
+  COMBAT.topFightTile.UI.setAttribute("bolterButton", "id", "topBolterButton")
 end
 
 function onObjectDestroy(destroyedObj)
@@ -568,7 +560,7 @@ function onObjectCollisionEnter(registered_object, info)
   local obj = info.collision_object
 
   if obj.getName() == "Reinforcement token" then
-    renameReinforcementToken(obj, registered_object == botFightTile and 1 or 2)
+    renameReinforcementToken(obj, registered_object == COMBAT.botFightTile and 1 or 2)
     obj.setVar("isReinforcement", true)
     obj.setRotation({0, registered_object.getRotation().y, 0})
   end
@@ -607,8 +599,8 @@ function update ()
 end
 
 function sortObjects()
-  sortObjectsOnTile(botFightZoneGUID, botFightTile)
-  sortObjectsOnTile(topFightZoneGUID, topFightTile)
+  sortObjectsOnTile(COMBAT.botFightZoneGUID, COMBAT.botFightTile)
+  sortObjectsOnTile(COMBAT.topFightZoneGUID, COMBAT.topFightTile)
 end
 
 function sortObjectsOnTile(zoneGUID, tile)
@@ -750,7 +742,10 @@ function unitReturnClicked(player, value, id)
 end
 
 function onObjectLeaveScriptingZone(zone, obj)
-  if (zone.guid == botFightZoneGUID or zone.guid == topFightZoneGUID) then
+  if not zone or not obj then
+    return
+  end
+  if (zone.guid == COMBAT.botFightZoneGUID or zone.guid == COMBAT.topFightZoneGUID) then
     calculate()
 
     if STORE.unitsData[obj.getName()] then
@@ -760,13 +755,13 @@ function onObjectLeaveScriptingZone(zone, obj)
 end
 
 function calculate()
-    local bottomFightZone = getObjectFromGUID(botFightZoneGUID)
+    local bottomFightZone = getObjectFromGUID(COMBAT.botFightZoneGUID)
     local bottomFightZoneObjects = bottomFightZone and bottomFightZone.getObjects()
     if(not bottomFightZoneObjects) then return end
     local botStats = getStatsForObjects(bottomFightZoneObjects)
-    local topStats = getStatsForObjects(getObjectFromGUID(topFightZoneGUID).getObjects())
-    setFightTileData(botFightTile, botStats, topStats)
-    setFightTileData(topFightTile, topStats, botStats)
+    local topStats = getStatsForObjects(getObjectFromGUID(COMBAT.topFightZoneGUID).getObjects())
+    setFightTileData(COMBAT.botFightTile, botStats, topStats)
+    setFightTileData(COMBAT.topFightTile, topStats, botStats)
 end
 
 function getStatsForObjects(objs)

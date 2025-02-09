@@ -9,7 +9,7 @@ local waitMap = {}
 function onHover(player_color)
     if not self.is_face_down then return end
     local zones = self.getZones()
-    if not zones then return end
+    if #zones == 0 then return end
     for _, zone in ipairs(zones) do
        if zone.guid == orderZones[faction] then return end
     end
