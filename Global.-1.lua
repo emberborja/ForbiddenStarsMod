@@ -17,7 +17,7 @@ function onload()
     getObjectFromGUID(STORE.diceWallIDs[2]).setPosition({-32.3, 6, 0.22})
     getObjectFromGUID(STORE.diceWallIDs[3]).setPosition({-24, 6, 0})
     lowerDiceWalls()
-    initStrategizeOrderReturnButtons()
+    initOrderTokens()
 end
 
 -- https://api.tabletopsimulator.com/events/#onobjectpeek
@@ -80,15 +80,21 @@ function fightClicked()
   end
 end
 
-function initStrategizeOrderReturnButtons()
+function initOrderTokens()
   for faction, tokenTypes in pairs(STORE.orderTokens) do
-    for _, id in ipairs(tokenTypes.strategize) do
-      local obj = getObjectFromGUID(id)
-      STORE.orderTokenStartingCoordinates[id] = {
-        position = obj.getPosition(),
-        rotation = obj.getRotation()
-      }
-      obj.UI.setXmlTable({createOrderTokenUI(id, obj, faction)})
+    for type, tokens in pairs(tokenTypes) do
+      for _, guid in ipairs(tokens) do
+        local obj = getObjectFromGUID(guid)
+        STORE.orderTokenStartingCoordinates[guid] = {
+          position = obj.getPosition(),
+          rotation = obj.getRotation()
+        }
+        if type == "strategize" then
+          obj.UI.setXmlTable({createStrategizeOrderTokenUI(guid, obj, faction)})
+        else
+          obj.UI.setXmlTable({createOrderTokenUI(guid, obj, faction)})
+        end
+      end
     end
   end
 end
@@ -106,9 +112,9 @@ function createOrderTokenUI(tokenId, obj, faction)
       scale = scale.." "..scale.." "..scale,
       position = "0 "..((150 + offset) * scale).." 0",
       rotation = obj.getRotation().z.." 0 0",
-      text = "Add to event deck",
+      text = "Return to start",
       fontSize = 28,
-      onClick = "Global/placeOrderTokenOnEventDeck",
+      onClick = "Global/placeOrderTokenBackToStart",
       onMouseEnter = "show",
       onMouseExit = "hide",
       id = tokenId .. ":" .. faction
@@ -116,7 +122,30 @@ function createOrderTokenUI(tokenId, obj, faction)
   }
 end
 
-function placeOrderTokenOnEventDeck(player, value, id)
+function createStrategizeOrderTokenUI(tokenId, obj, faction)
+  local scale = 1 / obj.getScale().x
+  local offset = 10
+  return {
+    tag = "Button",
+    attributes = {
+      interactable = true,
+      active = false,
+      height = 60,
+      width = 250,
+      scale = scale.." "..scale.." "..scale,
+      position = "0 "..((150 + offset) * scale).." 0",
+      rotation = obj.getRotation().z.." 0 0",
+      text = "Add to event deck",
+      fontSize = 28,
+      onClick = "Global/placeStrategizeOrderTokenOnEventDeck",
+      onMouseEnter = "show",
+      onMouseExit = "hide",
+      id = tokenId .. ":" .. faction
+    }
+  }
+end
+
+function placeStrategizeOrderTokenOnEventDeck(player, value, id)
   local orderToken
   for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
     orderToken = getObjectFromGUID(tokenId)
@@ -224,10 +253,18 @@ function collectMaterielClicked()
   else
     printError(err)
   end
-  getObjectFromGUID("9fdf39").shuffle()
-  getObjectFromGUID("f869ee").shuffle()
-  getObjectFromGUID("beb03e").shuffle()
-  getObjectFromGUID("84398b").shuffle()
+  for faction, data in pairs(STORE.factionsData) do
+    getObjectFromGUID(data.eventDeckGUID).shuffle()
+    for type, tokens in pairs(data.orderTokens) do
+      for _, guid in ipairs(tokens) do
+        -- check if the strategize order token is outside of the order zone, then add it to the event deck perhaps?
+        -- check to see if chaos player and if so, don't move order tokens on the event deck (they have order upgrade)
+        if type ~= 'strategize' then
+          placeOrderTokenBackToStart(nil, nil, guid..":"..faction)
+        end
+      end
+    end
+  end
 end
 
 function checkCollectMateriels()
