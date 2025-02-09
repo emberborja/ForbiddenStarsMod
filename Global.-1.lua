@@ -5,9 +5,9 @@ Most of your script code goes here. --]]
 local STORE = require("_variables")
 local UTILS = require('_utils')
 local BATTLE_SCRIPTS = require('_battles')
+local COMBAT = require("_combat")
 
 function onload()
-    battleData = nil
     boardZone = getObjectFromGUID("7e9dca")
     botFightZoneGUID = "9f0b03"
     topFightZoneGUID = "839de2"
@@ -17,7 +17,6 @@ function onload()
     botFightTile.registerCollisions(false)
     topFightTile.interactable = false
     botFightTile.interactable = false
-    unitsPositions = {}
 
     updateAllContainerAmounts()
     setupBattlePanelsUI()
@@ -466,8 +465,8 @@ function endBattleClicked()
   cleanFightZone(getObjectFromGUID(botFightZoneGUID))
   cleanFightZone(getObjectFromGUID(topFightZoneGUID))
   discardBattleCards()
-  unitsPositions = {}
-  battleData = nil
+  COMBAT.unitsPositions = {}
+  COMBAT.battleData = nil
   Wait.time(calculate, 0.2)
 end
 
@@ -500,8 +499,8 @@ function cleanFightZone(zone)
       takeCardHome(v)
     end
 
-    if unitsPositions[v.getGUID()] then
-      v.setPositionSmooth(unitsPositions[v.getGUID()])
+    if COMBAT.unitsPositions[v.getGUID()] then
+      v.setPositionSmooth(COMBAT.unitsPositions[v.getGUID()])
     end
   end
 end
@@ -687,9 +686,9 @@ end
 
 function renameReinforcementToken(token, fighterIndex)
   local reinforcement
-  if battleData == nil then return nil end
-  reinforcement = battleData.isSpace and "space" or "planet"
-  token.setName(getReinforcementUnitName(battleData.fighters[fighterIndex].faction, reinforcement))
+  if COMBAT.battleData == nil then return nil end
+  reinforcement = COMBAT.battleData.isSpace and "space" or "planet"
+  token.setName(getReinforcementUnitName(COMBAT.battleData.fighters[fighterIndex].faction, reinforcement))
 end
 
 function getReinforcementUnitName(faction, reinforcement)
@@ -743,8 +742,8 @@ end
 
 function unitReturnClicked(player, value, id)
   local unit = getObjectFromGUID(string.sub(id, 1, 6))
-  if unitsPositions[unit.getGUID()] then
-    unit.setPositionSmooth(unitsPositions[unit.getGUID()])
+  if COMBAT.unitsPositions[unit.getGUID()] then
+    unit.setPositionSmooth(COMBAT.unitsPositions[unit.getGUID()])
   else
     printError("I don't know where to return that")
   end
