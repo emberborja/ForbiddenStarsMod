@@ -4,6 +4,7 @@
         "Wait",
         "getObjectFromGUID",
         "Player",
-        "broadcastToAll"
+        "broadcastToAll",
+        "log"
     ]
 }
