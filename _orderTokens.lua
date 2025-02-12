@@ -206,6 +206,21 @@ function ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
 	end, 300)
 end
 
+function ORDER_TOKENS.addWaitToUnhideTeleportButton(token, buttonId)
+	waitMap[buttonId] = Wait.frames(function()
+		for _, player in ipairs(Player.getPlayers()) do
+			local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
+			if hoverGuid == object.guid then
+				print("still hovering")
+				ORDER_TOKENS.addWaitToUnhideObject(token, buttonId)
+				return
+			end
+		end
+		token.UI.hide(buttonId)
+		waitMap[buttonId] = nil
+	end, 300)
+end
+
 -- teleport token button visibility code
 function ORDER_TOKENS.onHover(player_color, object)
 	if not object then
@@ -231,7 +246,7 @@ function ORDER_TOKENS.onHover(player_color, object)
 						end
 					end
 					object.UI.show(buttonId)
-					ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
+					ORDER_TOKENS.addWaitToUnhideTeleportButton(object, buttonId)
 				end
 			end
 		end
