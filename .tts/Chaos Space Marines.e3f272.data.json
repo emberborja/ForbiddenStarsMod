@@ -1,0 +1,276 @@
+{
+  "GUID": "e3f272",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.70074,
+    "posY": 0.9652233,
+    "posZ": -14.17123,
+    "rotX": -9.151354e-7,
+    "rotY": 179.983261,
+    "rotZ": -4.46990441e-7,
+    "scaleX": 1.24999976,
+    "scaleY": 1.24999976,
+    "scaleZ": 1.24999976
+  },
+  "Nickname": "Chaos Space Marines",
+  "Description": "Grants 3 combat dice, 3 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/e2chgnj5zf81364/ChaosMarine.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/agwgjhhs76c4w9e/ChaosMarine02.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"100\" color=\"#F01825\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 100\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "e5419f",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -40.3274269,
+        "posY": 3.25188661,
+        "posZ": -16.3081112,
+        "rotX": 0.196446866,
+        "rotY": 179.6335,
+        "rotZ": 0.638191462,
+        "scaleX": 1,
+        "scaleY": 1,
+        "scaleZ": 1
+      },
+      "Nickname": "Chaos Space Marine",
+      "Description": "Grants 3 combat dice, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/e2chgnj5zf81364/ChaosMarine.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/agwgjhhs76c4w9e/ChaosMarine02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "8e4bd2",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -46.2396469,
+        "posY": 3.1760726,
+        "posZ": -15.37397,
+        "rotX": 0.000009237705,
+        "rotY": 180.001526,
+        "rotZ": -0.000004079995,
+        "scaleX": 1,
+        "scaleY": 1,
+        "scaleZ": 1
+      },
+      "Nickname": "Chaos Space Marine",
+      "Description": "Grants 3 combat dice, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/e2chgnj5zf81364/ChaosMarine.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/agwgjhhs76c4w9e/ChaosMarine02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "b047cd",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -43.79615,
+        "posY": 3.17607069,
+        "posZ": -16.1608944,
+        "rotX": 0.000001751801,
+        "rotY": 180.000061,
+        "rotZ": -0.00000189789171,
+        "scaleX": 1,
+        "scaleY": 1,
+        "scaleZ": 1
+      },
+      "Nickname": "Chaos Space Marine",
+      "Description": "Grants 3 combat dice, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/e2chgnj5zf81364/ChaosMarine.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/agwgjhhs76c4w9e/ChaosMarine02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "f34977",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -41.22431,
+        "posY": 3.250699,
+        "posZ": -17.3649578,
+        "rotX": 0.0217689164,
+        "rotY": 180.015259,
+        "rotZ": 359.971741,
+        "scaleX": 1,
+        "scaleY": 1,
+        "scaleZ": 1
+      },
+      "Nickname": "Chaos Space Marine",
+      "Description": "Grants 3 combat dice, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/e2chgnj5zf81364/ChaosMarine.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/agwgjhhs76c4w9e/ChaosMarine02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

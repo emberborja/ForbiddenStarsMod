@@ -1,0 +1,227 @@
+{
+  "GUID": "4b093a",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 52.87609,
+    "posY": 0.961217344,
+    "posZ": -18.3425312,
+    "rotX": -1.16743166e-7,
+    "rotY": -0.0008264299,
+    "rotZ": 2.47485559e-7,
+    "scaleX": 0.87499994,
+    "scaleY": 0.87499994,
+    "scaleZ": 0.87499994
+  },
+  "Nickname": "Falcons",
+  "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398109870/42FF4AD9797D8DE7C064A7D6487AA0B7F5AD7D49/",
+    "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398110250/8637E20686C813BF15FCFE23188D09479222F325/",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"100\" color=\"#F7D722\"></Text>\n</Defaults>\n\n<Panel offsetXY=\"0 -175\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "4a6c7a",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 41.12676,
+        "posY": 2.467085,
+        "posZ": -17.9852,
+        "rotX": 0.114673249,
+        "rotY": 359.992371,
+        "rotZ": 0.00002170679,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Falcon",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398109870/42FF4AD9797D8DE7C064A7D6487AA0B7F5AD7D49/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398110250/8637E20686C813BF15FCFE23188D09479222F325/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "1436c4",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 40.2854271,
+        "posY": 2.46819115,
+        "posZ": -21.1506329,
+        "rotX": 359.9761,
+        "rotY": 359.992371,
+        "rotZ": 0.0232791714,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Falcon",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398109870/42FF4AD9797D8DE7C064A7D6487AA0B7F5AD7D49/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398110250/8637E20686C813BF15FCFE23188D09479222F325/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "9f0d78",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 38.7995377,
+        "posY": 2.464894,
+        "posZ": -18.1149464,
+        "rotX": -1.82202129e-7,
+        "rotY": 359.992371,
+        "rotZ": -1.405478e-7,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Falcon",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398109870/42FF4AD9797D8DE7C064A7D6487AA0B7F5AD7D49/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738398110250/8637E20686C813BF15FCFE23188D09479222F325/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

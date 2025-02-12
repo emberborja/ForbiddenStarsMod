@@ -1,0 +1,227 @@
+{
+  "GUID": "cab63c",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.7319565,
+    "posY": 1.15926683,
+    "posZ": 22.3345222,
+    "rotX": -0.000102188555,
+    "rotY": -0.0000461037671,
+    "rotZ": -0.0000109369894,
+    "scaleX": 0.350000441,
+    "scaleY": 0.350000441,
+    "scaleZ": 0.350000441
+  },
+  "Nickname": "Gargants",
+  "Description": "Grants 3 combat dice, 6 HP and 3 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.305870861,
+    "g": 1,
+    "b": 0.345086575
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989619244/68658BD82767739E6BC307FACCADE8B4F962E9E2/",
+    "DiffuseURL": "http://i.imgur.com/fYZ2aDh.jpg",
+    "NormalURL": "",
+    "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989623260/58F7326D04FC7EE18D8F01F79DF3D81598016C13/",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"295\" color=\"#2FA324\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 660\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "201624",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -42.13189,
+        "posY": 1.20527589,
+        "posZ": 23.9908447,
+        "rotX": 359.946472,
+        "rotY": 0.005757149,
+        "rotZ": 359.97226,
+        "scaleX": 0.275000423,
+        "scaleY": 0.275000423,
+        "scaleZ": 0.275000423
+      },
+      "Nickname": "Gargant",
+      "Description": "Grants 3 combat dice, 6 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.996078432,
+        "g": 1,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989619244/68658BD82767739E6BC307FACCADE8B4F962E9E2/",
+        "DiffuseURL": "http://i.imgur.com/fYZ2aDh.jpg",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989623260/58F7326D04FC7EE18D8F01F79DF3D81598016C13/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "6ea89b",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -39.0778275,
+        "posY": 1.17541838,
+        "posZ": 25.1050453,
+        "rotX": -0.0000112481721,
+        "rotY": 0.000037566002,
+        "rotZ": -1.440217e-7,
+        "scaleX": 0.275000423,
+        "scaleY": 0.275000423,
+        "scaleZ": 0.275000423
+      },
+      "Nickname": "Gargant",
+      "Description": "Grants 3 combat dice, 6 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.996078432,
+        "g": 1,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989619244/68658BD82767739E6BC307FACCADE8B4F962E9E2/",
+        "DiffuseURL": "http://i.imgur.com/fYZ2aDh.jpg",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989623260/58F7326D04FC7EE18D8F01F79DF3D81598016C13/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "898cd9",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -41.7145538,
+        "posY": 1.190628,
+        "posZ": 23.614584,
+        "rotX": 359.946,
+        "rotY": -0.00202909,
+        "rotZ": 359.968475,
+        "scaleX": 0.275000423,
+        "scaleY": 0.275000423,
+        "scaleZ": 0.275000423
+      },
+      "Nickname": "Gargant",
+      "Description": "Grants 3 combat dice, 6 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.996078432,
+        "g": 1,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989619244/68658BD82767739E6BC307FACCADE8B4F962E9E2/",
+        "DiffuseURL": "http://i.imgur.com/fYZ2aDh.jpg",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989623260/58F7326D04FC7EE18D8F01F79DF3D81598016C13/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 0,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "GUID": "581425",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 52.87609,
+    "posY": 0.9612179,
+    "posZ": -14.3425331,
+    "rotX": -8.54804654e-8,
+    "rotY": 359.990356,
+    "rotZ": 2.57721773e-8,
+    "scaleX": 0.7499998,
+    "scaleY": 0.7499998,
+    "scaleZ": 0.7499998
+  },
+  "Nickname": "Wraithguards",
+  "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/yscmeypndz55a7e/EldarWraithguard01.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/axwc8dm67e1r5ku/EldarWraithguard02.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"100\" color=\"#F7D722\"></Text>\n</Defaults>\n\n<Panel offsetXY=\"0 -110\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "0fb3e6",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 41.8216362,
+        "posY": 3.23231554,
+        "posZ": -17.0463276,
+        "rotX": 359.192,
+        "rotY": 14.4058113,
+        "rotZ": 359.733154,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Wraithguard",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/yscmeypndz55a7e/EldarWraithguard01.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/axwc8dm67e1r5ku/EldarWraithguard02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "e2276d",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 41.2595253,
+        "posY": 3.2375803,
+        "posZ": -16.6724148,
+        "rotX": 359.9926,
+        "rotY": 14.97179,
+        "rotZ": 0.00882655,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Wraithguard",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/yscmeypndz55a7e/EldarWraithguard01.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/axwc8dm67e1r5ku/EldarWraithguard02.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

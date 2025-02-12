@@ -1,0 +1,227 @@
+{
+  "GUID": "32f862",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.7319565,
+    "posY": 0.9616651,
+    "posZ": 18.3345222,
+    "rotX": -2.07012675e-7,
+    "rotY": -0.000344640139,
+    "rotZ": -5.06414551e-7,
+    "scaleX": 0.5500004,
+    "scaleY": 0.5500004,
+    "scaleZ": 0.5500004
+  },
+  "Nickname": "Battlewagons",
+  "Description": "Grants 3 combat dice, 5 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992168844,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241293222/3298977536328DFC53E0FC41C8B4324A04A9F6F5/",
+    "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241188627/CB8C199A598DC9EED62174297866668917A9D6D7/",
+    "NormalURL": "",
+    "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241189515/3F42DC57624835B5CB1E9CAF06AA97593C5FD020/",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"200\" color=\"#2FA324\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 300\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "836448",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -40.3104744,
+        "posY": 2.25814486,
+        "posZ": 20.0730247,
+        "rotX": 0.2999967,
+        "rotY": 0.0007320428,
+        "rotZ": 359.365723,
+        "scaleX": 0.425000459,
+        "scaleY": 0.425000459,
+        "scaleZ": 0.425000459
+      },
+      "Nickname": "Battlewagons",
+      "Description": "Grants 3 combat dice, 5 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992168844,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241293222/3298977536328DFC53E0FC41C8B4324A04A9F6F5/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241188627/CB8C199A598DC9EED62174297866668917A9D6D7/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241189515/3F42DC57624835B5CB1E9CAF06AA97593C5FD020/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "eef57d",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -43.0450974,
+        "posY": 2.19530416,
+        "posZ": 20.29135,
+        "rotX": -7.322903e-7,
+        "rotY": -0.0009792337,
+        "rotZ": 0.00000964017454,
+        "scaleX": 0.425000459,
+        "scaleY": 0.425000459,
+        "scaleZ": 0.425000459
+      },
+      "Nickname": "Battlewagons",
+      "Description": "Grants 3 combat dice, 5 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992168844,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241293222/3298977536328DFC53E0FC41C8B4324A04A9F6F5/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241188627/CB8C199A598DC9EED62174297866668917A9D6D7/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241189515/3F42DC57624835B5CB1E9CAF06AA97593C5FD020/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "80df4c",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -49.4960327,
+        "posY": 2.25273156,
+        "posZ": 20.5909481,
+        "rotX": -0.0016773754,
+        "rotY": 0.00986303948,
+        "rotZ": 0.09071184,
+        "scaleX": 0.425000459,
+        "scaleY": 0.425000459,
+        "scaleZ": 0.425000459
+      },
+      "Nickname": "Battlewagons",
+      "Description": "Grants 3 combat dice, 5 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992168844,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241293222/3298977536328DFC53E0FC41C8B4324A04A9F6F5/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241188627/CB8C199A598DC9EED62174297866668917A9D6D7/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241189515/3F42DC57624835B5CB1E9CAF06AA97593C5FD020/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

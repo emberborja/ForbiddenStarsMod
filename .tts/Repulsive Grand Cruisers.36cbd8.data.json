@@ -1,0 +1,257 @@
+{
+  "GUID": "36cbd8",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -49.2007332,
+    "posY": 1.12008047,
+    "posZ": -18.1712265,
+    "rotX": 0.000196960376,
+    "rotY": 180.017624,
+    "rotZ": 0.00010271246,
+    "scaleX": 0.5250002,
+    "scaleY": 0.5250002,
+    "scaleZ": 0.5250002
+  },
+  "Nickname": "Repulsive Grand Cruisers",
+  "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 1,
+    "g": 0.996079743,
+    "b": 1
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525948262/8BC9DEF47DCE5EE2D1E6B775CCF40F39ACE511CA/",
+    "DiffuseURL": "http://i.imgur.com/eIy0MNF.png",
+    "NormalURL": "",
+    "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074240983600/6C64036D56E1868407DA04EC01B68BFD5AB300BC/",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"200\" color=\"#F01825\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"-180 340\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "e20ad9",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -37.6849442,
+        "posY": 2.182039,
+        "posZ": -20.1208076,
+        "rotX": 0.00005553202,
+        "rotY": 180,
+        "rotZ": -0.00007959313,
+        "scaleX": 0.4000002,
+        "scaleY": 0.4000002,
+        "scaleZ": 0.4000002
+      },
+      "Nickname": "Repulsive Grand Cruiser",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.996079743,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525948262/8BC9DEF47DCE5EE2D1E6B775CCF40F39ACE511CA/",
+        "DiffuseURL": "http://i.imgur.com/eIy0MNF.png",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074240983600/6C64036D56E1868407DA04EC01B68BFD5AB300BC/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.05,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "6fc6fb",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -35.6658859,
+        "posY": 2.16340351,
+        "posZ": -19.60076,
+        "rotX": -0.00000291309379,
+        "rotY": 180,
+        "rotZ": 0.000008776796,
+        "scaleX": 0.4000002,
+        "scaleY": 0.4000002,
+        "scaleZ": 0.4000002
+      },
+      "Nickname": "Repulsive Grand Cruiser",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.996079743,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525948262/8BC9DEF47DCE5EE2D1E6B775CCF40F39ACE511CA/",
+        "DiffuseURL": "http://i.imgur.com/eIy0MNF.png",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074240983600/6C64036D56E1868407DA04EC01B68BFD5AB300BC/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.05,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "767d3a",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -46.5224457,
+        "posY": 2.1688087,
+        "posZ": -20.7394,
+        "rotX": 0.005366023,
+        "rotY": 180.003372,
+        "rotZ": 359.86554,
+        "scaleX": 0.4000002,
+        "scaleY": 0.4000002,
+        "scaleZ": 0.4000002
+      },
+      "Nickname": "Repulsive Grand Cruiser",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.996079743,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525948262/8BC9DEF47DCE5EE2D1E6B775CCF40F39ACE511CA/",
+        "DiffuseURL": "http://i.imgur.com/eIy0MNF.png",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074240983600/6C64036D56E1868407DA04EC01B68BFD5AB300BC/",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.05,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

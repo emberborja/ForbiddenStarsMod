@@ -1,0 +1,329 @@
+{
+  "GUID": "b8e6b9",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.7319565,
+    "posY": 0.965136051,
+    "posZ": 14.3345127,
+    "rotX": -3.75421e-8,
+    "rotY": 180.000473,
+    "rotZ": -9.034241e-8,
+    "scaleX": 0.87499994,
+    "scaleY": 0.87499994,
+    "scaleZ": 0.87499994
+  },
+  "Nickname": "Nobz",
+  "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"95\" color=\"#2FA324\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 0\" offsetXY=\"0 -120\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "611900",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -41.48724,
+        "posY": 3.24433875,
+        "posZ": 14.386776,
+        "rotX": 1.27805865,
+        "rotY": 180.1398,
+        "rotZ": 359.958069,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Nob",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "f9673c",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -39.48784,
+        "posY": 3.173233,
+        "posZ": 14.1624575,
+        "rotX": -0.00001273393,
+        "rotY": 180.000778,
+        "rotZ": 0.000008273625,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Nob",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "8205a6",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -38.78947,
+        "posY": 3.173229,
+        "posZ": 16.27233,
+        "rotX": -0.000009988449,
+        "rotY": 180.000031,
+        "rotZ": -6.490091e-7,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Nob",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "fa99f7",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -40.95971,
+        "posY": 3.25857973,
+        "posZ": 16.5072651,
+        "rotX": -0.0006081694,
+        "rotY": 180.000031,
+        "rotZ": 0.004508365,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Nob",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "396e54",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -40.53818,
+        "posY": 3.258876,
+        "posZ": 16.470459,
+        "rotX": 359.955658,
+        "rotY": 179.990952,
+        "rotZ": 359.98877,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Nob",
+      "Description": "Grants 2 combat dice, 4 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 1,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/pc66btz9iqro0wj/OrkNobz06.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/ksih4fl32g7wqzm/OrkNobz06.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

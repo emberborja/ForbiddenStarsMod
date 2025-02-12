@@ -1,0 +1,45 @@
+{
+  "GUID": "169777",
+  "Name": "go_game_piece_black",
+  "Transform": {
+    "posX": 10.25,
+    "posY": 1.14299834,
+    "posZ": 0.25,
+    "rotX": -6.06206129e-7,
+    "rotY": 3.33194976e-7,
+    "rotZ": -3.3347257e-7,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "",
+  "Description": "",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0,
+    "g": 0,
+    "b": 0
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "LuaScript": "function onLoad()\n  bags = {\"cfd108\", \"e588c2\", \"a7ae4b\", \"cb678c\"}\nend\n\nfunction introSetup()\n  self.UI.show(\"players\")\nend\n\nfunction customSetup()\n  setup(bags[1])\nend\n\nfunction twoPlayers()\n  setup(bags[2])\nend\n\nfunction threePlayers()\n  setup(bags[3])\nend\n\nfunction fourPlayers()\n  setup(bags[4])\nend\n\nfunction setup(bagGUID)\n  self.destruct()\n  unpack(bagGUID)\n  removeBags()\nend\n\nfunction removeBags()\n  for i, v in ipairs(bags) do\n    getObjectFromGUID(v).destruct()\n  end\nend\n\nfunction unpack(bagGUID)\n  local bag = getObjectFromGUID(bagGUID)\n  local data = bag.getTable(\"data\")\n\n  for i,v in ipairs(data) do\n    bag.takeObject({\n      guid=v[1],\n      position={v[2], v[3], v[4]},\n      rotation={v[5], v[6], v[7]},\n      smooth=false,\n      callback_function=function(obj) obj.setLock(v[8]) end\n    })\n  end\nend",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Button fontSize = \"100\"></Button>\n</Defaults>\n\n<Button onClick=\"customSetup\" width=\"600\" height=\"250\" position=\"0 -150 -100\">Custom setup</Button>\n<Button onClick=\"introSetup\" width=\"600\" height=\"250\" position=\"0 150 -100\">Introductory setup</Button>\n<VerticalLayout id=\"players\" position=\"600 150 -100\" spacing=\"30\" height=\"500\" width=\"500\" active=\"false\" showAnimation=\"FadeIn\">\n   <Button onClick=\"twoPlayers\">2 players</Button>\n   <Button onClick=\"threePlayers\">3 players</Button>\n   <Button onClick=\"fourPlayers\">4 players</Button>\n</VerticalLayout>"
+}

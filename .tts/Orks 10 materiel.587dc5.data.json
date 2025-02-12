@@ -1,0 +1,58 @@
+{
+  "GUID": "587dc5",
+  "Name": "Custom_Token",
+  "Transform": {
+    "posX": -14.250001,
+    "posY": 1.217057,
+    "posZ": 27.25,
+    "rotX": -0.00008122641,
+    "rotY": 0.0000545556977,
+    "rotZ": -0.0000511266735,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "Orks: 10 materiel",
+  "Description": "",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1,
+    "a": 0
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": false,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "https://steamusercontent-a.akamaihd.net/ugc/868487305990551508/787F319DE1A17997BD5A5BA57B1275A07F996F42/",
+    "ImageSecondaryURL": "",
+    "ImageScalar": 1,
+    "WidthScale": 0,
+    "CustomToken": {
+      "Thickness": 0.2,
+      "MergeDistancePixels": 15,
+      "StandUp": false,
+      "Stackable": false
+    }
+  },
+  "LuaScript": "-- Universal Counter Tokens      coded by: MrStump\n\n--Saves the count value into a table (data_to_save) then encodes it into the Tabletop save\nfunction onSave()\n    local data_to_save = {saved_count = count}\n    saved_data = JSON.encode(data_to_save)\n    return saved_data\nend\n\n--Loads the saved data then creates the buttons\nfunction onload(saved_data)\n    generateButtonParameters()\n    --Checks if there is a saved data. If there is, it gets the saved value for 'count'\n    if not saved_data == '' then\n        local loaded_data = JSON.decode(saved_data)\n        count = loaded_data.saved_count\n    else\n        --If there wasn't saved data, the default value is set to 10.\n        count = 10\n    end\n\n    --Generates the buttons after putting the count value onto the 'display' button\n    b_display.label = tostring(count)\n    if count >= 100 then\n        b_display.font_size = 360\n    else\n        b_display.font_size = 500\n    end\n    updateName()\n    self.createButton(b_display)\n    self.createButton(b_plus)\n    self.createButton(b_minus)\n    self.createButton(b_plus5)\n    self.createButton(b_minus5)\nend\n\nfunction setCount(newCount)\n    count = newCount\n    updateDisplay()\nend\n\nfunction getCount()\n    return count\nend\n\nfunction logManualChange(old)\n    print(\"Orks: materiel \"..old..\" -> \"..count)\nend\nfunction updateName()\n    self.setName(\"Orks: \"..count..\" materiel\")\nend\n\n--Activates when + is hit. Adds 1 to 'count' then updates the display button.\nfunction increase()\n    --Prevents count from going above 14\n    if count < 14 then\n        old = count\n        count = count + 1\n        updateDisplay()\n        logManualChange(old)\n    end\nend\n\n--Activates when - is hit. Subtracts 1 from 'count' then updates the display button.\nfunction decrease()\n    --Prevents count from going below 0\n    if count > 0 then\n        old = count\n        count = count - 1\n        updateDisplay()\n        logManualChange(old)\n    end\nend\n\n--Activates when + is hit. Adds 5 to 'count' then updates the display button.\nfunction increase5()\n    if count < 14 then\n        old = count\n        if count < 9 then\n            count = count + 5\n        else\n            count = 14\n        end\n        updateDisplay()\n        logManualChange(old)\n    end\nend\n\n--Activates when - is hit. Subtracts 5 from 'count' then updates the display button.\nfunction decrease5()\n    --Prevents count from going below 0\n    if count > 0 then\n        old = count\n        if count > 5 then\n            count = count - 5\n        else\n            count = 0\n        end\n        updateDisplay()\n        logManualChange(old)\n    end\nend\n\nfunction customSet()\n    local description = self.getDescription()\n    local descriptionNEmpty = description == ''\n    if not descriptionNEmpty and type(tonumber(description)) == 'number' then\n        self.setDescription('')\n        count = tonumber(description)\n        updateDisplay()\n    end\nend\n\n--function that updates the display. I trigger it whenever I change 'count'\nfunction updateDisplay()\n    --If statement to resize font size if it gets too long\n    if count >= 100 then\n        b_display.font_size = 360\n    else\n        b_display.font_size = 500\n    end\n    b_display.label = tostring(count)\n    self.editButton(b_display)\n    updateName()\nend\n\n--This is activated when onload runs. This sets all parameters for our buttons.\n--I do not have to put this all into a function, but I prefer to do it this way.\nfunction generateButtonParameters()\n    b_display = {\n        index = 0, click_function = 'customSet', function_owner = self, label = '',\n        position = {0,0.1,0}, width = 600, height = 600, font_size = 500\n    }\n    b_plus = {\n        click_function = 'increase', function_owner = self, label =  '+',\n        position = {0.9,0.1,0.3}, width = 300, height = 300, font_size = 400\n    }\n    b_minus = {\n        click_function = 'decrease', function_owner = self, label =  '-',\n        position = {-0.9,0.1,0.3}, width = 300, height = 300, font_size = 400\n    }\n    b_plus5 = {\n        click_function = 'increase5', function_owner = self, label =  '+5',\n        position = {0.9,0.1,-0.29}, width = 230, height = 230, font_size = 150\n    }\n    b_minus5 = {\n        click_function = 'decrease5', function_owner = self, label =  '-5',\n        position = {-0.9,0.1,-0.29}, width = 230, height = 230, font_size = 150\n    }\nend",
+  "LuaScriptState": "{\"saved_count\":10}",
+  "XmlUI": ""
+}

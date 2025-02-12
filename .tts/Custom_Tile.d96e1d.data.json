@@ -1,0 +1,57 @@
+{
+  "GUID": "d96e1d",
+  "Name": "Custom_Tile",
+  "Transform": {
+    "posX": -32.25,
+    "posY": 0.9600004,
+    "posZ": -6.17980146,
+    "rotX": 9.061497e-8,
+    "rotY": 0.00000160166155,
+    "rotZ": 3.15072342e-8,
+    "scaleX": 4.676901,
+    "scaleY": 1,
+    "scaleZ": 6
+  },
+  "Nickname": "",
+  "Description": "",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 1,
+    "g": 1,
+    "b": 1
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "CustomImage": {
+    "ImageURL": "https://i.imgur.com/lPhtC1K.png",
+    "ImageSecondaryURL": "https://i.imgur.com/lPhtC1K.png",
+    "ImageScalar": 1,
+    "WidthScale": 0,
+    "CustomTile": {
+      "Type": 0,
+      "Thickness": 0.2,
+      "Stackable": false,
+      "Stretch": true
+    }
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize = \"13\"></Text>\n</Defaults>\n\n<Panel class = \"battlePanel\" width=\"130\" height=\"100\" id=\"battlePanel\">\n  <Button onClick=\"Global/addDiceClicked\" width=\"50\" height=\"25\" offsetXY=\"30 70\" id=\"diceButton\">+Die</Button>\n  <Button onClick=\"Global/sortClicked\" width=\"50\" height=\"25\" offsetXY=\"-30 70\" id=\"sortButton\">Sort</Button>\n  <Button onClick=\"Global/endBattleClicked\" width=\"50\" height=\"35\" offsetXY=\"30 -70\">End battle</Button>\n  <Button onClick=\"Global/endRoundClicked\" width=\"50\" height=\"35\" offsetXY=\"-30 -70\" id=\"endRoundButton\">End round</Button>\n  <Button onClick=\"Global/addBolterClicked\" width=\"20\" height=\"20\" offsetXY=\"77 -12\" id=\"bolterButton\">+</Button>\n  <Button onClick=\"Global/addShieldClicked\" width=\"20\" height=\"20\" offsetXY=\"77 13\" id=\"shieldButton\">+</Button>\n  <TableLayout width = \"130\" height = \"100\" color = \"#FFFFFF\">\n    <Row dontUseTableRowBackground=\"true\" color=\"#0089EA\">\n      <Cell><Text></Text></Cell>\n      <Cell><Text>Count</Text></Cell>\n      <Cell><Text>Delta</Text></Cell>\n    </Row>\n    <Row>\n      <Cell><Text>Bolters</Text></Cell>\n      <Cell><Text id=\"bolterCount\" text=\"0\"></Text></Cell>\n      <Cell><Text id=\"dealtDamage\" text=\"0\"></Text></Cell>\n    </Row>\n    <Row>\n      <Cell><Text>Shields</Text></Cell>\n      <Cell><Text id=\"shieldCount\" text=\"0\"></Text></Cell>\n      <Cell><Text id=\"takenDamage\" text=\"0\"></Text></Cell>\n    </Row>\n    <Row>\n      <Cell><Text>Morale</Text></Cell>\n      <Cell><Text id=\"moraleCount\" text=\"0\"></Text></Cell>\n      <Cell><Text id=\"moraleDelta\" text=\"0\"></Text></Cell>\n    </Row>\n  </TableLayout>\n</Panel>"
+}

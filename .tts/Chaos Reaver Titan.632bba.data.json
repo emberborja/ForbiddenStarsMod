@@ -1,0 +1,227 @@
+{
+  "GUID": "632bba",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.70074,
+    "posY": 1.13884115,
+    "posZ": -22.17123,
+    "rotX": -0.0000146093726,
+    "rotY": 180.0043,
+    "rotZ": 0.0000498209229,
+    "scaleX": 0.87499994,
+    "scaleY": 0.87499994,
+    "scaleZ": 0.87499994
+  },
+  "Nickname": "Chaos Reaver Titan",
+  "Description": "Grants 4 combat dice, 5 HP and 3 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065345/A180EF3AC8EEAB2DB09F57878FF59D9D797CBC7B/",
+    "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065913/BF73FB1F63214E69C10FFD54239B95A6B6069674/",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"120\" color=\"#F01825\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 245\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "47759b",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -41.82516,
+        "posY": 3.92003751,
+        "posZ": -23.968338,
+        "rotX": 359.9915,
+        "rotY": 180.000015,
+        "rotZ": -0.00213377,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Chaos Reaver Titan",
+      "Description": "Grants 4 combat dice, 5 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065345/A180EF3AC8EEAB2DB09F57878FF59D9D797CBC7B/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065913/BF73FB1F63214E69C10FFD54239B95A6B6069674/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "223f37",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -43.9294357,
+        "posY": 3.900362,
+        "posZ": -28.738966,
+        "rotX": 0.00000610544248,
+        "rotY": 180.000015,
+        "rotZ": -1.60081541e-7,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Chaos Reaver Titan",
+      "Description": "Grants 4 combat dice, 5 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065345/A180EF3AC8EEAB2DB09F57878FF59D9D797CBC7B/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065913/BF73FB1F63214E69C10FFD54239B95A6B6069674/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "01d5a5",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -41.0993919,
+        "posY": 3.90443134,
+        "posZ": -23.6621246,
+        "rotX": 359.958466,
+        "rotY": 179.9993,
+        "rotZ": 0.01302016,
+        "scaleX": 0.75,
+        "scaleY": 0.75,
+        "scaleZ": 0.75
+      },
+      "Nickname": "Chaos Reaver Titan",
+      "Description": "Grants 4 combat dice, 5 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065345/A180EF3AC8EEAB2DB09F57878FF59D9D797CBC7B/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784110074241065913/BF73FB1F63214E69C10FFD54239B95A6B6069674/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

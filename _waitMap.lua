@@ -1,0 +1,3 @@
+local waitMap = {}
+
+return waitMap

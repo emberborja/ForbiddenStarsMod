@@ -1,0 +1,257 @@
+{
+  "GUID": "3a3e84",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 52.73787,
+    "posY": 1.13483715,
+    "posZ": 22.2864323,
+    "rotX": -0.0000246075815,
+    "rotY": 359.978455,
+    "rotZ": 0.00008462796,
+    "scaleX": 0.475000471,
+    "scaleY": 0.475000471,
+    "scaleZ": 0.475000471
+  },
+  "Nickname": "Warlord Titans",
+  "Description": "Grants 3 combat dice, 5 HP and 4 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.996078432,
+    "g": 0.999226749,
+    "b": 1
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989605935/1CC0F9F686C4C83D69BC2EB4D827FFB228BA901F/",
+    "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738397958843/0477F35D2C68D43E628364F9AF815858FEC59DA5/",
+    "NormalURL": "",
+    "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989597485/8B3372E04DD443C74B40019B4B87B4858C484D61/",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"230\" color=\"#2D34BD\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 460\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "4e2094",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 40.90093,
+        "posY": 1.19610465,
+        "posZ": 23.9291286,
+        "rotX": 359.9849,
+        "rotY": 359.9738,
+        "rotZ": -0.000766219,
+        "scaleX": 0.350000441,
+        "scaleY": 0.350000441,
+        "scaleZ": 0.350000441
+      },
+      "Nickname": "Warlord Titan",
+      "Description": "Grants 3 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960783,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989605935/1CC0F9F686C4C83D69BC2EB4D827FFB228BA901F/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738397958843/0477F35D2C68D43E628364F9AF815858FEC59DA5/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989597485/8B3372E04DD443C74B40019B4B87B4858C484D61/",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "SpecularIntensity": 0,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "5d72bc",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 41.2758331,
+        "posY": 1.19593644,
+        "posZ": 23.43107,
+        "rotX": 359.9849,
+        "rotY": 359.989777,
+        "rotZ": -0.0007702367,
+        "scaleX": 0.350000441,
+        "scaleY": 0.350000441,
+        "scaleZ": 0.350000441
+      },
+      "Nickname": "Warlord Titan",
+      "Description": "Grants 3 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960783,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989605935/1CC0F9F686C4C83D69BC2EB4D827FFB228BA901F/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738397958843/0477F35D2C68D43E628364F9AF815858FEC59DA5/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989597485/8B3372E04DD443C74B40019B4B87B4858C484D61/",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "SpecularIntensity": 0,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "dffae2",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 41.185154,
+        "posY": 1.195942,
+        "posZ": 23.4996643,
+        "rotX": 359.9849,
+        "rotY": 359.973755,
+        "rotZ": -0.000764361233,
+        "scaleX": 0.350000441,
+        "scaleY": 0.350000441,
+        "scaleZ": 0.350000441
+      },
+      "Nickname": "Warlord Titan",
+      "Description": "Grants 3 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960783,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989605935/1CC0F9F686C4C83D69BC2EB4D827FFB228BA901F/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/779608738397958843/0477F35D2C68D43E628364F9AF815858FEC59DA5/",
+        "NormalURL": "",
+        "ColliderURL": "https://steamusercontent-a.akamaihd.net/ugc/92728727989597485/8B3372E04DD443C74B40019B4B87B4858C484D61/",
+        "Convex": true,
+        "MaterialIndex": 3,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 1,
+            "g": 1,
+            "b": 1
+          },
+          "SpecularIntensity": 0,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 0
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

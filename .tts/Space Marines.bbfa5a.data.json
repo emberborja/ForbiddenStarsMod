@@ -1,0 +1,329 @@
+{
+  "GUID": "bbfa5a",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 52.7378769,
+    "posY": 0.961119235,
+    "posZ": 14.2864122,
+    "rotX": -4.72945e-8,
+    "rotY": 179.988876,
+    "rotZ": -3.91086026e-8,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "Space Marines",
+  "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"100\" color=\"#2D34BD\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 0\" offsetXY=\"0 -120\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "a7de2f",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 42.60265,
+        "posY": 2.85257077,
+        "posZ": 16.0692844,
+        "rotX": 359.797333,
+        "rotY": 180.109268,
+        "rotZ": 2.54812264,
+        "scaleX": 0.875,
+        "scaleY": 0.875,
+        "scaleZ": 0.875
+      },
+      "Nickname": "Space Marine",
+      "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "efb41b",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 39.857933,
+        "posY": 2.79383159,
+        "posZ": 16.0358772,
+        "rotX": -0.0000121865869,
+        "rotY": 179.97052,
+        "rotZ": 0.000008360163,
+        "scaleX": 0.875,
+        "scaleY": 0.875,
+        "scaleZ": 0.875
+      },
+      "Nickname": "Space Marine",
+      "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "84d62a",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 36.41017,
+        "posY": 2.79383063,
+        "posZ": 15.99008,
+        "rotX": 8.202092e-7,
+        "rotY": 180.020035,
+        "rotZ": 0.0000102571994,
+        "scaleX": 0.875,
+        "scaleY": 0.875,
+        "scaleZ": 0.875
+      },
+      "Nickname": "Space Marine",
+      "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "cada08",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 33.3973923,
+        "posY": 2.79383087,
+        "posZ": 15.8976555,
+        "rotX": -6.27978068e-7,
+        "rotY": 180.003937,
+        "rotZ": 0.00000196066435,
+        "scaleX": 0.875,
+        "scaleY": 0.875,
+        "scaleZ": 0.875
+      },
+      "Nickname": "Space Marine",
+      "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "a74580",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 40.6513939,
+        "posY": 2.88380432,
+        "posZ": 15.3855019,
+        "rotX": 0.0911555,
+        "rotY": 179.955292,
+        "rotZ": 0.0173260868,
+        "scaleX": 0.875,
+        "scaleY": 0.875,
+        "scaleZ": 0.875
+      },
+      "Nickname": "Space Marine",
+      "Description": "Grants 2 combat dice, 3 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/ht3gqdcbc2tujuf/SpaceMarine05.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/kreh86wgvtcjyzj/SpaceMarine.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

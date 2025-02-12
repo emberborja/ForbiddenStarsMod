@@ -1,40 +1,7 @@
+local ORDER_TOKENS = require("_orderTokens")
+
 local STORE = {
     boardZoneGUID = "7e9dca",
-    orderTokens = {
-        ["sm"] = {
-            deploy = {"f70c5d", "cd262d"},
-            strategize = {"d2e8ea", "d36c19"},
-            dominate = {"e3142f", "88b2c7"},
-            advance = {"e51f7b", "080a73"}
-        },
-        ["oz"] = {
-            deploy = {"6faf2d", "b23647"},
-            strategize = {"3bf6c2", "8c2b92"},
-            dominate = {"d48b28", "05f879"},
-            advance = {"f20013", "ff822a"}
-        },
-        ["ch"] = {
-            deploy = {"7fc185", "2d02ab"},
-            strategize = {"b5b9ec", "787faf"},
-            dominate = {"5244ce", "2607fc"},
-            advance = {"911f30", "656f0c"}
-        },
-        ["ed"] = {
-            deploy = {"8ec1f0", "99d309"},
-            strategize = {"9d41d1", "b05da8"},
-            dominate = {"ea7418", "91d7c0"},
-            advance = {"525259", "a68c5d"}
-        }
-    },
-
-    orderTokenStartingCoordinates = {},
-
-    orderZones = {
-        ["ch"] = "a82193",
-        ["ed"] = "d48a52",
-        ["sm"] = "5c5abb",
-        ["oz"] = "3f1125"
-    },
 
     rollingDices = {},
 
@@ -573,7 +540,7 @@ local STORE = {
 function STORE.init()
     STORE.boardZone = getObjectFromGUID(STORE.boardZoneGUID)
     for faction, data in pairs(STORE.factionsData) do
-        data.orderTokens = STORE.orderTokens[faction]
+        data.orderTokens = ORDER_TOKENS.orderTokens[faction]
     end
 end
 

@@ -1,0 +1,55 @@
+{
+  "GUID": "b23647",
+  "Name": "Custom_Model",
+  "Transform": {
+    "posX": -9.750153,
+    "posY": 1.06121707,
+    "posZ": 28.25,
+    "rotX": 4.541112e-8,
+    "rotY": 359.993744,
+    "rotZ": 180,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "Ork order token",
+  "Description": "",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": true,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/97kutfegv0csjam/HexagonToken.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/of24m5gcuy0yai6/OrderDeployOrk.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 3,
+    "TypeIndex": 0,
+    "CastShadows": true
+  },
+  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"oz\"\nlocal tokenGUID = \"b23647\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap[buttonId] then\n\t\tWait.stop(waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
+  "LuaScriptState": "",
+  "XmlUI": ""
+}

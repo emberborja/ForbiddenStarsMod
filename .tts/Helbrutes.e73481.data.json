@@ -1,0 +1,227 @@
+{
+  "GUID": "e73481",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -52.70074,
+    "posY": 0.965223432,
+    "posZ": -18.17123,
+    "rotX": -4.967022e-7,
+    "rotY": 180.00856,
+    "rotZ": 4.26343661e-7,
+    "scaleX": 0.6249999,
+    "scaleY": 0.6249999,
+    "scaleZ": 0.6249999
+  },
+  "Nickname": "Helbrutes",
+  "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214128/B2E57AF83770FC88C5034BBA4DE85448919BC0FE/",
+    "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214594/A9ABBEF636711EC21F3286EE0EC75514C868CEA6/",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"175\" color=\"#F01825\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 235\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "14e0f0",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -42.405117,
+        "posY": 3.40420318,
+        "posZ": -18.5979233,
+        "rotX": 359.540466,
+        "rotY": 180.00386,
+        "rotZ": 0.0000629157148,
+        "scaleX": 0.5,
+        "scaleY": 0.5,
+        "scaleZ": 0.5
+      },
+      "Nickname": "Helbrute",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214128/B2E57AF83770FC88C5034BBA4DE85448919BC0FE/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214594/A9ABBEF636711EC21F3286EE0EC75514C868CEA6/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "eaa2e0",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -43.7978859,
+        "posY": 3.38914871,
+        "posZ": -15.8986092,
+        "rotX": 1.09279723e-8,
+        "rotY": 180.003876,
+        "rotZ": 3.9264016e-8,
+        "scaleX": 0.5,
+        "scaleY": 0.5,
+        "scaleZ": 0.5
+      },
+      "Nickname": "Helbrute",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214128/B2E57AF83770FC88C5034BBA4DE85448919BC0FE/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214594/A9ABBEF636711EC21F3286EE0EC75514C868CEA6/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "2baf65",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -49.41421,
+        "posY": 3.392283,
+        "posZ": -21.1535473,
+        "rotX": 0.0187434554,
+        "rotY": 180.007324,
+        "rotZ": 359.984955,
+        "scaleX": 0.5,
+        "scaleY": 0.5,
+        "scaleZ": 0.5
+      },
+      "Nickname": "Helbrute",
+      "Description": "Grants 3 combat dice, 4 HP and 3 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214128/B2E57AF83770FC88C5034BBA4DE85448919BC0FE/",
+        "DiffuseURL": "https://steamusercontent-a.akamaihd.net/ugc/784109908360214594/A9ABBEF636711EC21F3286EE0EC75514C868CEA6/",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

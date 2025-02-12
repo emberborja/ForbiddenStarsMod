@@ -1,0 +1,253 @@
+{
+  "GUID": "7ece2b",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": -49.2319565,
+    "posY": 0.9612483,
+    "posZ": 10.8345041,
+    "rotX": 3.04388e-8,
+    "rotY": 0.012967472,
+    "rotZ": -1.06436069e-7,
+    "scaleX": 0.7499998,
+    "scaleY": 0.7499998,
+    "scaleZ": 0.7499998
+  },
+  "Nickname": "Onslaught Attack Ships",
+  "Description": "Grants 1 combat die, 3 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/unjx4xaiemewqfu/Ork%20Frigate2.obj?dl=1",
+    "DiffuseURL": "http://i.imgur.com/XEa225Q.png",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"95\" color=\"#2FA324\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"80 100\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "9ce178",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -36.2681,
+        "posY": 2.03172469,
+        "posZ": 12.4068785,
+        "rotX": 359.763428,
+        "rotY": 0.0226338357,
+        "rotZ": 0.05397262,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Onslaught Attack Ship",
+      "Description": "Grants 1 combat die, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/unjx4xaiemewqfu/Ork%20Frigate2.obj?dl=1",
+        "DiffuseURL": "http://i.imgur.com/XEa225Q.png",
+        "NormalURL": "",
+        "ColliderURL": "https://www.dropbox.com/s/umle5g2sv0gyf42/HITBOX3.obj?dl=1",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.01,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 0.1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "d012b9",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -36.26171,
+        "posY": 2.0279007,
+        "posZ": 12.6525583,
+        "rotX": 0.08752137,
+        "rotY": 359.9746,
+        "rotZ": 359.974762,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Onslaught Attack Ship",
+      "Description": "Grants 1 combat die, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/unjx4xaiemewqfu/Ork%20Frigate2.obj?dl=1",
+        "DiffuseURL": "http://i.imgur.com/XEa225Q.png",
+        "NormalURL": "",
+        "ColliderURL": "https://www.dropbox.com/s/umle5g2sv0gyf42/HITBOX3.obj?dl=1",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.01,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 0.1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "623198",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": -36.81606,
+        "posY": 2.02689481,
+        "posZ": 12.4275351,
+        "rotX": 359.953278,
+        "rotY": 359.9819,
+        "rotZ": 0.227060139,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Onslaught Attack Ship",
+      "Description": "Grants 1 combat die, 3 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/unjx4xaiemewqfu/Ork%20Frigate2.obj?dl=1",
+        "DiffuseURL": "http://i.imgur.com/XEa225Q.png",
+        "NormalURL": "",
+        "ColliderURL": "https://www.dropbox.com/s/umle5g2sv0gyf42/HITBOX3.obj?dl=1",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.01,
+          "SpecularSharpness": 3,
+          "FresnelStrength": 0.1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

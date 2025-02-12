@@ -17,7 +17,22 @@ function onload()
 	getObjectFromGUID(STORE.diceWallIDs[2]).setPosition({ -32.3, 6, 0.22 })
 	getObjectFromGUID(STORE.diceWallIDs[3]).setPosition({ -24, 6, 0 })
 	lowerDiceWalls()
-	initOrderTokens()
+end
+
+-- https://api.tabletopsimulator.com/events/#onplayeraction
+function onPlayerAction(player, action, targets) 
+	local test = ORDER_TOKENS.handlePlayerFlip(player, action, targets)
+	if test == false then return false end -- stops the player action
+end
+
+-- https://api.tabletopsimulator.com/events/#onobjectpeek
+function onObjectPeek(object, player_color)
+	ORDER_TOKENS.testAndHideOrderTokenOnPeek(object, player_color)
+end
+
+-- https://api.tabletopsimulator.com/events/#onobjecthover
+function onObjectHover(player_color, object)
+	ORDER_TOKENS.onHover(player_color, object)
 end
 
 function call_module(params)
@@ -32,57 +47,6 @@ function call_module(params)
 	end
 end
 
--- https://api.tabletopsimulator.com/events/#onobjectpeek
-function onObjectPeek(object, player_color)
-	testAndHideOrderTokenOnPeek(object, player_color)
-end
-
-local unhideColorMap = {}
-function testAndHideOrderTokenOnPeek(object, player_color)
-	local objectName = object.getName()
-	local msg = player_color .. " peeked: " .. objectName
-	local waitId = player_color .. object.guid
-	if unhideColorMap[waitId] then
-		Wait.stop(unhideColorMap[waitId])
-	end
-	if string.find(objectName, "order token") and not object.is_face_down then
-		local msgColor = { 1, 0, 0 }
-		local shouldHide = false
-		for faction, data in pairs(factionsData) do
-			local color = data["color"]
-			if color == player_color then
-				msgColor = factionColors[faction]
-			end
-			if string.find(objectName, data["name"]) and color ~= player_color then
-				shouldHide = true
-			end
-		end
-		if shouldHide then
-			object.setHiddenFrom({ player_color })
-			broadcastToAll(msg, msgColor)
-			addWaitToUnhideObject(object, player_color)
-		end
-	end
-end
-
-function addWaitToUnhideObject(object, player_color)
-	local waitId = player_color .. object.guid
-	unhideColorMap[waitId] = Wait.frames(function()
-		for _, player in ipairs(Player.getPlayers()) do
-			if player.color == player_color then
-				local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
-				if hoverGuid == object.guid then
-					print(player_color .. " still hovering")
-					addWaitToUnhideObject(object, player_color)
-					return
-				end
-			end
-		end
-		object.setHiddenFrom({})
-		unhideColorMap[waitId] = nil
-	end, 300)
-end
-
 -- Scan for battle button function
 function fightClicked()
 	local status, err =
@@ -91,84 +55,6 @@ function fightClicked()
 		BATTLE_SCRIPTS.scanForBattles(STORE.boardZone, COMBAT.botFightTile, COMBAT.topFightTile)
 	else
 		printError(err)
-	end
-end
-
-function initOrderTokens()
-	for faction, tokenTypes in pairs(STORE.orderTokens) do
-		for type, tokens in pairs(tokenTypes) do
-			for _, guid in ipairs(tokens) do
-				local obj = getObjectFromGUID(guid)
-				STORE.orderTokenStartingCoordinates[guid] = {
-					position = obj.getPosition(),
-					rotation = obj.getRotation(),
-				}
-				obj.UI.setXmlTable({ createOrderTokenUI(guid, obj, faction, type == "strategize") })
-			end
-		end
-	end
-end
-
-function createOrderTokenUI(tokenId, obj, faction, isStrategize)
-	local scale = 1 / obj.getScale().x
-	local offset = 10
-	return {
-		tag = "Button",
-		attributes = {
-			interactable = true,
-			active = false,
-			height = 60,
-			width = 250,
-			scale = scale .. " " .. scale .. " " .. scale,
-			position = "0 " .. ((150 + offset) * scale) .. " 0",
-			rotation = obj.getRotation().z .. " 0 0",
-			text = isStrategize and "Add to event deck" or "Return to start",
-			fontSize = 28,
-			onClick = isStrategize and "Global/placeStrategizeOrderTokenOnEventDeck" or "Global/placeOrderTokenBackToStart",
-			onMouseEnter = "show",
-			onMouseExit = "hide",
-			id = tokenId .. ":" .. faction,
-		},
-	}
-end
-
-function placeStrategizeOrderTokenOnEventDeck(player, value, id)
-	local orderToken
-	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-		orderToken = getObjectFromGUID(tokenId)
-		local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
-		local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
-		eventDeck.y = eventDeck.y + 2
-		orderToken.setPositionSmooth(eventDeck, false, true)
-		local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
-		orderToken.setRotationSmooth(startRot, false, true)
-	end
-	orderToken.UI.setAttributes(id, {
-		onClick = "Global/placeStrategizeOrderTokenBackToStart",
-		text = "Return to start",
-	})
-end
-
-function placeStrategizeOrderTokenBackToStart(player, value, id)
-	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-		local startPos = STORE.orderTokenStartingCoordinates[tokenId].position
-		local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
-		local strategizeToken = getObjectFromGUID(tokenId)
-		strategizeToken.setPositionSmooth(startPos, false, true)
-		strategizeToken.setRotationSmooth(startRot, false, true)
-		strategizeToken.UI.setAttributes(id, {
-			onClick = "Global/placeOrderTokenOnEventDeck",
-			text = "Add to event deck",
-		})
-	end
-end
-
-function placeOrderTokenBackToStart(player, value, id)
-	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
-		local startPos = STORE.orderTokenStartingCoordinates[tokenId].position
-		local startRot = STORE.orderTokenStartingCoordinates[tokenId].rotation
-		getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
-		getObjectFromGUID(tokenId).setRotationSmooth(startRot, false, true)
 	end
 end
 
@@ -259,7 +145,7 @@ function collectMaterielClicked()
 				-- check if the strategize order token is outside of the order zone, then add it to the event deck perhaps?
 				-- check to see if chaos player and if so, don't move order tokens on the event deck (they have order upgrade)
 				if type ~= "strategize" then
-					placeOrderTokenBackToStart(nil, nil, guid .. ":" .. faction)
+					ORDER_TOKENS.placeOrderTokenBackToStart(nil, nil, guid .. ":" .. faction)
 				end
 			end
 		end
@@ -433,7 +319,7 @@ function createLine(pointTable, color)
 end
 
 function addDiceClicked(player, value, id)
-	local factionData = getFactionDataByColor(player.color)
+	local factionData = UTILS.getFactionDataByColor(player.color)
 	local tile = id == "botDiceButton" and COMBAT.botFightTile or COMBAT.topFightTile
 	local zoneGUID = id == "botDiceButton" and COMBAT.botFightZoneGUID or COMBAT.topFightZoneGUID
 
@@ -478,15 +364,6 @@ function getDiceCount(zone)
 	return result
 end
 
-function getFactionDataByColor(color)
-	for k, v in pairs(STORE.factionsData) do
-		if v.color == color then
-			return v
-		end
-	end
-
-	return nil
-end
 
 function endRoundClicked()
 	removeCombatTokens(getObjectFromGUID(COMBAT.botFightZoneGUID))

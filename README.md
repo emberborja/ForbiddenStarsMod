@@ -12,6 +12,10 @@ You should see a menu of options of the left side of the modal that pops up. Cla
 
 ## Instructions for contributing to the mod
 There is an in-game script editor in TTS under the "Modding" menu option which opens a dropdown with further options. Click on "Scriping" to open the script editor in game. 
+
+I have moved to using Tabletop Simulator Editor https://marketplace.visualstudio.com/items?itemName=sebaestschjin.tts-editor. I can load all files from the mod into my project directory for saving to Github and I can modify the game files directly and load them into the game to be saved to the workshop. The extension will bundle all require statement code so all of my new scripts are in the project directory and required by Global.lua
+
+I was using Tabletop Simulator Lua before, but I had to use the sync_dir.sh to copies files from my project report into the temporary directory made by the extension.
 I prefer to use an external text editor called Visual Studio Code. This is a YouTube video with instructions on how to use it to mod in TTS => https://youtu.be/z9rxVf3XvLk
 
 Update: there is currently an issue with the TTS Lua extensions but if you follow the instructions here you can resolve it.

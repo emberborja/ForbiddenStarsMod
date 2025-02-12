@@ -1,48 +1,320 @@
 local STORE = require("_variables")
-local ORDER_TOKENS = {}
+local UTILS = require("_utils")
+local waitMap = require("_waitMap")
 
-function ORDER_TOKENS.init()
-	for faction, tokens in pairs(STORE.orderTokens) do
-		for tokenType, guids in pairs(tokens) do
-			for _, guid in ipairs(guids) do
-				-- Global.call("call_module", {"ORDER_TOKENS._onHover", {player_color, "%s", "%s"}})
-				getObjectFromGUID(guid).setLuaScript(string.format(
-					[[
-                    local waitMap = {}
-                    local faction = "%s"
-                    local tokenGUID = "%s"
-                    local buttonId = tokenGUID..":"..faction
-                    function onHover(player_color)
-                        local orderZone = "%s"
-                        local token = getObjectFromGUID(tokenGUID)
-                        if not token.is_face_down then return end
-                        local zones = token.getZones()
-                        if #zones == 0 then return end
-                        for _, zone in ipairs(zones) do
-                            if zone.guid == orderZone then return end
-                        end
-                        token.UI.show(buttonId)
-                        waitMap[buttonId] = Wait.frames(function () token.UI.hide(buttonId) end, 60)
-                    end
+local ORDER_TOKENS = {
+	orderTokens = {
+		["sm"] = {
+			deploy = { "f70c5d", "cd262d" },
+			strategize = { "d2e8ea", "d36c19" },
+			dominate = { "e3142f", "88b2c7" },
+			advance = { "e51f7b", "080a73" },
+		},
+		["oz"] = {
+			deploy = { "6faf2d", "b23647" },
+			strategize = { "3bf6c2", "8c2b92" },
+			dominate = { "d48b28", "05f879" },
+			advance = { "f20013", "ff822a" },
+		},
+		["ch"] = {
+			deploy = { "7fc185", "2d02ab" },
+			strategize = { "b5b9ec", "787faf" },
+			dominate = { "5244ce", "2607fc" },
+			advance = { "911f30", "656f0c" },
+		},
+		["ed"] = {
+			deploy = { "8ec1f0", "99d309" },
+			strategize = { "9d41d1", "b05da8" },
+			dominate = { "ea7418", "91d7c0" },
+			advance = { "525259", "a68c5d" },
+		},
+	},
 
-                    -- button onMouseEnter
-                    function show()
-                        if waitMap[buttonId] then Wait.stop(waitMap[buttonId]) end
-                        self.UI.show(buttonId)
-                    end
+	orderZones = {
+		["ch"] = "a82193",
+		["ed"] = "d48a52",
+		["sm"] = "5c5abb",
+		["oz"] = "3f1125",
+	},
 
-                    -- button onMouseExit
-                    function hide()
-                        self.UI.hide(buttonId)
-                    end
-                ]],
-					faction,
-					guid,
-                    STORE.orderZones[faction]
-				))
+	orderTokenStartingCoordinates = {},
+}
+
+function ORDER_TOKENS.setOrderTokenTeleportButtons()
+	for faction, tokenTypes in pairs(ORDER_TOKENS.orderTokens) do
+		for type, tokens in pairs(tokenTypes) do
+			for _, guid in ipairs(tokens) do
+				local obj = getObjectFromGUID(guid)
+				ORDER_TOKENS.orderTokenStartingCoordinates[guid] = {
+					position = obj.getPosition(),
+					rotation = obj.getRotation(),
+				}
+				obj.UI.setXmlTable({ ORDER_TOKENS.createOrderTokenUI(guid, obj, faction, type == "strategize") })
 			end
 		end
 	end
+end
+
+function ORDER_TOKENS.createOrderTokenUI(tokenId, obj, faction, isStrategize)
+	local scale = 1 / obj.getScale().x
+	local offset = 10
+	return {
+		tag = "Button",
+		attributes = {
+			interactable = true,
+			active = false,
+			height = 60,
+			width = 250,
+			scale = scale .. " " .. scale .. " " .. scale,
+			position = "0 " .. ((150 + offset) * scale) .. " 0",
+			rotation = obj.getRotation().z .. " 0 0",
+			text = isStrategize and "Add to event deck" or "Return to start",
+			fontSize = 28,
+			onClick = isStrategize and "Global/placeStrategizeOrderTokenOnEventDeck"
+				or "Global/placeOrderTokenBackToStart",
+			onMouseEnter = "show",
+			onMouseExit = "hide",
+			id = tokenId .. ":" .. faction,
+		},
+	}
+end
+
+function ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck(player, value, id)
+	local orderToken
+	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+		orderToken = getObjectFromGUID(tokenId)
+		local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+		local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
+		eventDeck.y = eventDeck.y + 2
+		orderToken.setPositionSmooth(eventDeck, false, true)
+		local startRot = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].rotation
+		orderToken.setRotationSmooth(startRot, false, true)
+	end
+	orderToken.UI.setAttributes(id, {
+		onClick = "Global/placeStrategizeOrderTokenBackToStart",
+		text = "Return to start",
+	})
+end
+Global.setVar("placeStrategizeOrderTokenOnEventDeck", placeStrategizeOrderTokenOnEventDeck)
+
+function ORDER_TOKENS.placeStrategizeOrderTokenBackToStart(player, value, id)
+	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+		local startPos = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].position
+		local startRot = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].rotation
+		local strategizeToken = getObjectFromGUID(tokenId)
+		strategizeToken.setPositionSmooth(startPos, false, true)
+		strategizeToken.setRotationSmooth(startRot, false, true)
+		strategizeToken.UI.setAttributes(id, {
+			onClick = "Global/placeOrderTokenOnEventDeck",
+			text = "Add to event deck",
+		})
+	end
+end
+Global.setVar("placeStrategizeOrderTokenBackToStart", placeStrategizeOrderTokenBackToStart)
+
+function ORDER_TOKENS.placeOrderTokenBackToStart(player, value, id)
+	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
+		local startPos = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].position
+		local startRot = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].rotation
+		getObjectFromGUID(tokenId).setPositionSmooth(startPos, false, true)
+		getObjectFromGUID(tokenId).setRotationSmooth(startRot, false, true)
+	end
+end
+Global.setVar("placeOrderTokenBackToStart", placeOrderTokenBackToStart)
+
+function ORDER_TOKENS.getFactionOfOrderToken(id)
+	for faction, tokens in pairs(ORDER_TOKENS.orderTokens) do
+		for type, ids in pairs(tokens) do
+			for _, tokenId in ipairs(ids) do
+				if tokenId == id then
+					return faction
+				end
+			end
+		end
+	end
+end
+
+ORDER_TOKENS.handlePlayerFlip = function(player, action, targets)
+	if action == Player.Action.FlipOver then
+		for _, target in ipairs(targets) do
+			local id = target.getGUID()
+			local faction = ORDER_TOKENS.getFactionOfOrderToken(id)
+			if not faction then
+				return
+			end
+			-- prevent illegal flips
+			if STORE.factionsData[faction].color ~= player.color then
+				return false
+			end
+			-- visibility of order token teleport buttons
+			-- if target.is_face_down then
+			-- 	target.UI.hide(id .. ":" .. faction)
+			-- else
+			-- 	target.UI.show(id .. ":" .. faction)
+			-- end
+		end
+	end
+end
+
+-- prevent illegal peeks
+function ORDER_TOKENS.testAndHideOrderTokenOnPeek(object, player_color)
+	local objectName = object.getName()
+	local msg = player_color .. " peeked: " .. objectName
+	local waitId = player_color .. object.guid
+	if waitMap[waitId] then
+		Wait.stop(waitMap[waitId])
+	end
+	if string.find(objectName, "order token") and not object.is_face_down then
+		local msgColor = { 1, 0, 0 }
+		local shouldHide = false
+		for faction, data in pairs(STORE.factionsData) do
+			local color = data["color"]
+			if color == player_color then
+				msgColor = STORE.factionColors[faction]
+			end
+			if string.find(objectName, data["name"]) and color ~= player_color then
+				shouldHide = true
+			end
+		end
+		if shouldHide then
+			object.setHiddenFrom({ player_color })
+			broadcastToAll(msg, msgColor)
+			ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
+		end
+	end
+end
+
+function ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
+	local waitId = player_color .. object.guid
+	waitMap[waitId] = Wait.frames(function()
+		for _, player in ipairs(Player.getPlayers()) do
+			if player.color == player_color then
+				local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
+				if hoverGuid == object.guid then
+					print(player_color .. " still hovering")
+					ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
+					return
+				end
+			end
+		end
+		object.setHiddenFrom({})
+		waitMap[waitId] = nil
+	end, 300)
+end
+
+-- teleport token button visibility code
+function ORDER_TOKENS.onHover(player_color, object)
+  if not object then return end
+	for faction, tokens in pairs(ORDER_TOKENS.orderTokens) do
+		for type, guids in pairs(tokens) do
+			for _, guid in ipairs(guids) do
+				if guid == object.guid then
+					local buttonId = guid .. ":" .. faction
+					local orderZone = ORDER_TOKENS.orderZones[faction]
+					if not object.is_face_down then
+						return
+					end
+					local zones = object.getZones()
+					if #zones == 0 then
+						return
+					end
+					for _, zone in ipairs(zones) do
+						if zone.guid == orderZone then
+							return
+						end
+					end
+					object.UI.show(buttonId)
+					ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
+				end
+			end
+		end
+	end
+end
+
+-- this lives on the tokens themselves
+-- button onMouseEnter 
+-- function ORDER_TOKENS.show(self, buttonId)
+-- 	if waitMap[buttonId] then
+-- 		Wait.stop(waitMap[buttonId])
+-- 	end
+-- 	self.UI.show(buttonId)
+-- end
+
+-- -- button onMouseExit
+-- function ORDER_TOKENS.hide(self, buttonId)
+-- 	self.UI.hide(buttonId)
+-- end
+
+--[[ 
+function onObjectLeaveZone(zone, object)
+	local isOrderZone = false
+	local zoneFaction = ""
+	for faction, zoneId in pairs(ORDER_TOKENS.orderZones) do
+		if zoneId == zone.guid then
+			isOrderZone = true
+			zoneFaction = faction
+		end
+	end
+	if isOrderZone then
+		for _, token in ipairs(orderTokens[zoneFaction].strategize) do
+			if object.guid == token and object.is_face_down then
+				object.UI.show(token .. ":" .. zoneFaction)
+			end
+		end
+	end
+end
+
+function onObjectEnterZone(zone, object)
+	local isOrderZone = false
+	local zoneFaction = ""
+	for faction, zoneId in pairs(ORDER_TOKENS.orderZones) do
+		if zoneId == zone.guid then
+			isOrderZone = true
+			zoneFaction = faction
+		end
+	end
+	if isOrderZone then
+		for _, token in ipairs(orderTokens[zoneFaction].strategize) do
+			if object.guid == token then
+				object.UI.hide(token .. ":" .. zoneFaction)
+			end
+		end
+	end
+end ]]
+
+-- function ORDER_TOKENS.initOnHover()
+-- 	for faction, tokens in pairs(ORDER_TOKENS.orderTokens) do
+-- 		for tokenType, guids in pairs(tokens) do
+-- 			for _, guid in ipairs(guids) do
+-- 				getObjectFromGUID(guid).setLuaScript(string.format(
+-- 					[[
+--                     local faction = "%s"
+--                     local tokenGUID = "%s"
+--                     local buttonId = tokenGUID..":"..faction
+--                     -- button onMouseEnter
+--                     function show()
+--                       log(_G)
+--                       -- Global.call("call_module", {"ORDER_TOKENS.show", {self, buttonId}})
+--                       _G.call_module("ORDER_TOKENS.show", {self, buttonId})
+--                     end
+--                     -- button onMouseExit
+--                     function hide()
+--                       log('hide', _G)
+--                       -- Global.call("call_module", {"ORDER_TOKENS.hide", {self, buttonId}})
+--                       _G.call_module("ORDER_TOKENS.hide", {self, buttonId})
+--                     end
+--                 ]],
+-- 					faction,
+-- 					guid
+-- 				))
+-- 			end
+-- 		end
+-- 	end
+-- end
+
+function ORDER_TOKENS.init()
+	ORDER_TOKENS.setOrderTokenTeleportButtons()
+	-- ORDER_TOKENS.initOnHover()
 end
 
 return ORDER_TOKENS

@@ -1,0 +1,255 @@
+{
+  "GUID": "06cc47",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 49.25392,
+    "posY": 1.13154018,
+    "posZ": 18.28664,
+    "rotX": -1.34417263e-7,
+    "rotY": 0.01957434,
+    "rotZ": -6.19165633e-7,
+    "scaleX": 0.5000001,
+    "scaleY": 0.5000001,
+    "scaleZ": 0.5000001
+  },
+  "Nickname": "Battle Barges",
+  "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 1,
+    "g": 0.9960795,
+    "b": 1
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525942817/8A4287D449CE46E8FA329964171F0902EF69D57B/",
+    "DiffuseURL": "http://i.imgur.com/5Yvfnzq.png",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"195\" color=\"#2D34BD\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"-145 410\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "301726",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 37.78563,
+        "posY": 3.063391,
+        "posZ": 19.7825775,
+        "rotX": 359.977753,
+        "rotY": 359.969666,
+        "rotZ": 357.0022,
+        "scaleX": 0.375000119,
+        "scaleY": 0.375000119,
+        "scaleZ": 0.375000119
+      },
+      "Nickname": "Battle Barge",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960795,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525942817/8A4287D449CE46E8FA329964171F0902EF69D57B/",
+        "DiffuseURL": "http://i.imgur.com/5Yvfnzq.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.02,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "5a32ca",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 37.0794449,
+        "posY": 3.09225655,
+        "posZ": 18.4268913,
+        "rotX": 0.000148086285,
+        "rotY": 0.0114454813,
+        "rotZ": 0.00119166228,
+        "scaleX": 0.375000119,
+        "scaleY": 0.375000119,
+        "scaleZ": 0.375000119
+      },
+      "Nickname": "Battle Barge",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960795,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525942817/8A4287D449CE46E8FA329964171F0902EF69D57B/",
+        "DiffuseURL": "http://i.imgur.com/5Yvfnzq.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.02,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "ee8da3",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 42.54874,
+        "posY": 2.91862,
+        "posZ": 20.40844,
+        "rotX": 0.0006189891,
+        "rotY": 0.00106784434,
+        "rotZ": -0.00427334663,
+        "scaleX": 0.375000119,
+        "scaleY": 0.375000119,
+        "scaleZ": 0.375000119
+      },
+      "Nickname": "Battle Barge",
+      "Description": "Grants 4 combat dice, 5 HP and 4 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 1,
+        "g": 0.9960795,
+        "b": 1
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://steamusercontent-a.akamaihd.net/ugc/1860549582525942817/8A4287D449CE46E8FA329964171F0902EF69D57B/",
+        "DiffuseURL": "http://i.imgur.com/5Yvfnzq.png",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CustomShader": {
+          "SpecularColor": {
+            "r": 0.8745098,
+            "g": 0.8117647,
+            "b": 0.745098054
+          },
+          "SpecularIntensity": 0.02,
+          "SpecularSharpness": 2,
+          "FresnelStrength": 1
+        },
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

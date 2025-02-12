@@ -1,0 +1,170 @@
+{
+  "GUID": "90596a",
+  "Name": "Custom_Model_Bag",
+  "Transform": {
+    "posX": 52.7378769,
+    "posY": 0.961144447,
+    "posZ": 10.7863693,
+    "rotX": -1.06432712e-8,
+    "rotY": 359.990234,
+    "rotZ": 1.17693695e-7,
+    "scaleX": 0.7499998,
+    "scaleY": 0.7499998,
+    "scaleZ": 0.7499998
+  },
+  "Nickname": "Scouts",
+  "Description": "Grants 1 combat die, 2 HP and 2 morale during combat.",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": true,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": false,
+  "MaterialIndex": -1,
+  "MeshIndex": -1,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/4zracbnmbc0vhji/SpaceScout02.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/tzoxck61ojjlb8p/SpaceScout15.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 0,
+    "TypeIndex": 6,
+    "CastShadows": true
+  },
+  "Bag": {
+    "Order": 0
+  },
+  "LuaScript": "",
+  "LuaScriptState": "",
+  "XmlUI": "<Defaults>\n  <Text fontSize=\"150\" color=\"#2D34BD\"></Text>\n</Defaults>\n\n<Panel rotation=\"0 0 180\" offsetXY=\"0 140\">\n  <Text id=\"amount\">0</Text>\n</Panel>",
+  "ContainedObjects": [
+    {
+      "GUID": "ebc4b4",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 40.7336578,
+        "posY": 2.32823777,
+        "posZ": 11.4584274,
+        "rotX": 357.0209,
+        "rotY": 0.8269794,
+        "rotZ": 1.06754422,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Scout",
+      "Description": "Grants 1 combat die, 2 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999999,
+        "g": 0.9921603,
+        "b": 0.9999999
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/4zracbnmbc0vhji/SpaceScout02.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/tzoxck61ojjlb8p/SpaceScout15.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    },
+    {
+      "GUID": "97fa86",
+      "Name": "Custom_Model",
+      "Transform": {
+        "posX": 50.84275,
+        "posY": 2.34436417,
+        "posZ": 12.3365793,
+        "rotX": -0.0018579528,
+        "rotY": 0.001893816,
+        "rotZ": 359.989075,
+        "scaleX": 0.625,
+        "scaleY": 0.625,
+        "scaleZ": 0.625
+      },
+      "Nickname": "Scout",
+      "Description": "Grants 1 combat die, 2 HP and 2 morale during combat.",
+      "GMNotes": "",
+      "AltLookAngle": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      },
+      "ColorDiffuse": {
+        "r": 0.9999998,
+        "g": 0.992160261,
+        "b": 0.9999998
+      },
+      "LayoutGroupSortIndex": 0,
+      "Value": 0,
+      "Locked": false,
+      "Grid": false,
+      "Snap": true,
+      "IgnoreFoW": false,
+      "MeasureMovement": false,
+      "DragSelectable": true,
+      "Autoraise": true,
+      "Sticky": true,
+      "Tooltip": true,
+      "GridProjection": false,
+      "HideWhenFaceDown": false,
+      "Hands": false,
+      "CustomMesh": {
+        "MeshURL": "https://www.dropbox.com/s/4zracbnmbc0vhji/SpaceScout02.obj?dl=1",
+        "DiffuseURL": "https://www.dropbox.com/s/tzoxck61ojjlb8p/SpaceScout15.jpg?dl=1",
+        "NormalURL": "",
+        "ColliderURL": "",
+        "Convex": true,
+        "MaterialIndex": 1,
+        "TypeIndex": 1,
+        "CastShadows": true
+      },
+      "LuaScript": "",
+      "LuaScriptState": "",
+      "XmlUI": ""
+    }
+  ]
+}

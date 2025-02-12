@@ -1,0 +1,55 @@
+{
+  "GUID": "8ec1f0",
+  "Name": "Custom_Model",
+  "Transform": {
+    "posX": 6.24986362,
+    "posY": 1.061217,
+    "posZ": -28.2502346,
+    "rotX": -1.9238432e-7,
+    "rotY": 179.990021,
+    "rotZ": 180,
+    "scaleX": 1,
+    "scaleY": 1,
+    "scaleZ": 1
+  },
+  "Nickname": "Eldar order token",
+  "Description": "",
+  "GMNotes": "",
+  "AltLookAngle": {
+    "x": 0,
+    "y": 0,
+    "z": 0
+  },
+  "ColorDiffuse": {
+    "r": 0.9999998,
+    "g": 0.992160261,
+    "b": 0.9999998
+  },
+  "LayoutGroupSortIndex": 0,
+  "Value": 0,
+  "Locked": false,
+  "Grid": true,
+  "Snap": true,
+  "IgnoreFoW": false,
+  "MeasureMovement": false,
+  "DragSelectable": true,
+  "Autoraise": true,
+  "Sticky": true,
+  "Tooltip": true,
+  "GridProjection": false,
+  "HideWhenFaceDown": false,
+  "Hands": true,
+  "CustomMesh": {
+    "MeshURL": "https://www.dropbox.com/s/97kutfegv0csjam/HexagonToken.obj?dl=1",
+    "DiffuseURL": "https://www.dropbox.com/s/1clswgthl0g2no7/OrderDeployEldar.jpg?dl=1",
+    "NormalURL": "",
+    "ColliderURL": "",
+    "Convex": true,
+    "MaterialIndex": 3,
+    "TypeIndex": 0,
+    "CastShadows": true
+  },
+  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"ed\"\nlocal tokenGUID = \"8ec1f0\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap[buttonId] then\n\t\tWait.stop(waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
+  "LuaScriptState": "",
+  "XmlUI": ""
+}
