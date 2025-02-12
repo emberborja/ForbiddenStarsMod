@@ -83,6 +83,10 @@ function ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck(player, value, id)
 	local orderToken
 	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
 		orderToken = getObjectFromGUID(tokenId)
+		orderToken.UI.setAttributes(id, {
+			onClick = "Global/placeStrategizeOrderTokenBackToStart",
+			text = "Return to start",
+		})
 		local factionData = STORE.factionsData[faction]
 		if not factionData then
 			return
@@ -94,10 +98,6 @@ function ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck(player, value, id)
 		local startRot = ORDER_TOKENS.orderTokenStartingCoordinates[tokenId].rotation
 		orderToken.setRotationSmooth(startRot, false, true)
 	end
-	orderToken.UI.setAttributes(id, {
-		onClick = "Global/placeStrategizeOrderTokenBackToStart",
-		text = "Return to start",
-	})
 end
 Global.setVar("placeStrategizeOrderTokenOnEventDeck", ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck)
 
@@ -217,16 +217,17 @@ function ORDER_TOKENS.onHover(player_color, object)
 				if guid == object.guid then
 					local buttonId = guid .. ":" .. faction
 					local orderZone = ORDER_TOKENS.orderZones[faction]
+					-- is_face_down is reversed in game for order tokens, will have to fix assets
 					if not object.is_face_down then
 						return
 					end
+					-- the intent here is to not show the buttons when in the order zone
 					local zones = object.getZones()
-					if #zones == 0 then
-						return
-					end
-					for _, zone in ipairs(zones) do
-						if zone.guid == orderZone then
-							return
+					if zones then
+						for _, zone in ipairs(zones) do
+							if zone.guid == orderZone then
+								return
+							end
 						end
 					end
 					object.UI.show(buttonId)
