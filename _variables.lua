@@ -1,5 +1,3 @@
-local ORDER_TOKENS = require("_orderTokens")
-
 local STORE = {
     boardZoneGUID = "7e9dca",
 
@@ -539,9 +537,6 @@ local STORE = {
 
 function STORE.init()
     STORE.boardZone = getObjectFromGUID(STORE.boardZoneGUID)
-    for faction, data in pairs(STORE.factionsData) do
-        data.orderTokens = ORDER_TOKENS.orderTokens[faction]
-    end
 end
 
 return STORE;

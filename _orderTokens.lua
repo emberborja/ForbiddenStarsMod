@@ -83,7 +83,11 @@ function ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck(player, value, id)
 	local orderToken
 	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
 		orderToken = getObjectFromGUID(tokenId)
-		local eventDeckGUID = STORE.factionsData[faction].eventDeckGUID
+		local factionData = STORE.factionsData[faction]
+		if not factionData then
+			return
+		end
+		local eventDeckGUID = factionData.eventDeckGUID
 		local eventDeck = getObjectFromGUID(eventDeckGUID).getPosition()
 		eventDeck.y = eventDeck.y + 2
 		orderToken.setPositionSmooth(eventDeck, false, true)
@@ -95,7 +99,7 @@ function ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck(player, value, id)
 		text = "Return to start",
 	})
 end
-Global.setVar("placeStrategizeOrderTokenOnEventDeck", placeStrategizeOrderTokenOnEventDeck)
+Global.setVar("placeStrategizeOrderTokenOnEventDeck", ORDER_TOKENS.placeStrategizeOrderTokenOnEventDeck)
 
 function ORDER_TOKENS.placeStrategizeOrderTokenBackToStart(player, value, id)
 	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
@@ -110,7 +114,7 @@ function ORDER_TOKENS.placeStrategizeOrderTokenBackToStart(player, value, id)
 		})
 	end
 end
-Global.setVar("placeStrategizeOrderTokenBackToStart", placeStrategizeOrderTokenBackToStart)
+Global.setVar("placeStrategizeOrderTokenBackToStart", ORDER_TOKENS.placeStrategizeOrderTokenBackToStart)
 
 function ORDER_TOKENS.placeOrderTokenBackToStart(player, value, id)
 	for tokenId, faction in string.gmatch(id, "(%w+):(%w+)") do
@@ -120,7 +124,7 @@ function ORDER_TOKENS.placeOrderTokenBackToStart(player, value, id)
 		getObjectFromGUID(tokenId).setRotationSmooth(startRot, false, true)
 	end
 end
-Global.setVar("placeOrderTokenBackToStart", placeOrderTokenBackToStart)
+Global.setVar("placeOrderTokenBackToStart", ORDER_TOKENS.placeOrderTokenBackToStart)
 
 function ORDER_TOKENS.getFactionOfOrderToken(id)
 	for faction, tokens in pairs(ORDER_TOKENS.orderTokens) do
@@ -204,7 +208,9 @@ end
 
 -- teleport token button visibility code
 function ORDER_TOKENS.onHover(player_color, object)
-  if not object then return end
+	if not object then
+		return
+	end
 	for faction, tokens in pairs(ORDER_TOKENS.orderTokens) do
 		for type, guids in pairs(tokens) do
 			for _, guid in ipairs(guids) do
@@ -233,6 +239,9 @@ end
 
 function ORDER_TOKENS.init()
 	ORDER_TOKENS.setOrderTokenTeleportButtons()
+	for faction, data in pairs(STORE.factionsData) do
+		data.orderTokens = ORDER_TOKENS.orderTokens[faction]
+	end
 end
 
 return ORDER_TOKENS
