@@ -151,11 +151,11 @@ ORDER_TOKENS.handlePlayerFlip = function(player, action, targets)
 				return false
 			end
 			-- visibility of order token teleport buttons
-			-- if target.is_face_down then
-			-- 	target.UI.hide(id .. ":" .. faction)
-			-- else
-			-- 	target.UI.show(id .. ":" .. faction)
-			-- end
+			if target.is_face_down then
+				target.UI.hide(id .. ":" .. faction)
+			else
+				target.UI.show(id .. ":" .. faction)
+			end
 		end
 	end
 end
