@@ -2,11 +2,11 @@
   "GUID": "7fc185",
   "Name": "Custom_Model",
   "Transform": {
-    "posX": -9.75,
-    "posY": 1.06000006,
-    "posZ": -18.25,
-    "rotX": -2.27180507e-7,
-    "rotY": 180.031052,
+    "posX": -9.250418,
+    "posY": 1.061217,
+    "posZ": -28.2502213,
+    "rotX": 1.867855e-7,
+    "rotY": 179.612518,
     "rotZ": 180,
     "scaleX": 1,
     "scaleY": 1,
@@ -49,7 +49,7 @@
     "TypeIndex": 0,
     "CastShadows": true
   },
-  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"ch\"\nlocal tokenGUID = \"7fc185\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap[buttonId] then\n\t\tWait.stop(waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
+  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"ch\"\nlocal tokenGUID = \"7fc185\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap.waitMap[buttonId] then\n\t\tWait.stop(waitMap.waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
   "LuaScriptState": "",
   "XmlUI": ""
 }

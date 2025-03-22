@@ -5,8 +5,8 @@ local buttonId = tokenGUID .. ":" .. faction
 
 -- button onMouseEnter
 function show()
-	if waitMap[buttonId] then
-		Wait.stop(waitMap[buttonId])
+	if waitMap.waitMap[buttonId] then
+		Wait.stop(waitMap.waitMap[buttonId])
 	end
 	self.UI.show(buttonId)
 end

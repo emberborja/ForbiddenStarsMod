@@ -35,18 +35,6 @@ function onObjectHover(player_color, object)
 	ORDER_TOKENS.onHover(player_color, object)
 end
 
-function call_module(params)
-	local module_method = params[1]
-	local args = params[2]
-	for module, method_name in string.gmatch(module_method, "(.+)%.(.+)") do
-		if _G[module][method_name] and args then
-			_G[module][method_name](table.unpack(args))
-		else
-			print("Method not found: " .. method_name)
-		end
-	end
-end
-
 -- Scan for battle button function
 function fightClicked()
 	local status, err =

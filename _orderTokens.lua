@@ -165,8 +165,8 @@ function ORDER_TOKENS.testAndHideOrderTokenOnPeek(object, player_color)
 	local objectName = object.getName()
 	local msg = player_color .. " peeked: " .. objectName
 	local waitId = player_color .. object.guid
-	if waitMap[waitId] then
-		Wait.stop(waitMap[waitId])
+	if waitMap.get(waitId) then
+		Wait.stop(waitMap.get(waitId))
 	end
 	if string.find(objectName, "order token") and not object.is_face_down then
 		local msgColor = { 1, 0, 0 }
@@ -190,7 +190,7 @@ end
 
 function ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
 	local waitId = player_color .. object.guid
-	waitMap[waitId] = Wait.frames(function()
+	waitMap.waitMap[waitId] = Wait.frames(function()
 		for _, player in ipairs(Player.getPlayers()) do
 			if player.color == player_color then
 				local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
@@ -202,22 +202,23 @@ function ORDER_TOKENS.addWaitToUnhideObject(object, player_color)
 			end
 		end
 		object.setHiddenFrom({})
-		waitMap[waitId] = nil
+		waitMap.waitMap[waitId] = nil
 	end, 300)
 end
 
 function ORDER_TOKENS.addWaitToUnhideTeleportButton(token, buttonId)
-	waitMap[buttonId] = Wait.frames(function()
+	log(waitMap)
+	waitMap.waitMap[buttonId] = Wait.frames(function()
 		for _, player in ipairs(Player.getPlayers()) do
 			local hoverGuid = player.getHoverObject() and player.getHoverObject().guid
-			if hoverGuid == object.guid then
+			if hoverGuid == token.guid then
 				print("still hovering")
 				ORDER_TOKENS.addWaitToUnhideObject(token, buttonId)
 				return
 			end
 		end
 		token.UI.hide(buttonId)
-		waitMap[buttonId] = nil
+		waitMap.waitMap[buttonId] = nil
 	end, 300)
 end
 
@@ -251,6 +252,10 @@ function ORDER_TOKENS.onHover(player_color, object)
 			end
 		end
 	end
+end
+
+function ORDER_TOKENS.test(token)
+	log(token)
 end
 
 function ORDER_TOKENS.init()

@@ -5,7 +5,7 @@
     "posX": -6.750001,
     "posY": 1.061217,
     "posZ": -34.2495575,
-    "rotX": -2.07808782e-7,
+    "rotX": -1.52396424e-7,
     "rotY": 179.977127,
     "rotZ": 180,
     "scaleX": 1,
@@ -49,7 +49,7 @@
     "TypeIndex": 0,
     "CastShadows": true
   },
-  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"ch\"\nlocal tokenGUID = \"656f0c\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap[buttonId] then\n\t\tWait.stop(waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
+  "LuaScript": "local waitMap = require(\"_waitMap\")\nlocal faction = \"ch\"\nlocal tokenGUID = \"656f0c\"\nlocal buttonId = tokenGUID .. \":\" .. faction\n\n-- button onMouseEnter\nfunction show()\n\tif waitMap.waitMap[buttonId] then\n\t\tWait.stop(waitMap.waitMap[buttonId])\n\tend\n\tself.UI.show(buttonId)\nend\n\n-- button onMouseExit\nfunction hide()\n\tself.UI.hide(buttonId)\nend\n",
   "LuaScriptState": "",
   "XmlUI": ""
 }
